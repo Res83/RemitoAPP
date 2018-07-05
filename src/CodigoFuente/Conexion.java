@@ -119,7 +119,8 @@ public Connection CrearDB_Base_datos_Provedores()
                     + "Ciudad_Provedor Varchar(255),"
                     + "Email_Provedor Varchar(255),"
                     + "Anotacionl_Provedor Varchar(255)" 
-                    + ")";              try (PreparedStatement ps = con.prepareStatement(tabla))
+                    + ")";              
+    try (PreparedStatement ps = con.prepareStatement(tabla))
               {
                   ps.execute();
               }
