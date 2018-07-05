@@ -1,0 +1,14 @@
+
+Cosas interesantes para agregar
+
+Imagenes
+
+Producto:
+
+Criterios de Busqueda especifico
+
+Generar codigo QR x producto
+
+Imprimir ficha de producto con codigo de barra qr
+
+Código de Barra
