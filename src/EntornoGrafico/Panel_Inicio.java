@@ -55,9 +55,9 @@ public Panel_Inicio()
         setTitle("RemitoAPP");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("RemitoAPP 3.2");
+        jLabel1.setText("RemitoAPP 1.0");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel1.setVerifyInputWhenFocusTarget(false);
         jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -152,6 +152,13 @@ public Panel_Inicio()
         jMenu5.add(jMenuItem15);
 
         jMenuItem14.setText("Acerca de RemitosAPP");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem14);
 
         jMenuBar1.add(jMenu5);
@@ -172,7 +179,7 @@ public Panel_Inicio()
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jLabel1))
         );
 
@@ -190,7 +197,7 @@ public Panel_Inicio()
         Modificar_Clientes ventanabierta = new Modificar_Clientes();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-      //  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -203,7 +210,7 @@ public Panel_Inicio()
         Provedores_Agregar ventanabierta = new Provedores_Agregar();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-      //  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -217,9 +224,7 @@ public Panel_Inicio()
         Clientes_Agregar ventanabierta = new Clientes_Agregar();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-      //  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        
+     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);     
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -233,7 +238,7 @@ public Panel_Inicio()
         Modificar_Provedor ventanabierta = new Modificar_Provedor();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-      //  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -248,8 +253,19 @@ public Panel_Inicio()
         Agregar_Nuevo_Producto ventanabierta = new Agregar_Nuevo_Producto();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-      //  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem14ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem14ActionPerformed
+// Abrir Acerca_de_RemitoAPP.java
+
+        Panel_Inicio VB = new Panel_Inicio();
+        Acerca_de_RemitoAPP ventanabierta = new Acerca_de_RemitoAPP();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
 /**
  * @param args the command line arguments
