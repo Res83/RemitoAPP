@@ -115,6 +115,13 @@ public Panel_Inicio()
         jMenu3.add(jMenuItem9);
 
         jMenuItem1.setText("Categorias");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem1);
 
         jMenuItem10.setText("Buscar - Modificar - Eliminar");
@@ -197,7 +204,7 @@ public Panel_Inicio()
         Modificar_Clientes ventanabierta = new Modificar_Clientes();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -210,7 +217,7 @@ public Panel_Inicio()
         Provedores_Agregar ventanabierta = new Provedores_Agregar();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+   //    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -238,7 +245,7 @@ public Panel_Inicio()
         Modificar_Provedor ventanabierta = new Modificar_Provedor();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -253,7 +260,7 @@ public Panel_Inicio()
         Agregar_Nuevo_Producto ventanabierta = new Agregar_Nuevo_Producto();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem14ActionPerformed
@@ -264,8 +271,17 @@ public Panel_Inicio()
         Acerca_de_RemitoAPP ventanabierta = new Acerca_de_RemitoAPP();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-       this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    //   this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+        Panel_Inicio VB = new Panel_Inicio();
+        Ventana_Categorias ventanabierta = new Ventana_Categorias();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+      // this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 /**
  * @param args the command line arguments

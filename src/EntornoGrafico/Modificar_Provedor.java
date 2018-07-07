@@ -475,8 +475,7 @@ public Modificar_Provedor()
     private void jButton1_CerrarVentanAbiertaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1_CerrarVentanAbiertaActionPerformed
     {//GEN-HEADEREND:event_jButton1_CerrarVentanAbiertaActionPerformed
         // Clic Boton Cerrar
-
-        //  Java: dispose() es usado para cerrar un jframe
+//  Java: dispose() es usado para cerrar un jframe
         dispose();
     }//GEN-LAST:event_jButton1_CerrarVentanAbiertaActionPerformed
 

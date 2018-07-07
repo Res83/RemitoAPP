@@ -12,3 +12,22 @@ Generar codigo QR x producto
 Imprimir ficha de producto con codigo de barra qr
 
 Código de Barra
+
+
+Descuento para cada cliente especial
+
+Ganacia por Porcentaje= 50% d 10 
+Ganancia Objetina: $ 5-
+
+
+
+
+
+cd /c/RemitoApp3
+
+
+
+git log
+
+
+git status

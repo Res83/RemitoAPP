@@ -1,0 +1,22 @@
+jTextField_int_Codigo_Producto = int_Codigo_Producto
+
+jTextField_Descripcion_Producto = Descripcion_Producto
+
+jComboBox_Lista_de_Categorias = jCBox_Lista_de_Categorias
+jComboBox_Lista_de_Ubicacion = jCBox_Lista_de_Ubicacion
+jTextField_int_Cantidad_de_unidades = int_Cantidad_de_unidades
+jTextField_int_Cantidad_de_cajas = int_Cantidad_de_cajas
+jTextField_int_caja_se_forma_xunidades = int_caja_se_forma_xunidades
+jTextField_int_caja_se_forma_xAtados = int_caja_se_forma_xAtados
+jTextField_int_Cantidad_de_Atados = int_Cantidad_de_Atados
+jTextField_int_UnAtados_se_forma_xunidades = int_UnAtados_se_forma_xunidades
+
+jTextField_Costo_Unidad = Costo_Unidad
+jTextField_Costo_xCaja = Costo_xCaja
+jTextField_Costo_xAtado = Costo_xAtado
+
+jComboBox_cod_Provedor = jCBox_cod_Provedor
+jTextPane_NombreyApellidoProvedor = NombreyApellidoProvedor
+
+jComboBox_Marcas = jCBOX_Marcas
+jTextArea_txtAnotacion_Producto = txtAnotacion_Producto

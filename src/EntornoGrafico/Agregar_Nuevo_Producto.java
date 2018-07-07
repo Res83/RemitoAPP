@@ -7,6 +7,8 @@ package EntornoGrafico;
 
 import CodigoFuente.Conexion;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -15,12 +17,11 @@ public class Agregar_Nuevo_Producto extends javax.swing.JFrame
  Conexion conex = new Conexion();
  Connection cone2;
  
-int contador_de_error=0;
-
 
 public Agregar_Nuevo_Producto()
 {
     initComponents();
+
         
 }
 
@@ -401,6 +402,13 @@ public Agregar_Nuevo_Producto()
         jTextField_int_Cantidad_de_unidades.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_int_Cantidad_de_unidades.setText("10");
         jTextField_int_Cantidad_de_unidades.setToolTipText("Campo Mínimo requerido (Requerido)");
+        jTextField_int_Cantidad_de_unidades.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jTextField_int_Cantidad_de_unidadesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -425,7 +433,6 @@ public Agregar_Nuevo_Producto()
 
         jTextField_int_Codigo_Producto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField_int_Codigo_Producto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_int_Codigo_Producto.setText("000");
 
         jLabel2_Codigo_Cliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2_Codigo_Cliente.setText("Código:");
@@ -445,6 +452,13 @@ public Agregar_Nuevo_Producto()
         });
 
         jComboBox_Lista_de_Categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Categoria" }));
+        jComboBox_Lista_de_Categorias.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jComboBox_Lista_de_CategoriasActionPerformed(evt);
+            }
+        });
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -702,14 +716,9 @@ public Agregar_Nuevo_Producto()
 
     private void jButton_GuardarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_GuardarNuevoClienteActionPerformed
     {//GEN-HEADEREND:event_jButton_GuardarNuevoClienteActionPerformed
-        contador_de_error=0;
 
-        Validar();
-
-        if(contador_de_error==0)
-        {
             //agregar clientes a la tabla
-            conex.CrearDB_Base_datos_Productos();
+           conex.CrearDB_Base_datos_Productos();
             cone2 = conex.CargarDB_Base_datos_Productos();
             if (cone2!=null)
 
@@ -718,44 +727,45 @@ public Agregar_Nuevo_Producto()
 
                 {
                     Statement orden = cone2.createStatement();
-                    String crear = "Insert Into ListadeClientes"
-                    + "("
-                    + "int_Codigo_Producto,"
-                    + "Descripcion_Producto,"
-                    + "jCBox_Lista_de_Categorias,"
-                    + "jCBox_Lista_de_Ubicacion,"
-                    + "int_Cantidad_de_unidades,"
-                    + "int_Cantidad_de_cajas,"
-                    + "int_caja_se_forma_xunidades,"
-                    + "int_caja_se_forma_xAtados,"
-                    + "int_Cantidad_de_Atados,"
-                    + "int_UnAtados_se_forma_xunidades,"
-                    + "Costo_Unidad,"
-                    + "Costo_xCaja,"
-                    + "Costo_xAtado,"
-                    + "jCBox_cod_Provedor,"
-                    + "NombreyApellidoProvedor,"
-                    + "jCBOX_Marcas,"
-                    + "txtAnotacion_Producto"
-                    + ") Values("
-                    + ""+jTextField_int_Codigo_Producto.getText()+","
-                    + "'"+jTextField_Descripcion_Producto.getText()+"',"
-                    + "'"+jComboBox_Lista_de_Categorias.getSelectedItem()+"',"
-                    + ""+jComboBox_Lista_de_Ubicacion.getSelectedItem()+","
-                    + ""+jTextField_int_Cantidad_de_unidades.getText()+","
-                    + ""+jTextField_int_Cantidad_de_cajas.getText()+","
-                    + "'"+jTextField_int_caja_se_forma_xunidades.getText()+"',"
-                    + "'"+jTextField_int_caja_se_forma_xAtados.getText()+"',"
-                    + "'"+jTextField_int_Cantidad_de_Atados.getText()+"',"
-                    + "'"+jTextField_int_UnAtados_se_forma_xunidades.getText()+"',"
-                    + "'"+jTextField_Costo_Unidad.getText()+"',"
-                    + "'"+jTextField_Costo_xCaja.getText()+"',"
-                    + "'"+jTextField_Costo_xAtado.getText()+"',"
-                    + "'"+jComboBox_cod_Provedor.getSelectedItem()+"',"
-                    + "'"+jTextPane_NombreyApellidoProvedor.getText()+"',"
-                    + "'"+jComboBox_Marcas.getSelectedItem()+"',"
-                    + "'"+jTextArea_txtAnotacion_Producto.getText()+"'"
-                    + ")";
+                    String crear;
+                    crear = "Insert Into ListadeProductos"
+                            + "("
+                            + "int_Codigo_Producto,"
+                            + "Descripcion_Producto,"
+                            + "jCBox_Lista_de_Categorias,"
+                            + "jCBox_Lista_de_Ubicacion,"
+                            + "int_Cantidad_de_unidades,"
+                            + "int_Cantidad_de_cajas,"
+                            + "int_caja_se_forma_xunidades,"
+                            + "int_caja_se_forma_xAtados,"
+                            + "int_Cantidad_de_Atados,"
+                            + "int_UnAtados_se_forma_xunidades,"
+                            + "Costo_Unidad,"
+                            + "Costo_xCaja,"
+                            + "Costo_xAtado,"
+                            + "jCBox_cod_Provedor,"
+                            + "NombreyApellidoProvedor,"
+                            + "jCBOX_Marcas,"
+                            + "txtAnotacion_Producto"
+                            + ") Values("
+                            + ""+jTextField_int_Codigo_Producto.getText()+","
+                            + "'"+jTextField_Descripcion_Producto.getText()+"',"
+                            + ""+jComboBox_Lista_de_Categorias.getSelectedItem()+","
+                            + ""+jComboBox_Lista_de_Ubicacion.getSelectedItem()+","
+                            + ""+jTextField_int_Cantidad_de_unidades.getText()+","
+                            + ""+jTextField_int_Cantidad_de_cajas.getText()+","
+                            + ""+jTextField_int_caja_se_forma_xunidades.getText()+","
+                            + ""+jTextField_int_caja_se_forma_xAtados.getText()+","
+                            + ""+jTextField_int_Cantidad_de_Atados.getText()+","
+                            + ""+jTextField_int_UnAtados_se_forma_xunidades.getText()+","
+                            + ""+jTextField_Costo_Unidad.getText()+","
+                            + ""+jTextField_Costo_xCaja.getText()+","
+                            + ""+jTextField_Costo_xAtado.getText()+","
+                            + ""+jComboBox_cod_Provedor.getSelectedItem()+","
+                            + "'"+jTextPane_NombreyApellidoProvedor.getText()+"',"
+                            + ""+jComboBox_Marcas.getSelectedItem()+","
+                            + "'"+jTextArea_txtAnotacion_Producto.getText()+"'"
+                            + ")";
 
                     orden.executeUpdate(crear);
                     System.out.println("Registro creado");
@@ -765,14 +775,11 @@ public Agregar_Nuevo_Producto()
                 catch (SQLException ex)
                 {
                     System.out.println("Error WILSONG:"+ex);
-                    JOptionPane.showMessageDialog(this, "Error: Numero de Cliente Repetido ("+jTextField_int_Codigo_Producto.getText()+") Cambie el numero");
+                    JOptionPane.showMessageDialog(this, "Error: Numero de Producto Repetido ("+jTextField_int_Codigo_Producto.getText()+") Cambie el numero");
 
                 }}
 
-            }else
-            {
-                JOptionPane.showMessageDialog(this, "Error: Es neceserio completar los campos requeridos para guardar.");
-            }
+
         }
 
         /**
@@ -812,13 +819,10 @@ public Agregar_Nuevo_Producto()
             //</editor-fold>
 
             /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable()
-                {
-                    public void run()
-                    {
-                        new Agregar_Nuevo_Producto().setVisible(true);
-                    }
-                });
+            java.awt.EventQueue.invokeLater(() ->
+            {
+                new Agregar_Nuevo_Producto().setVisible(true);
+            });
 
     }//GEN-LAST:event_jButton_GuardarNuevoClienteActionPerformed
 
@@ -854,6 +858,41 @@ public Agregar_Nuevo_Producto()
     {//GEN-HEADEREND:event_jTextField_int_Cantidad_de_AtadosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_int_Cantidad_de_AtadosActionPerformed
+
+    private void jComboBox_Lista_de_CategoriasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_CategoriasActionPerformed
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_CategoriasActionPerformed
+// ComboBox
+        
+        
+               //Conexion conex = new Conexion();
+        //Connection cone2;
+
+        cone2= conex.CargarDB_Lista_de_Categorias();
+        if(cone2!=null)
+        {
+            try
+            {
+                Statement orden = cone2.createStatement();
+                ResultSet r = orden.executeQuery("Select* From Base_datos_Lista_de_Categorias Where Titulo_Categoria_Producto="+jComboBox_Lista_de_Categorias.getSelectedItem());
+                //if(r.next())
+               // {
+               //     r.close();
+               //     orden.close();
+               // }
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(Modificar_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("41");
+            }
+        }
+        
+    }//GEN-LAST:event_jComboBox_Lista_de_CategoriasActionPerformed
+
+    private void jTextField_int_Cantidad_de_unidadesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_int_Cantidad_de_unidadesActionPerformed
+    {//GEN-HEADEREND:event_jTextField_int_Cantidad_de_unidadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_int_Cantidad_de_unidadesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
