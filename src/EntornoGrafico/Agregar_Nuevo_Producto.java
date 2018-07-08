@@ -956,4 +956,8 @@ public Agregar_Nuevo_Producto()
     private javax.swing.JTextPane jTextPane_NombreyApellidoProvedor;
     // End of variables declaration//GEN-END:variables
    
+ private void ComboBox_Categorias()
+ {
+     
+ }   
     }
