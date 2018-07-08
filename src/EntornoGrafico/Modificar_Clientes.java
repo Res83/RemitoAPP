@@ -612,6 +612,8 @@ JOptionPane.showMessageDialog(this,"El campo de Id Cliente esta Vacio");
                     jTextField1_txtCiudad_Cliente.setText(r.getString("Ciudad_Cliente"));
                     jTextField1_txtEmail_Cliente.setText(r.getString("Email_Cliente"));
                     jTextArea1_txtAnotacionl_Cliente.setText(r.getString("Anotacionl_Cliente"));
+ 
+// Siempre se debe cerrar los                     
                     r.close();
                     orden.close();
                 }
@@ -845,14 +847,15 @@ private void ComboCodigosCliente()
     try 
     {
         Statement orden = cone2.createStatement();
-        ResultSet r=orden.executeQuery("Select* from ListadeClientes");
+        ResultSet r=orden.executeQuery("Select* from Base_datos_Lista_de_Categorias");
         while (r.next())
         {    
-            jComboBox_BuscarporCodCliente.addItem(r.getString("Codigo_Cliente"));
+            jComboBox_BuscarporCodCliente.addItem(r.getString("Titulo_Categoria_Producto"));
         }
     }
     catch (SQLException ex)
     {
         Logger.getLogger(Modificar_Clientes.class.getName()).log(Level.SEVERE, null, ex);
     }
-}}
+}
+}

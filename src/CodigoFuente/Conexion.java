@@ -22,6 +22,9 @@ String Base_datos_Provedores = System.getProperty("user.dir")+barra+"BaseDatos"+
 // Establecer Base de Datos Productos:
 String Base_datos_Productos = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Productos";
 
+// Establecer Base de Datos Lista de Categorias:
+String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Categorias";
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 final String drivers ="org.apache.derby.jdbc.EmbeddedDriver"; 
@@ -252,6 +255,76 @@ public Connection CargarDB_Base_datos_Productos()
         }
         return null;  
     }
+
+/////
+
+public Connection CrearDB_Lista_de_Categorias()
+    {
+      Connection con;
+      File url= new File(Base_datos_Lista_de_Categorias);
+      
+      if(url.exists())
+      {
+          System.out.println("La Base de Datos de Lista de Categorias ya existe.");   
+      }else
+      {
+          try
+          {
+             //Carga base de datos 
+             System.out.println("Creando Base de Datos de Lista de Categorias...");
+              Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            // decirle donde va estar la base de datos
+            String db ="jdbc:derby:"+Base_datos_Lista_de_Categorias+";create=true";
+            
+            con = DriverManager.getConnection(db);
+            
+                        // Crear Tabla
+            
+            String tabla = "create table Lista_de_Categorias("
+                    + "ID INT PRIMARY KEY,"
+ //                   + "ID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+                    + "Titulo_Categoria Varchar(255)"
+                    + ")";
+              try (PreparedStatement ps = con.prepareStatement(tabla))
+              {
+                  ps.execute();
+              }
+                    
+              System.out.println("Base de Datos de Lista de Categorias Creada con Exito.");
+
+             return con;
+
+          }catch (ClassNotFoundException | SQLException ex)
+              {
+                             System.out.println("Error:"+ex);   
+              }
+      }
+        return null;
+    }
+        
+public Connection CargarDB_Lista_de_Categorias()
+    {
+      Connection con;
+        try 
+        {
+           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+           String db = "jdbc:derby:"+Base_datos_Lista_de_Categorias;
+           con = DriverManager.getConnection(db);
+            System.out.println("La base de datos Categoria ya esta cargada.");
+                        
+           return con;
+               }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println("Error: "+ex);
+        }
+        return null;  
+    }
+
+
+
+
+/////
 //    public void AutoIncrementar_Cod_Clientes()
 //    {
 //     int id=1;
