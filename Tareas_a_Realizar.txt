@@ -1,0 +1,81 @@
+Imprimir remito            1
+armar remito 10
+ventana de especificaciones de la empresa (Nombre) 1
+calcular remito  10
+almacenar remito         1
+hallar remito              1
+relacionar remito con cliente, provedor     1
+
+guardar como pdf remito      1
+Login de ingreso                1
+
+control de version, actualizable?  10
+avison de actualizaciones.
+
+Provedor crear lista paralela de productos que ofrece ese provedor 1
+
+Marcas en Productos 1
+
+Imagenes todo la app 10
+
+Cargar foto en Base de datos, recuperar y usar foto.   10
+
+Generar codigo qr con datos obtenidos de las celdas en producto   1
+
+Imprimir codigo QR 1
+
+Productos > Control de inventario (Muestra todos los productos con sistam de filtros y aviso de poco cantidad de productos) 10
+
+
+Pantalla Inicial > Nota de Compra   2
+                 > Nota de Entrega   2
+                 > Agenda Diaria  10
+
+Hacer Manual en pdf explicando todo. 5
+
+Acerca de poner avance de la app        2
+
+Lista de Productos de Bajo Stock --> Imprimir o Ver
+
+Remito >>> Presupuesto No descuenta del Stock y remito si.
+
+Crear base de datos de presupuestos y filtros de busqueda.
+
+Vencimiento proximo de productos
+Articulos faltantes
+
+
+Articulo / Descripcion
+
+Stock Minimo
+
+
+
+
+Ayuda
+Sugerencias o Problemas > La persona me envia un mensaje con el problema o idea para mejor la app.  10
+
+Hacer test de uso 10
+
+Contactar al comprador para carga de base de datos.  1
+
+
+Base datos paralela SQL
+App Android
+Login confirmacion online
+
+
+
+
+
+Septiembre fines Beta usable de la APP
+
+Fines de noviembre La App final.
+
+
+
+
+
+
+
+

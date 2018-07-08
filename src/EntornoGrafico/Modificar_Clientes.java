@@ -612,6 +612,8 @@ JOptionPane.showMessageDialog(this,"El campo de Id Cliente esta Vacio");
                     jTextField1_txtCiudad_Cliente.setText(r.getString("Ciudad_Cliente"));
                     jTextField1_txtEmail_Cliente.setText(r.getString("Email_Cliente"));
                     jTextArea1_txtAnotacionl_Cliente.setText(r.getString("Anotacionl_Cliente"));
+ 
+// Siempre se debe cerrar los                     
                     r.close();
                     orden.close();
                 }
