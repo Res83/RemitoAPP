@@ -21,7 +21,8 @@ public class Agregar_Nuevo_Producto extends javax.swing.JFrame
 public Agregar_Nuevo_Producto()
 {
     initComponents();
-
+        CBoxCategorias();
+        
         
 }
 
@@ -85,7 +86,6 @@ public Agregar_Nuevo_Producto()
         jComboBox_Lista_de_Ubicacion = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jTextField_Descripcion_Producto = new javax.swing.JTextField();
-        jComboBox_Lista_de_Categorias = new javax.swing.JComboBox<>();
         jPanel10 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -94,6 +94,7 @@ public Agregar_Nuevo_Producto()
         jButton7 = new javax.swing.JButton();
         jLabel_Caja_de_Foto_Producto = new javax.swing.JLabel();
         jLabel_QR_Producto = new javax.swing.JLabel();
+        jComboBox_Lista_de_Categorias = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -451,15 +452,6 @@ public Agregar_Nuevo_Producto()
             }
         });
 
-        jComboBox_Lista_de_Categorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Categoria" }));
-        jComboBox_Lista_de_Categorias.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jComboBox_Lista_de_CategoriasActionPerformed(evt);
-            }
-        });
-
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton3.setText("Cargar Foto del Producto");
@@ -571,8 +563,9 @@ public Agregar_Nuevo_Producto()
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jComboBox_Lista_de_Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
+                                .addGap(10, 10, 10)
+                                .addComponent(jComboBox_Lista_de_Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)
                                 .addComponent(jLabel6)))
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -596,9 +589,9 @@ public Agregar_Nuevo_Producto()
                             .addComponent(jTextField_Descripcion_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox_Lista_de_Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(jComboBox_Lista_de_Ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox_Lista_de_Ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox_Lista_de_Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -859,36 +852,6 @@ public Agregar_Nuevo_Producto()
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_int_Cantidad_de_AtadosActionPerformed
 
-    private void jComboBox_Lista_de_CategoriasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_CategoriasActionPerformed
-    {//GEN-HEADEREND:event_jComboBox_Lista_de_CategoriasActionPerformed
-// ComboBox
-        
-        
-               //Conexion conex = new Conexion();
-        //Connection cone2;
-
-        cone2= conex.CargarDB_Lista_de_Categorias();
-        if(cone2!=null)
-        {
-            try
-            {
-                Statement orden = cone2.createStatement();
-                ResultSet r = orden.executeQuery("Select* From Base_datos_Lista_de_Categorias Where Titulo_Categoria_Producto="+jComboBox_Lista_de_Categorias.getSelectedItem());
-                //if(r.next())
-               // {
-               //     r.close();
-               //     orden.close();
-               // }
-            }
-            catch (SQLException ex)
-            {
-                Logger.getLogger(Modificar_Clientes.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("41");
-            }
-        }
-        
-    }//GEN-LAST:event_jComboBox_Lista_de_CategoriasActionPerformed
-
     private void jTextField_int_Cantidad_de_unidadesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_int_Cantidad_de_unidadesActionPerformed
     {//GEN-HEADEREND:event_jTextField_int_Cantidad_de_unidadesActionPerformed
         // TODO add your handling code here:
@@ -956,8 +919,24 @@ public Agregar_Nuevo_Producto()
     private javax.swing.JTextPane jTextPane_NombreyApellidoProvedor;
     // End of variables declaration//GEN-END:variables
    
- private void ComboBox_Categorias()
+ private void CBoxCategorias()
  {
+     cone2=conex.CargarDB_Lista_de_Categorias();
+   Statement orden;
+     try
+     {
+         orden = cone2.createStatement();
+         ResultSet r=orden.executeQuery("Select* From Lista_de_Categorias");
+         while (r.next())
+         {             
+             jComboBox_Lista_de_Categorias.addItem(r.getString("Titulo_Categoria"));
+         }
+     }
+     catch (SQLException ex)
+     {
+         Logger.getLogger(Agregar_Nuevo_Producto.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
      
  }   
     }
