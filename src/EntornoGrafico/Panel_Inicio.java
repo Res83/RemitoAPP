@@ -18,6 +18,7 @@ public class Panel_Inicio extends javax.swing.JFrame
     private boolean Ingreso_en_Contador;
     
     Conexion conexion_BaseDatosCategorias = new Conexion();
+    Conexion conexion_BaseDatosUbicaciones = new Conexion();
     
 
 // Conexion conexion_BaseDatosClientes = new Conexion();
@@ -54,6 +55,7 @@ public Panel_Inicio()
         jMenu3 = new javax.swing.JMenu();
         jMenuItem_Productos_Agregar_Nuevo = new javax.swing.JMenuItem();
         jMenuItem_Productos_Categorias = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -134,6 +136,16 @@ public Panel_Inicio()
             }
         });
         jMenu3.add(jMenuItem_Productos_Categorias);
+
+        jMenuItem1.setText("Ubicaciones");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
 
         jMenuItem10.setText("Buscar - Modificar - Eliminar");
         jMenu3.add(jMenuItem10);
@@ -296,6 +308,16 @@ public Panel_Inicio()
       // this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem_Productos_CategoriasActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+     conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
+        Panel_Inicio VB = new Panel_Inicio();
+        Ventana_Ubicaciones ventanabierta = new Ventana_Ubicaciones();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+      // this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 /**
  * @param args the command line arguments
  */
@@ -341,6 +363,7 @@ public static void main(String args[])
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;

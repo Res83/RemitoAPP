@@ -28,6 +28,11 @@ String Base_datos_Productos = System.getProperty("user.dir")+barra+"BaseDatos"+b
 // Establecer Base de Datos Lista de Categorias:
 String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Categorias";
 
+// Establecer Base de Datos Lista de Categorias:
+String Base_datos_Ubicaciones = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Ubicacion";
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 final String drivers ="org.apache.derby.jdbc.EmbeddedDriver"; 
@@ -83,6 +88,68 @@ public Connection CargarDB_RemitoAPP_sistema()
         {
            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
            String db = "jdbc:derby:"+Base_datos_RemitoAPP;
+           con = DriverManager.getConnection(db);
+            System.out.println("La base de datos esta cargada.");
+                        
+           return con;
+               }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println("Error: "+ex);
+        }
+        return null;  
+    }
+public Connection CrearDB_Base_datos_Ubicaciones()
+    {
+      Connection con;
+      File url= new File(Base_datos_Ubicaciones);
+      
+      if(url.exists())
+      {
+          System.out.println("La Base de Datos de Base_datos_Ubicaciones ya existe.");   
+      }else
+      {
+          try
+          {
+             //Carga base de datos 
+             System.out.println("Creando Base de Datos de Base_datos_Ubicaciones...");
+              Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            // decirle donde va estar la base de datos
+            String db ="jdbc:derby:"+Base_datos_Ubicaciones+";create=true";
+            
+            con = DriverManager.getConnection(db);
+            
+                        // Crear Tabla Control_RemitoAPP
+            
+            String tabla = "create table Control_RemitoAPP("
+                    + "ID INT PRIMARY KEY,"
+                    + "Lugar Varchar(255)"
+                    + ")";
+              try (PreparedStatement ps = con.prepareStatement(tabla))
+              {
+                  ps.execute();
+              }
+                    
+              System.out.println("Base de Datos de Control_RemitoAPP se ha Creado con Exito.");
+
+             return con;
+
+          }catch (ClassNotFoundException | SQLException ex)
+              {
+                             System.out.println("Error:"+ex);   
+              }
+      }
+        return null;
+    }
+public Connection CargarDB_Base_datos_Ubicaciones()
+    {
+
+      int id=1;
+      Connection con;
+        try 
+        {
+           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+           String db = "jdbc:derby:"+Base_datos_Ubicaciones;
            con = DriverManager.getConnection(db);
             System.out.println("La base de datos esta cargada.");
                         
@@ -386,27 +453,4 @@ public Connection CargarDB_Lista_de_Categorias()
         }
         return null;  
     }
-
-
-
-/////
-//    public void AutoIncrementar_Cod_Clientes()
-//    {
-//     int id=1;
-//     PreparedStatement ps=null;
-//     ResultSet rs=null;
-//     Conexion db = new Conexion();
-//        try
-//        {
-//     ps.db.getconnection().prepareStatement("SELECT MAX(Codigo_Cliente) FROM ListadeClientes");
-//rs=ps.executeQuery();
-//            while (rs.next())
-//            {
-//                id = rs.getInt(1)+1;               
-//            }
-//        }
-//        catch (SQLException e)
-//        {
-//        }  
-//    }
 }

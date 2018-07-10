@@ -7,6 +7,8 @@ package EntornoGrafico;
 
 // Importo la relación con la base de datos
 import CodigoFuente.Conexion;
+import EntornoGrafico.Panel_Inicio;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -172,7 +174,11 @@ public Ventana_Categorias()
     int id_borrado=0;
     
     
-    jButton_EliminarCategoria.setVisible(false);  
+    jButton_EliminarCategoria.setVisible(false);
+    jButton_AgregarCategoria.setVisible(false);
+    jButton_ModificarCategoria.setVisible(false);
+    
+    jTextField_txtCuadroCategoria.requestFocus();
     
     if(cone2!=null)
     {
@@ -203,10 +209,6 @@ public Ventana_Categorias()
     {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Listado_de_Categorias = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField_txtCuadroCategoria = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTextField_ID_Categoria = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -214,10 +216,103 @@ public Ventana_Categorias()
         jButton_ModificarCategoria = new javax.swing.JButton();
         jButton_EliminarCategoria = new javax.swing.JButton();
         jButton_CerrarCategoria = new javax.swing.JButton();
+        jTextField_txtCuadroCategoria = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_Listado_de_Categorias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RemitoAPP / Categorias");
         setAlwaysOnTop(true);
+        setResizable(false);
+
+        jPanel1.setName(""); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Categorias");
+
+        jTextField_ID_Categoria.setEditable(false);
+        jTextField_ID_Categoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_ID_Categoria.setAutoscrolls(false);
+        jTextField_ID_Categoria.setFocusable(false);
+
+        jLabel2.setText("ID:");
+        jLabel2.setFocusable(false);
+
+        jButton_AgregarCategoria.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_AgregarCategoria.setText("+ Agregar");
+        jButton_AgregarCategoria.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jButton_AgregarCategoria.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_AgregarCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_AgregarCategoriaActionPerformed(evt);
+            }
+        });
+
+        jButton_ModificarCategoria.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_ModificarCategoria.setText("* Modificar");
+        jButton_ModificarCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_ModificarCategoriaActionPerformed(evt);
+            }
+        });
+
+        jButton_EliminarCategoria.setBackground(new java.awt.Color(255, 0, 0));
+        jButton_EliminarCategoria.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton_EliminarCategoria.setText("- Eliminar");
+        jButton_EliminarCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_EliminarCategoriaActionPerformed(evt);
+            }
+        });
+
+        jButton_CerrarCategoria.setText("Cerrar");
+        jButton_CerrarCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_CerrarCategoriaActionPerformed(evt);
+            }
+        });
+
+        jTextField_txtCuadroCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField_txtCuadroCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_txtCuadroCategoria.setFocusCycleRoot(true);
+        jTextField_txtCuadroCategoria.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextField_txtCuadroCategoriaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                jTextField_txtCuadroCategoriaMouseEntered(evt);
+            }
+        });
+        jTextField_txtCuadroCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jTextField_txtCuadroCategoriaActionPerformed(evt);
+            }
+        });
+        jTextField_txtCuadroCategoria.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField_txtCuadroCategoriaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jTextField_txtCuadroCategoriaKeyReleased(evt);
+            }
+        });
 
         jTable_Listado_de_Categorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -248,153 +343,71 @@ public Ventana_Categorias()
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_ID_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                                .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(127, 127, 127)
+                                    .addComponent(jButton_CerrarCategoria))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(190, Short.MAX_VALUE)
+                    .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(22, 22, 22)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTextField_txtCuadroCategoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_txtCuadroCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_txtCuadroCategoria.setText("(Escribe la Nueva Categoria)");
-        jTextField_txtCuadroCategoria.setFocusCycleRoot(true);
-        jTextField_txtCuadroCategoria.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jTextField_txtCuadroCategoriaMouseClicked(evt);
-            }
-        });
-        jTextField_txtCuadroCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jTextField_txtCuadroCategoriaActionPerformed(evt);
-            }
-        });
-        jTextField_txtCuadroCategoria.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
-                jTextField_txtCuadroCategoriaKeyReleased(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Categorias");
-
-        jTextField_ID_Categoria.setEditable(false);
-        jTextField_ID_Categoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jLabel2.setText("ID:");
-
-        jButton_AgregarCategoria.setText("+ Agregar");
-        jButton_AgregarCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_AgregarCategoriaActionPerformed(evt);
-            }
-        });
-
-        jButton_ModificarCategoria.setText("* Modificar");
-        jButton_ModificarCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_ModificarCategoriaActionPerformed(evt);
-            }
-        });
-
-        jButton_EliminarCategoria.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_EliminarCategoria.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton_EliminarCategoria.setText("- Eliminar");
-        jButton_EliminarCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_EliminarCategoriaActionPerformed(evt);
-            }
-        });
-
-        jButton_CerrarCategoria.setText("Cerrar");
-        jButton_CerrarCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_CerrarCategoriaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_ID_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
-                    .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jButton_CerrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_ID_Categoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton_CerrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField_ID_Categoria)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton_CerrarCategoria)
-                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(91, 91, 91)
+                    .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(182, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -451,7 +464,8 @@ public Ventana_Categorias()
     {//GEN-HEADEREND:event_jTextField_txtCuadroCategoriaMouseClicked
         if(jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
         {
-                  jTextField_txtCuadroCategoria.setText("");  
+                  jTextField_txtCuadroCategoria.setText("");
+                  jButton_AgregarCategoria.setVisible(true);
         }  
 
     }//GEN-LAST:event_jTextField_txtCuadroCategoriaMouseClicked
@@ -480,6 +494,7 @@ public Ventana_Categorias()
     {//GEN-HEADEREND:event_jTable_Listado_de_CategoriasMouseClicked
 
         jButton_AgregarCategoria.setVisible(false);
+        jButton_ModificarCategoria.setVisible(true);
         jButton_EliminarCategoria.setVisible(true);
         
         // evento Mouse Clicked en la Tabla:
@@ -520,6 +535,55 @@ public Ventana_Categorias()
             
         }
     }//GEN-LAST:event_jButton_EliminarCategoriaActionPerformed
+
+    private void jTextField_txtCuadroCategoriaMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaMouseEntered
+    {//GEN-HEADEREND:event_jTextField_txtCuadroCategoriaMouseEntered
+        hasFocus();
+    }//GEN-LAST:event_jTextField_txtCuadroCategoriaMouseEntered
+
+    private void jTextField_txtCuadroCategoriaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaKeyPressed
+    {//GEN-HEADEREND:event_jTextField_txtCuadroCategoriaKeyPressed
+       
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+         cone2=conex.CargarDB_Lista_de_Categorias();
+// Cargo la base de datos mas arriba para tenerla disponible en todo.       
+        if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
+        {
+        JOptionPane.showMessageDialog(this, "Debe escribir la categoria antes de agregar");
+        }else 
+        {
+        if(cone2!=null)
+  {
+      try
+      {
+          Statement orden = cone2.createStatement();
+          String crear = "Insert into Lista_de_Categorias(ID,Titulo_Categoria) Values("
+                  + ""+jTextField_ID_Categoria.getText()+","
+                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
+          
+// Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
+           orden.executeUpdate(crear);
+          System.out.println("Registro Agregado OK");
+          
+       //   IniciarContador(contador_de_filas);
+          PropiedadesTabla();
+          JOptionPane.showMessageDialog(this, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
+          jTextField_txtCuadroCategoria.setText("");
+            //r.close();
+            SeBorroCategoria="NO";
+            ReAbrirVentanaCategorias();
+            orden.close();
+            
+      }
+      catch (SQLException ex)
+      {
+          System.out.println("Error:"+ex); 
+    
+      }
+  } }    
+        }   
+    }//GEN-LAST:event_jTextField_txtCuadroCategoriaKeyPressed
 
 /**
  * @param args the command line arguments
@@ -578,7 +642,6 @@ public static void main(String args[])
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_Listado_de_Categorias;
     private javax.swing.JTextField jTextField_ID_Categoria;

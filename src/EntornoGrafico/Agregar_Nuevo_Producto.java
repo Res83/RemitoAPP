@@ -440,8 +440,6 @@ public Agregar_Nuevo_Producto()
         jLabel2_Codigo_Cliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2_Codigo_Cliente.setText("Código:");
 
-        jComboBox_Lista_de_Ubicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Ubicación:");
 
         jTextField_Descripcion_Producto.setText("(Descripción)");
@@ -554,6 +552,13 @@ public Agregar_Nuevo_Producto()
         });
 
         jButton2.setText("+");
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -593,13 +598,13 @@ public Agregar_Nuevo_Producto()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel6)))
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox_Lista_de_Ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_Descripcion_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField_Descripcion_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox_Lista_de_Ubicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2_Codigo_Cliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -901,6 +906,15 @@ public Agregar_Nuevo_Producto()
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_Lista_de_CategoriasActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
+    {//GEN-HEADEREND:event_jButton2ActionPerformed
+//Boton + Ubicacion
+        Agregar_Nuevo_Producto VB = new Agregar_Nuevo_Producto();
+        Ventana_Ubicaciones ventanabierta = new Ventana_Ubicaciones();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -967,6 +981,7 @@ public Agregar_Nuevo_Producto()
    
  private void CBoxCategorias()
  {
+     conex.CrearDB_Lista_de_Categorias();
      cone2=conex.CargarDB_Lista_de_Categorias();
    Statement orden;
      try
@@ -976,6 +991,27 @@ public Agregar_Nuevo_Producto()
          while (r.next())
          {             
              jComboBox_Lista_de_Categorias.addItem(r.getString("Titulo_Categoria"));
+         }
+     }
+     catch (SQLException ex)
+     {
+         Logger.getLogger(Agregar_Nuevo_Producto.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
+     
+ }  
+ private void CBoxUbicacion()
+ {
+     conex.CrearDB_Base_datos_Ubicaciones();
+     cone2=conex.CargarDB_Base_datos_Ubicaciones();
+   Statement orden;
+     try
+     {
+         orden = cone2.createStatement();
+         ResultSet r=orden.executeQuery("Select* From Base_datos_Ubicaciones");
+         while (r.next())
+         {             
+             jComboBox_Lista_de_Ubicacion.addItem(r.getString("Lugar"));
          }
      }
      catch (SQLException ex)

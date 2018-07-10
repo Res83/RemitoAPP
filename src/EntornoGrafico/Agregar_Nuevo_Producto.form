@@ -166,7 +166,7 @@
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel6" min="-2" pref="69" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -176,8 +176,8 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBox_Lista_de_Ubicacion" alignment="1" min="-2" pref="191" max="-2" attributes="0"/>
                                       <Component id="jTextField_Descripcion_Producto" min="-2" pref="518" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_Lista_de_Ubicacion" min="-2" pref="162" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel2_Codigo_Cliente" min="-2" max="-2" attributes="0"/>
@@ -768,12 +768,7 @@
                 <Component class="javax.swing.JComboBox" name="jComboBox_Lista_de_Ubicacion">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -940,6 +935,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="+"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
