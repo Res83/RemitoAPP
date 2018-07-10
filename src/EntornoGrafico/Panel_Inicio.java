@@ -5,12 +5,23 @@
  */
 package EntornoGrafico;
 
+import CodigoFuente.Conexion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Res
  */
 public class Panel_Inicio extends javax.swing.JFrame
 {
+
+    private boolean Ingreso_en_Contador;
+    
+    Conexion conexion_BaseDatosCategorias = new Conexion();
+    
+
+// Conexion conexion_BaseDatosClientes = new Conexion();
+    
 
 public Panel_Inicio()
 {
@@ -41,8 +52,8 @@ public Panel_Inicio()
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem_Productos_Agregar_Nuevo = new javax.swing.JMenuItem();
+        jMenuItem_Productos_Categorias = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -104,25 +115,25 @@ public Panel_Inicio()
 
         jMenu3.setText("Productos");
 
-        jMenuItem9.setText("Agregar Nuevo");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener()
+        jMenuItem_Productos_Agregar_Nuevo.setText("Agregar Nuevo");
+        jMenuItem_Productos_Agregar_Nuevo.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jMenuItem9ActionPerformed(evt);
+                jMenuItem_Productos_Agregar_NuevoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        jMenu3.add(jMenuItem_Productos_Agregar_Nuevo);
 
-        jMenuItem1.setText("Categorias");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener()
+        jMenuItem_Productos_Categorias.setText("Categorias");
+        jMenuItem_Productos_Categorias.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem_Productos_CategoriasActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenu3.add(jMenuItem_Productos_Categorias);
 
         jMenuItem10.setText("Buscar - Modificar - Eliminar");
         jMenu3.add(jMenuItem10);
@@ -249,19 +260,18 @@ public Panel_Inicio()
       
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem9ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem9ActionPerformed
+    private void jMenuItem_Productos_Agregar_NuevoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
    // Modificar Provedor
-        
-        // Abrir Formulario Provedor_Agregar.java
+             // Abrir Formulario Provedor_Agregar.java
        // new Provedor_Agregar(this,true).setVisible(true);
      //   this.setVisible(false);
         Panel_Inicio VB = new Panel_Inicio();
         Agregar_Nuevo_Producto ventanabierta = new Agregar_Nuevo_Producto();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+     //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);       
+    }//GEN-LAST:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem14ActionPerformed
     {//GEN-HEADEREND:event_jMenuItem14ActionPerformed
@@ -274,14 +284,15 @@ public Panel_Inicio()
     //   this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem1ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem1ActionPerformed
+    private void jMenuItem_Productos_CategoriasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem_Productos_CategoriasActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem_Productos_CategoriasActionPerformed
+        conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
         Panel_Inicio VB = new Panel_Inicio();
         Ventana_Categorias ventanabierta = new Ventana_Categorias();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
       // this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItem_Productos_CategoriasActionPerformed
 
 /**
  * @param args the command line arguments
@@ -328,7 +339,6 @@ public static void main(String args[])
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
@@ -339,6 +349,7 @@ public static void main(String args[])
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuItem_Productos_Agregar_Nuevo;
+    private javax.swing.JMenuItem jMenuItem_Productos_Categorias;
     // End of variables declaration//GEN-END:variables
 }

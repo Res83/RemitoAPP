@@ -13,9 +13,7 @@ public class Clientes_Agregar extends javax.swing.JFrame
  Conexion conex = new Conexion();
  Connection cone2;
  
-int contador_de_error=0;
 
- 
  private void PropiedadesTabla_Clientes()
  {
      String Columnas[]=
@@ -79,12 +77,7 @@ int contador_de_error=0;
 public Clientes_Agregar()
 {
     initComponents();
-    
-    
-        jLabel_Requerido_NombreyApellido.setVisible(false);
-        jLabel_Requerido_CalleNumero.setVisible(false);
-        jLabel_Requerido_Telefono.setVisible(false);
-        
+           
     conex.CrearDB_Base_datos_Clientes();
     cone2=conex.CargarDB_Base_datos_Clientes();
     if (cone2!=null)
@@ -130,9 +123,6 @@ public Clientes_Agregar()
         jTextField2_txtTelefonoMovil_Cliente = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1_TablaClientes = new javax.swing.JTable();
-        jLabel_Requerido_NombreyApellido = new javax.swing.JLabel();
-        jLabel_Requerido_CalleNumero = new javax.swing.JLabel();
-        jLabel_Requerido_Telefono = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1_txtPiso_Cliente = new javax.swing.JTextField();
@@ -216,15 +206,6 @@ public Clientes_Agregar()
         jTable1_TablaClientes.setFocusable(false);
         jScrollPane2.setViewportView(jTable1_TablaClientes);
 
-        jLabel_Requerido_NombreyApellido.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel_Requerido_NombreyApellido.setText("(Requerido)");
-
-        jLabel_Requerido_CalleNumero.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel_Requerido_CalleNumero.setText("(Requerido)");
-
-        jLabel_Requerido_Telefono.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel_Requerido_Telefono.setText("(Requerido a lo sumo un Teléfono)");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -246,11 +227,7 @@ public Clientes_Agregar()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1_txtCalle_Numero_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_Requerido_NombreyApellido)
-                                    .addComponent(jLabel_Requerido_CalleNumero)))
+                                        .addComponent(jTextField1_txtCalle_Numero_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,10 +235,8 @@ public Clientes_Agregar()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2_txtTelefonoMovil_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel_Requerido_Telefono)))
-                        .addContainerGap(149, Short.MAX_VALUE))
+                                .addComponent(jTextField2_txtTelefonoMovil_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(318, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2)
@@ -281,22 +256,19 @@ public Clientes_Agregar()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1_txtNombreApellido_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Requerido_NombreyApellido))
+                    .addComponent(jTextField1_txtNombreApellido_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField1_txtCalle_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1_txtCalle_Numero_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Requerido_CalleNumero))
+                    .addComponent(jTextField1_txtCalle_Numero_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField1_txtTelefonoFijo_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2_txtTelefonoMovil_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Requerido_Telefono))
+                    .addComponent(jTextField2_txtTelefonoMovil_Cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -434,10 +406,12 @@ public Clientes_Agregar()
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1_CerrarVentanAbierta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1_GuardarNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(jTabbedPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -448,7 +422,7 @@ public Clientes_Agregar()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1_GuardarNuevoCliente)
+                .addComponent(jButton1_GuardarNuevoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1_CerrarVentanAbierta)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -477,11 +451,20 @@ dispose();
 
     private void jButton1_GuardarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1_GuardarNuevoClienteActionPerformed
     {//GEN-HEADEREND:event_jButton1_GuardarNuevoClienteActionPerformed
-     contador_de_error=0;
         
-        Validar();
+
+        //Lo Basico
+        String NombreyApellido=""+jTextField1_txtNombreApellido_Cliente.getText();
+        String Calle=""+jTextField1_txtCalle_Cliente.getText();
+       // Integer NCalle=Integer.parseInt(""+jTextField1_txtCalle_Numero_Cliente.getText());
+       // Integer NFijoTel=Integer.parseInt(""+jTextField1_txtTelefonoFijo_Cliente.getText());
+       // Integer NMovilTel=Integer.parseInt(""+jTextField2_txtTelefonoMovil_Cliente.getText());
+       
+                
         
-        if(contador_de_error==0)
+        
+        
+        if(NombreyApellido!=""||Calle!="")
         {            
       //agregar clientes a la tabla
                cone2 = conex.CargarDB_Base_datos_Clientes();
@@ -612,9 +595,6 @@ public static void main(String args[])
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel_Requerido_CalleNumero;
-    private javax.swing.JLabel jLabel_Requerido_NombreyApellido;
-    private javax.swing.JLabel jLabel_Requerido_Telefono;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -637,62 +617,4 @@ public static void main(String args[])
     private javax.swing.JTextField jTextField2_txtTelefonoMovil_Cliente;
     // End of variables declaration//GEN-END:variables
 
- 
-    private void Validar() 
-    {      
-        if(jTextField1_txtNombreApellido_Cliente.getText().equals(""))
-        {
-            jLabel_Requerido_NombreyApellido.setVisible(true);
-            contador_de_error++;
-            System.out.println("+ NombreAmpellido");
-        }else
-        {
-            jLabel_Requerido_NombreyApellido.setVisible(false);
-                        System.out.println("- NombreAmpellido");
-        }
-            
-        if(jTextField1_txtCalle_Cliente.getText().equals(""))
-        {
-            jLabel_Requerido_CalleNumero.setVisible(true);
-            contador_de_error++;
-                        System.out.println("+ Calle");
-        }else
-        {
-            jLabel_Requerido_CalleNumero.setVisible(false);
-                                    System.out.println("- Calle");
-        }
-        if(jTextField1_txtCalle_Numero_Cliente.getText().equals(""))
-        {
-            jLabel_Requerido_CalleNumero.setVisible(true);
-            contador_de_error++;
-                        System.out.println("+ Numero");
-        }else
-        {
-            jLabel_Requerido_CalleNumero.setVisible(false);
-                                    System.out.println("- Numero");
-        }
-        if(jTextField1_txtTelefonoFijo_Cliente.getText().equals(""))
-        {
-            jLabel_Requerido_Telefono.setVisible(true);
-            contador_de_error++;
-                                    System.out.println("+ TelefonoFijoyCelular");
-        }else
-        {
-            jLabel_Requerido_Telefono.setVisible(false);
-            System.out.println("- TelefonoFijoyCelular");
-        }
-               if(jTextField2_txtTelefonoMovil_Cliente.getText().equals(""))
-        {
-            jLabel_Requerido_Telefono.setVisible(true);
-            contador_de_error++;
-                                    System.out.println("+ celular");
-        }else
-        {
-            jLabel_Requerido_Telefono.setVisible(false);
-//            contador_de_error--;
-            System.out.println("- celular");
-        }
-    
-              System.out.println("Contador de Error = "+contador_de_error);  
-    }        
     }

@@ -20,60 +20,35 @@ import javax.swing.table.DefaultTableModel;
 public class Ventana_Categorias extends javax.swing.JFrame
 {
 // Cargo la relación con la base de datos
-     Conexion conex = new Conexion();
-    Connection cone2;
 
-   
-    int contador_de_filas=0;
+    Conexion conex = new Conexion();
+    Connection cone2;  
+   // int contador_de_filas=1;
+    private String SeBorroCategoria;
+    private int id_borrado_categoria;
+    private Integer Comienza_desde_Aqui;
+    
 /**
  * Creates new form Ventana_Categorias
  */
-private void IniciarContador(int contador_de_filas)
-{
-String columnas[] = {};
-
-// Primero toma las filas pero no las tengo y pongo null
-// Constructor de la Tabla
-DefaultTableModel dft = new DefaultTableModel(null,columnas);
-         try
-         {
-             Statement orden = cone2.createStatement();
-
-//Monstrar Algo de una Base de Datos:
-
-            ResultSet r = orden.executeQuery("Select* From Lista_de_Categorias");
-            
-             while (r.next())
-             {  
-                contador_de_filas++;
-                 System.out.println("Contando filas: "+contador_de_filas);               
-             }
-             r.close();
-             contador_de_filas++;
-String ID_Actaul=Integer.toString(contador_de_filas);
-jTextField_ID_Categoria.setText(ID_Actaul);          
-         }
-         catch (SQLException ex)
-         {
-             Logger.getLogger(Ventana_Categorias.class.getName()).log(Level.SEVERE, null, ex);
-         }
-}
-    
 private void PropiedadesTabla()
 {
+cone2= conex.CargarDB_Lista_de_Categorias();
 String columnas[] = {"ID", "Categorias"};
+//String columnas[] = {"Categorias"};
+
+if(SeBorroCategoria!="SI"){
+int id=id_incrementable();
+jTextField_ID_Categoria.setText(String.valueOf(id));    
+}
+
+//    }  
+
 
 // Primero toma las filas pero no las tengo y pongo null
 // Constructor de la Tabla
 DefaultTableModel dft = new DefaultTableModel(null,columnas);
 
-// No logro establecer un buen tamaño de columna
-//TableColumnModel columnModel = jTable_Listado_de_Categorias.getColumnModel();
-//jTable_Listado_de_Categorias.getColumnModel().getColumn(0).setMaxWidth(0);
-//jTable_Listado_de_Categorias.getColumnModel().getColumn(0).setMinWidth(0);
-//jTable_Listado_de_Categorias.getColumnModel().getColumn(0).setPreferredWidth(0);
-//    columnModel.getColumn(0).setPreferredWidth(2);
-//    columnModel.getColumn(1).setPreferredWidth(10);
          try
          {
              Statement orden = cone2.createStatement();
@@ -83,8 +58,9 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
             ResultSet r = orden.executeQuery("Select* From Lista_de_Categorias");
             
              while (r.next())
-             {  
+             { 
                Object Filas[]={r.getString("ID"),r.getString("Titulo_Categoria")};
+             //  Object Filas[]={r.getString("Titulo_Categoria")};
 
 
 // Le digo ahora que tome estas filas dentro de la tabla
@@ -102,22 +78,6 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
              Logger.getLogger(Ventana_Categorias.class.getName()).log(Level.SEVERE, null, ex);
          }
 }    
-
-// Usar para PararBasededatos 
-//  if(r.next())
-//{
-//     
-//}
-//    r.close();
-//    orden.close();
-//
-
-
-
-
-
-
-
 
 private void FiltrarCategorias(String Establezco_Filtro)
 {
@@ -205,18 +165,25 @@ public Ventana_Categorias()
 {
     initComponents();
     
+       
     //Crea y carga al momento de cargar la ventana en pantalla.
     conex.CrearDB_Lista_de_Categorias();
     cone2= conex.CargarDB_Lista_de_Categorias();
+    int id_borrado=0;
     
-    jButton_EliminarCategoria.setVisible(false);
     
-   
+    jButton_EliminarCategoria.setVisible(false);  
     
     if(cone2!=null)
     {
     PropiedadesTabla();
-    IniciarContador(contador_de_filas);
+    
+  
+
+    
+    
+    
+    //IniciarContador(contador_de_filas);
   
     
     //JOptionPane.showMessageDialog (null,"Mensaje","Titulo",JOptionPane.ERRROR_MESSAGE); 
@@ -250,6 +217,7 @@ public Ventana_Categorias()
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RemitoAPP / Categorias");
+        setAlwaysOnTop(true);
 
         jTable_Listado_de_Categorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -383,9 +351,14 @@ public Ventana_Categorias()
                                 .addComponent(jTextField_ID_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)))
                     .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_CerrarCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jButton_CerrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -397,16 +370,16 @@ public Ventana_Categorias()
                     .addComponent(jTextField_ID_Categoria)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_txtCuadroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_EliminarCategoria)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton_AgregarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton_ModificarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
+                .addComponent(jButton_EliminarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jButton_CerrarCategoria)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -431,14 +404,13 @@ public Ventana_Categorias()
     {//GEN-HEADEREND:event_jButton_AgregarCategoriaActionPerformed
 // Al Presionar Agregar Categoria ocurre estas acciones:
 // Debe Cargar la Base de Datos para luego poder consultar, modificarla o agregar nuevos elementos.  
-// cone2=conex.CargarDB_Lista_de_Categorias();
+ cone2=conex.CargarDB_Lista_de_Categorias();
 // Cargo la base de datos mas arriba para tenerla disponible en todo.       
         if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
         {
         JOptionPane.showMessageDialog(this, "Debe escribir la categoria antes de agregar");
         }else 
         {
-        
         if(cone2!=null)
   {
       try
@@ -452,17 +424,20 @@ public Ventana_Categorias()
            orden.executeUpdate(crear);
           System.out.println("Registro Agregado OK");
           
-          IniciarContador(contador_de_filas);
+       //   IniciarContador(contador_de_filas);
           PropiedadesTabla();
-          JOptionPane.showMessageDialog(null, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
+          JOptionPane.showMessageDialog(this, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
           jTextField_txtCuadroCategoria.setText("");
+            //r.close();
+            SeBorroCategoria="NO";
+            ReAbrirVentanaCategorias();
+            orden.close();
+            
       }
       catch (SQLException ex)
       {
           System.out.println("Error:"+ex); 
-
-
-          
+    
       }
   } } 
     }//GEN-LAST:event_jButton_AgregarCategoriaActionPerformed
@@ -613,17 +588,46 @@ public static void main(String args[])
     private void EliminarRegistro()
     {
         cone2 = conex.CargarDB_Lista_de_Categorias();
-        
+
         if(cone2!=null)
         {
             try
             {
                 Statement orden = cone2.createStatement();
-                
-                String Elminar = "Delete From Lista_de_Categorias Where ID="+jTextField_ID_Categoria.getText();
+                int Comienza_desde_Aqui=Integer.parseInt(jTextField_ID_Categoria.getText());
+                System.out.println("Comienza_desde_Aqui:"+Comienza_desde_Aqui);     
+
+                String Elminar = "DELETE From Lista_de_Categorias Where ID="+jTextField_ID_Categoria.getText();
+
                 orden.executeUpdate(Elminar);
+               
+            //    String AlterarTabla = "ALTER TABLE Lista_de_Categorias DROP ID";
+                
+            //    orden.executeUpdate(AlterarTabla);
+                
+            //    String Renumerar_ID = "ALTER TABLE Lista_de_Categorias ADD ID Primary key";
+                
+            //    orden.executeUpdate(Renumerar_ID);
+            
+             cone2.close();
                 JOptionPane.showMessageDialog(this, "Categoria Elimina");
-                ReAbrirVentanaCategorias();
+         //       ReAbrirVentanaCategorias();
+         
+                 jTextField_txtCuadroCategoria.setText("(Escribe la Nueva Categoria)");
+
+                  jButton_EliminarCategoria.setVisible(false);
+                  jButton_AgregarCategoria.setVisible(true);
+                  jButton_ModificarCategoria.setVisible(false);
+                 
+                 PropiedadesTabla();
+                 
+                id_borrado_categoria=Comienza_desde_Aqui;
+                SeBorroCategoria="SI";
+
+              
+              jTextField_ID_Categoria.setText(String.valueOf(Comienza_desde_Aqui));
+                            
+             orden.close();
             }
             catch (SQLException ex)
             {
@@ -631,4 +635,48 @@ public static void main(String args[])
             }
         }
     }
-}
+
+public int id_incrementable()
+{
+    int id=1;
+    PreparedStatement ps =null;
+    cone2 = conex.CargarDB_Lista_de_Categorias();
+    try
+    {
+      Statement orden = cone2.createStatement();
+      ResultSet r = orden.executeQuery("Select MAX(ID) From Lista_de_Categorias");
+        while (r.next())
+        {            
+                    id=r.getInt(1)+1;
+
+        }
+        System.out.println("Id Maximo:"+id);
+        
+            }
+    catch (Exception ex)
+    {
+        System.out.println("Error:"+ex);
+    }
+    finally
+    {
+        try
+        {
+            ps.close();
+            
+            //DesconectarBasededatos Falta
+        }
+        catch (Exception e)
+        {
+        }
+    
+    }
+    
+        if(SeBorroCategoria=="SI")
+    {
+                        System.out.println("Se Borro un registro recien:"+SeBorroCategoria+"La Id era:"+id_borrado_categoria );
+     id=Comienza_desde_Aqui;   
+    }
+    
+        return id;
+    }
+    }
