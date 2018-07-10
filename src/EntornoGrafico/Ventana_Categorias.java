@@ -27,8 +27,11 @@ public class Ventana_Categorias extends javax.swing.JFrame
     Connection cone2;  
    // int contador_de_filas=1;
     private String SeBorroCategoria;
+    private String TextoTemporal;
     private int id_borrado_categoria;
     private Integer Comienza_desde_Aqui;
+    private String Bandera_Modificando;
+    private int seleccion;
     
 /**
  * Creates new form Ventana_Categorias
@@ -36,8 +39,8 @@ public class Ventana_Categorias extends javax.swing.JFrame
 private void PropiedadesTabla()
 {
 cone2= conex.CargarDB_Lista_de_Categorias();
-String columnas[] = {"ID", "Categorias"};
-//String columnas[] = {"Categorias"};
+//String columnas[] = {"ID", "Categorias"};
+String columnas[] = {"Categorias","ID"};
 
 if(SeBorroCategoria!="SI"){
 int id=id_incrementable();
@@ -61,9 +64,8 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
             
              while (r.next())
              { 
-               Object Filas[]={r.getString("ID"),r.getString("Titulo_Categoria")};
+               Object Filas[]={r.getString("Titulo_Categoria"),r.getString("ID")};
              //  Object Filas[]={r.getString("Titulo_Categoria")};
-
 
 // Le digo ahora que tome estas filas dentro de la tabla
 
@@ -94,13 +96,14 @@ private void FiltrarCategorias(String Establezco_Filtro)
             String Filtro = "Select* From Lista_de_Categorias where Titulo_Categoria LIKE '%"+jTextField_txtCuadroCategoria.getText().trim()+"%' ";
             ResultSet r=orden.executeQuery(Filtro);
 /////////////
-String columnas[] = {"ID", "Categorias"};
+String columnas[] = {"Categorias","ID"};
+//String columnas[] = {"ID", "Categorias"};
 DefaultTableModel dft = new DefaultTableModel(null,columnas);
 
             
              while (r.next())
              {  
-               Object Filas[]={r.getString("ID"),r.getString("Titulo_Categoria")};
+               Object Filas[]={r.getString("Titulo_Categoria"),r.getString("ID")};
                dft.addRow(Filas);
              }
              jTable_Listado_de_Categorias.setModel(dft);
@@ -120,8 +123,6 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
 }
 private void EditarRegistro()
 {
-// Este Metodo tambien se activa al pulsar ( * Modificar )
-
 //Cargo la Base de Datos    
 cone2 = conex.CargarDB_Lista_de_Categorias();
 
@@ -136,23 +137,66 @@ if(cone2!=null)
 // Update = Editar o Actualizar
 // Set (Establezco que voy a Editar)
 // Update (Nombre de la Tabla) Set
-
+               
     String editar ="Update Lista_de_Categorias Set Titulo_Categoria='"+jTextField_txtCuadroCategoria.getText()+"' where ID="+jTextField_ID_Categoria.getText()+"";
 // Ejecuta ahora la Orden de arriba:
-String TextoTemporal=jTextField_txtCuadroCategoria.getText();
-        orden.executeUpdate(editar);
-         ReAbrirVentanaCategorias();     
-        JOptionPane.showMessageDialog(this, "¡Categoria ("+TextoTemporal+") Agregada y Modificada con Exito!");
-// Actualizar la tabla con el cambio realizado        
-        PropiedadesTabla();
-// Es importante cerrar cuando no se usa mas:
+        orden.executeUpdate(editar);    
+        JOptionPane.showMessageDialog(this, "¡Categoria ("+TextoTemporal+" >> "+jTextField_txtCuadroCategoria.getText()+" ) Modificada con Exito!");
         orden.close(); 
+        ReAbrirVentanaCategorias(); 
+// Actualizar la tabla con el cambio realizado        
+    //    PropiedadesTabla();
+// Es importante cerrar cuando no se usa mas:
+
     }
     catch (SQLException ex)
     {
         System.out.println("Error: "+ex);
     }
+}    
+           
 }
+private void AgregarRegistro()
+{
+    cone2=conex.CargarDB_Lista_de_Categorias();
+// Cargo la base de datos mas arriba para tenerla disponible en todo.       
+        if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
+        {
+        JOptionPane.showMessageDialog(this, "Debe escribir la categoria antes de agregar");
+        }else 
+        {
+        if(cone2!=null)
+  {
+      try
+      {
+          Statement orden = cone2.createStatement();
+          String crear = "Insert into Lista_de_Categorias(Titulo_Categoria,ID) Values("
+                  + "'"+jTextField_txtCuadroCategoria.getText()+ "',"
+                   + ""+jTextField_ID_Categoria.getText()+")";                     
+                  
+//                  + ""+jTextField_ID_Categoria.getText()+","
+//                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
+          
+// Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
+           orden.executeUpdate(crear);
+          System.out.println("Registro Agregado OK");
+          
+       //   IniciarContador(contador_de_filas);
+          PropiedadesTabla();
+          JOptionPane.showMessageDialog(this, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
+          jTextField_txtCuadroCategoria.setText("");
+            //r.close();
+            SeBorroCategoria="NO";
+            ReAbrirVentanaCategorias();
+            orden.close();
+            
+      }
+      catch (SQLException ex)
+      {
+          System.out.println("Error:"+ex); 
+    
+      }
+  } }    
     
 }
 public void ReAbrirVentanaCategorias()
@@ -161,7 +205,7 @@ public void ReAbrirVentanaCategorias()
         Panel_Inicio VB = new Panel_Inicio();
         Ventana_Categorias ventanabierta = new Ventana_Categorias();
         ventanabierta.setLocationRelativeTo(getParent());
-        ventanabierta.setVisible(true);    
+        ventanabierta.setVisible(true); 
 }
 public Ventana_Categorias()
 {
@@ -175,10 +219,12 @@ public Ventana_Categorias()
     
     
     jButton_EliminarCategoria.setVisible(false);
-    jButton_AgregarCategoria.setVisible(false);
+    
     jButton_ModificarCategoria.setVisible(false);
     
     jTextField_txtCuadroCategoria.requestFocus();
+    
+    Bandera_Modificando="No";
     
     if(cone2!=null)
     {
@@ -324,10 +370,10 @@ public Ventana_Categorias()
 
             }
         ));
-        jTable_Listado_de_Categorias.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable_Listado_de_Categorias.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         jTable_Listado_de_Categorias.setAutoscrolls(false);
-        jTable_Listado_de_Categorias.setColumnSelectionAllowed(true);
         jTable_Listado_de_Categorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable_Listado_de_Categorias.setGridColor(new java.awt.Color(0, 0, 0));
         jTable_Listado_de_Categorias.getTableHeader().setReorderingAllowed(false);
         jTable_Listado_de_Categorias.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -337,7 +383,6 @@ public Ventana_Categorias()
             }
         });
         jScrollPane1.setViewportView(jTable_Listado_de_Categorias);
-        jTable_Listado_de_Categorias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -415,44 +460,7 @@ public Ventana_Categorias()
 
     private void jButton_AgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_AgregarCategoriaActionPerformed
     {//GEN-HEADEREND:event_jButton_AgregarCategoriaActionPerformed
-// Al Presionar Agregar Categoria ocurre estas acciones:
-// Debe Cargar la Base de Datos para luego poder consultar, modificarla o agregar nuevos elementos.  
- cone2=conex.CargarDB_Lista_de_Categorias();
-// Cargo la base de datos mas arriba para tenerla disponible en todo.       
-        if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
-        {
-        JOptionPane.showMessageDialog(this, "Debe escribir la categoria antes de agregar");
-        }else 
-        {
-        if(cone2!=null)
-  {
-      try
-      {
-          Statement orden = cone2.createStatement();
-          String crear = "Insert into Lista_de_Categorias(ID,Titulo_Categoria) Values("
-                  + ""+jTextField_ID_Categoria.getText()+","
-                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
-          
-// Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
-           orden.executeUpdate(crear);
-          System.out.println("Registro Agregado OK");
-          
-       //   IniciarContador(contador_de_filas);
-          PropiedadesTabla();
-          JOptionPane.showMessageDialog(this, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
-          jTextField_txtCuadroCategoria.setText("");
-            //r.close();
-            SeBorroCategoria="NO";
-            ReAbrirVentanaCategorias();
-            orden.close();
-            
-      }
-      catch (SQLException ex)
-      {
-          System.out.println("Error:"+ex); 
-    
-      }
-  } } 
+AgregarRegistro();
     }//GEN-LAST:event_jButton_AgregarCategoriaActionPerformed
 
     private void jTextField_txtCuadroCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaActionPerformed
@@ -479,20 +487,14 @@ public Ventana_Categorias()
     private void jButton_ModificarCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_ModificarCategoriaActionPerformed
     {//GEN-HEADEREND:event_jButton_ModificarCategoriaActionPerformed
 // Modificar
-         
-        if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
-        {
-        JOptionPane.showMessageDialog(this, "Debe Selecionar de la tabla una Categoria y escribir el  cambio de la categoria antes de Modificar");
-        }else 
-        {
-// Se crea un metodo EditarRegistro() para que las instruciones las podamos usar por cualquier otra parte.        
-           EditarRegistro(); 
-        }
+EditarRegistro(); 
     }//GEN-LAST:event_jButton_ModificarCategoriaActionPerformed
 
     private void jTable_Listado_de_CategoriasMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTable_Listado_de_CategoriasMouseClicked
     {//GEN-HEADEREND:event_jTable_Listado_de_CategoriasMouseClicked
-
+        Bandera_Modificando="Si";
+        
+        
         jButton_AgregarCategoria.setVisible(false);
         jButton_ModificarCategoria.setVisible(true);
         jButton_EliminarCategoria.setVisible(true);
@@ -502,9 +504,11 @@ public Ventana_Categorias()
              jTextField_txtCuadroCategoria.setText("");
              
              int seleccion=jTable_Listado_de_Categorias.rowAtPoint(evt.getPoint());
-             
-             jTextField_ID_Categoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,0)));
-             jTextField_txtCuadroCategoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,1)));
+            
+            
+             jTextField_txtCuadroCategoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,0)));             
+            jTextField_ID_Categoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,1)));
+            
     }//GEN-LAST:event_jTable_Listado_de_CategoriasMouseClicked
 
     private void jTextField_txtCuadroCategoriaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaKeyReleased
@@ -538,50 +542,26 @@ public Ventana_Categorias()
 
     private void jTextField_txtCuadroCategoriaMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaMouseEntered
     {//GEN-HEADEREND:event_jTextField_txtCuadroCategoriaMouseEntered
-        hasFocus();
+        String Entro = null;
+
+if(Bandera_Modificando=="Si"&& Entro!="Si")
+{
+    String TextoTemporal=jTextField_txtCuadroCategoria.getText();   
+    System.out.println("TextoGuardado: "+TextoTemporal);
+   Entro="No";  
+}
+        
     }//GEN-LAST:event_jTextField_txtCuadroCategoriaMouseEntered
 
     private void jTextField_txtCuadroCategoriaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroCategoriaKeyPressed
     {//GEN-HEADEREND:event_jTextField_txtCuadroCategoriaKeyPressed
        
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER&&Bandera_Modificando=="No")
         {
-         cone2=conex.CargarDB_Lista_de_Categorias();
-// Cargo la base de datos mas arriba para tenerla disponible en todo.       
-        if(jTextField_txtCuadroCategoria.getText().equals("")||jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Categoria)"))
+         AgregarRegistro();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER&&Bandera_Modificando=="Si")
         {
-        JOptionPane.showMessageDialog(this, "Debe escribir la categoria antes de agregar");
-        }else 
-        {
-        if(cone2!=null)
-  {
-      try
-      {
-          Statement orden = cone2.createStatement();
-          String crear = "Insert into Lista_de_Categorias(ID,Titulo_Categoria) Values("
-                  + ""+jTextField_ID_Categoria.getText()+","
-                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
-          
-// Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
-           orden.executeUpdate(crear);
-          System.out.println("Registro Agregado OK");
-          
-       //   IniciarContador(contador_de_filas);
-          PropiedadesTabla();
-          JOptionPane.showMessageDialog(this, "Nueva Categoria Agregada: [ "+jTextField_txtCuadroCategoria.getText()+" ]");
-          jTextField_txtCuadroCategoria.setText("");
-            //r.close();
-            SeBorroCategoria="NO";
-            ReAbrirVentanaCategorias();
-            orden.close();
-            
-      }
-      catch (SQLException ex)
-      {
-          System.out.println("Error:"+ex); 
-    
-      }
-  } }    
+            EditarRegistro();
         }   
     }//GEN-LAST:event_jTextField_txtCuadroCategoriaKeyPressed
 

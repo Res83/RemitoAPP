@@ -61,7 +61,8 @@ public Connection CrearDB_RemitoAPP_sistema()
             
             String tabla = "create table Control_RemitoAPP("
                     + "ID INT PRIMARY KEY,"
-                    + "Acceso_Categorias BOOLEAN"
+                    + "Acceso_Categorias BOOLEAN,"
+                    + "Texto_antes_cambiar Varchar(255)"
                     + ")";
               try (PreparedStatement ps = con.prepareStatement(tabla))
               {
