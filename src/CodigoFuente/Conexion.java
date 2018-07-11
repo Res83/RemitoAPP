@@ -122,7 +122,7 @@ public Connection CrearDB_Base_datos_Ubicaciones()
             
                         // Crear Tabla Control_RemitoAPP
             
-            String tabla = "create table Control_RemitoAPP("
+            String tabla = "create table Lista_de_Ubicaciones("
                     + "ID INT PRIMARY KEY,"
                     + "Lugar Varchar(255)"
                     + ")";
