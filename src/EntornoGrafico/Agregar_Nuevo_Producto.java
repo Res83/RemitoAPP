@@ -15,22 +15,18 @@ import javax.swing.JOptionPane;
 public class Agregar_Nuevo_Producto extends javax.swing.JFrame
 {
  Conexion conex = new Conexion();
+ Conexion conexion_BaseDatosCategorias = new Conexion();
+ Conexion conexion_BaseDatosUbicaciones = new Conexion();
+ Conexion conexion_BaseDatosProductos = new Conexion();
  Connection cone2;
  
-
 public Agregar_Nuevo_Producto()
 {
     initComponents();
         CBoxCategorias();
-        
-        
+        CBoxUbicacion();
+                
 }
-
-    Agregar_Nuevo_Producto(Panel_Inicio aThis, boolean b)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 /**
  * This method is called from within the constructor to
  * initialize the form.
@@ -717,7 +713,7 @@ public Agregar_Nuevo_Producto()
     {//GEN-HEADEREND:event_jButton_GuardarNuevoClienteActionPerformed
 
             //agregar clientes a la tabla
-           conex.CrearDB_Base_datos_Productos();
+           conexion_BaseDatosProductos.CrearDB_Lista_de_Categorias();
             cone2 = conex.CargarDB_Base_datos_Productos();
             if (cone2!=null)
 
@@ -971,8 +967,8 @@ public Agregar_Nuevo_Producto()
  }  
  private void CBoxUbicacion()
  {
-     conex.CrearDB_Base_datos_Ubicaciones();
-     cone2=conex.CargarDB_Base_datos_Ubicaciones();
+      conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
+     conexion_BaseDatosUbicaciones.CargarDB_Base_datos_Ubicaciones();
    Statement orden;
      try
      {

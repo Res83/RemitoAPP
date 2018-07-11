@@ -6,7 +6,6 @@
 package EntornoGrafico;
 
 import CodigoFuente.Conexion;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +18,7 @@ public class Panel_Inicio extends javax.swing.JFrame
     
     Conexion conexion_BaseDatosCategorias = new Conexion();
     Conexion conexion_BaseDatosUbicaciones = new Conexion();
+    Conexion conexion_BaseDatosProductos = new Conexion();
     
 
 // Conexion conexion_BaseDatosClientes = new Conexion();
