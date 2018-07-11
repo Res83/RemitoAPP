@@ -1,5 +1,16 @@
 package EntornoGrafico;
 
+/*********************************/
+//Cosas Cambiar Nueva Ventana:
+//
+//Lista_de_Ubicaciones
+//Lugar
+//cone2= conex.CargarDB_Base_datos_Ubicaciones();
+//ReAbrirVentanaUbicaciones()
+//(Escribe la Nueva Ubicación)
+
+/*********************************/
+
 // Importo la relación con la base de datos
 import CodigoFuente.Conexion;
 import java.awt.event.KeyEvent;
@@ -475,7 +486,21 @@ AgregarRegistro();
     private void jButton_CerrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_CerrarActionPerformed
     {//GEN-HEADEREND:event_jButton_CerrarActionPerformed
 //  Java: dispose() es usado para cerrar un jframe
-        dispose();
+        if(jTextField_txtCuadro.getText().equals("(Escribe la Nueva Ubicación)")||jTextField_txtCuadro.getText().equals("")){
+          dispose();  
+        }else
+        {
+        String opcion[]={"Si", "Cancelar"};
+        int eleccion =JOptionPane.showOptionDialog(this, "¿Esta seguro de Cerrar esta Ventana?", "Aviso", 0, 0, null, opcion, NORMAL);
+       
+        if(eleccion==JOptionPane.YES_OPTION)
+        {
+            dispose();
+        }else if (eleccion==JOptionPane.NO_OPTION)
+        {
+            
+        }  
+        }  
     }//GEN-LAST:event_jButton_CerrarActionPerformed
 
     private void jButton_ModificarRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_ModificarRegistroActionPerformed

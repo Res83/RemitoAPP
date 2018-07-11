@@ -483,7 +483,21 @@ AgregarRegistro();
     private void jButton_CerrarCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_CerrarCategoriaActionPerformed
     {//GEN-HEADEREND:event_jButton_CerrarCategoriaActionPerformed
 //  Java: dispose() es usado para cerrar un jframe
-        dispose();
+        if(jTextField_txtCuadroCategoria.getText().equals("(Escribe la Nueva Ubicación)")||jTextField_txtCuadroCategoria.getText().equals("")){
+          dispose();  
+        }else
+        {
+        String opcion[]={"Si", "Cancelar"};
+        int eleccion =JOptionPane.showOptionDialog(this, "¿Esta seguro de Cerrar esta Ventana?", "Aviso", 0, 0, null, opcion, NORMAL);
+       
+        if(eleccion==JOptionPane.YES_OPTION)
+        {
+            dispose();
+        }else if (eleccion==JOptionPane.NO_OPTION)
+        {
+            
+        }  
+        }  
     }//GEN-LAST:event_jButton_CerrarCategoriaActionPerformed
 
     private void jButton_ModificarCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_ModificarCategoriaActionPerformed
