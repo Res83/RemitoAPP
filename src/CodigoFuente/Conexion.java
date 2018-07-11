@@ -31,8 +31,6 @@ String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"Ba
 // Establecer Base de Datos Lista de Categorias:
 String Base_datos_Ubicaciones = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Ubicacion";
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 final String drivers ="org.apache.derby.jdbc.EmbeddedDriver"; 
@@ -389,8 +387,6 @@ public Connection CargarDB_Base_datos_Productos()
         }
         return null;  
     }
-
-/////
 
 public Connection CrearDB_Lista_de_Categorias()
     {

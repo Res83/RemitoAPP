@@ -7,7 +7,6 @@ package EntornoGrafico;
 
 // Importo la relación con la base de datos
 import CodigoFuente.Conexion;
-import EntornoGrafico.Panel_Inicio;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
@@ -24,7 +23,9 @@ public class Ventana_Categorias extends javax.swing.JFrame
 // Cargo la relación con la base de datos
 
     Conexion conex = new Conexion();
-    Connection cone2;  
+    Connection cone2;
+     Conexion conexion_BaseDatosCategorias = new Conexion();
+     
    // int contador_de_filas=1;
     private String SeBorroCategoria;
     private String TextoTemporal;

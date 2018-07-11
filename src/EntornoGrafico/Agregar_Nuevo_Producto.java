@@ -24,7 +24,7 @@ public Agregar_Nuevo_Producto()
 {
     initComponents();
         CBoxCategorias();
-        CBoxUbicacion();
+       // CBoxUbicacion();
                 
 }
 /**
@@ -946,8 +946,10 @@ public Agregar_Nuevo_Producto()
    
  private void CBoxCategorias()
  {
-     conex.CrearDB_Lista_de_Categorias();
-     cone2=conex.CargarDB_Lista_de_Categorias();
+   //  conex.CrearDB_Lista_de_Categorias();
+     cone2=conex.CargarDB_Lista_de_Categorias(); 
+     conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
+   //  conexion_BaseDatosCategorias.CargarDB_Lista_de_Categorias();
    Statement orden;
      try
      {
@@ -967,7 +969,7 @@ public Agregar_Nuevo_Producto()
  }  
  private void CBoxUbicacion()
  {
-      conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
+     conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
      conexion_BaseDatosUbicaciones.CargarDB_Base_datos_Ubicaciones();
    Statement orden;
      try

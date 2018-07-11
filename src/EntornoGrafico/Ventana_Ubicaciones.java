@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package EntornoGrafico;
 
 // Importo la relación con la base de datos
@@ -16,42 +11,45 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Res
+ * @author Raul Eduardo Scalia
+ * https://github.com/Res83
  */
 public class Ventana_Ubicaciones extends javax.swing.JFrame
 {
-// Cargo la relación con la base de datos
+// Cargo la relación con la base de datos //////////////////////////////////////////////////////
 
     Conexion conex = new Conexion();
-    Connection cone2;  
+    Connection cone2;
+     Conexion conexion_BaseDatosUbicaciones = new Conexion();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+     
    // int contador_de_filas=1;
+    private String SeBorroRegistro;
     private String TextoTemporal;
+    private int id_borrado_categoria;
     private Integer Comienza_desde_Aqui;
     private String Bandera_Modificando;
     private int seleccion;
-    private String SeBorroUbicaciones;
-    private int id_borrado_Ubicaciones;
-    private String id_borrado_categoria;
-    
-/**
- * Creates new form Ventana_Categorias
- */
+
 public Ventana_Ubicaciones()
 {
     initComponents();
     
-       
-    //Crea y carga al momento de cargar la ventana en pantalla.
+//Crea y carga Base de Datos /////////////////////////////////////////////////////////////
+
     conex.CrearDB_Base_datos_Ubicaciones();
     cone2= conex.CargarDB_Base_datos_Ubicaciones();
+    
+///////////////////////////////////////////////////////////////////////////////////////////    
     int id_borrado=0;
     
     
-    jButton_EliminarUbicaciones.setVisible(false);
+    jButton_EliminarRegistro.setVisible(false);
     
-    jButton_ModificarUbicaciones.setVisible(false);
+    jButton_ModificarRegistro.setVisible(false);
     
-    jTextField_txtCuadroUbicaciones.requestFocus();
+    jTextField_txtCuadro.requestFocus();
     
     Bandera_Modificando="No";
     
@@ -75,17 +73,13 @@ public Ventana_Ubicaciones()
 private void PropiedadesTabla()
 {
 cone2= conex.CargarDB_Base_datos_Ubicaciones();
-//String columnas[] = {"ID", "Ubicaciones"};
-String columnas[] = {"Ubicaciones","ID"};
+//String columnas[] = {"ID", "Lugares"};
+String columnas[] = {"Lugares","ID"};
 
-if(SeBorroUbicaciones!="SI"){
+if(SeBorroRegistro!="SI"){
 int id=id_incrementable();
-jTextField_ID_Ubicaciones.setText(String.valueOf(id));    
+jTextField_Cuadro_ID.setText(String.valueOf(id));    
 }
-
-//    }  
-
-
 // Primero toma las filas pero no las tengo y pongo null
 // Constructor de la Tabla
 DefaultTableModel dft = new DefaultTableModel(null,columnas);
@@ -101,13 +95,14 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
              while (r.next())
              { 
                Object Filas[]={r.getString("Lugar"),r.getString("ID")};
+             //  Object Filas[]={r.getString("Titulo_Categoria")};
 
 // Le digo ahora que tome estas filas dentro de la tabla
 
             dft.addRow(Filas);
 
              }
-             jTable_Listado_de_Ubicaciones.setModel(dft);
+             jTable_TabladeRegistros.setModel(dft);
                           r.close();
                         orden.close();
            
@@ -118,19 +113,19 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
          }
 }    
 
-private void FiltrarUbicaciones(String Establezco_Filtro)
+private void FiltrarRegistro(String Establezco_Filtro)
 {
-    cone2=conex.CargarDB_Base_datos_Ubicaciones();
+    cone2= conex.CargarDB_Base_datos_Ubicaciones();
     
     if(cone2!=null)
     {
         try
         {
             Statement orden = cone2.createStatement();
-            String Filtro = "Select* From Lista_de_Ubicaciones where Lugar LIKE '%"+jTextField_txtCuadroUbicaciones.getText().trim()+"%' ";
+            String Filtro = "Select* From Lista_de_Ubicaciones where Lugar LIKE '%"+jTextField_txtCuadro.getText().trim()+"%' ";
             ResultSet r=orden.executeQuery(Filtro);
 /////////////
-String columnas[] = {"Lugar","ID"};
+String columnas[] = {"Lugares","ID"};
 
 DefaultTableModel dft = new DefaultTableModel(null,columnas);
 
@@ -140,7 +135,7 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
                Object Filas[]={r.getString("Lugar"),r.getString("ID")};
                dft.addRow(Filas);
              }
-             jTable_Listado_de_Ubicaciones.setModel(dft);
+             jTable_TabladeRegistros.setModel(dft);
                           r.close();
                         orden.close();         
  
@@ -158,7 +153,7 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
 private void EditarRegistro()
 {
 //Cargo la Base de Datos    
-cone2 = conex.CargarDB_Base_datos_Ubicaciones();
+cone2= conex.CargarDB_Base_datos_Ubicaciones();
 
 // Si la conexion esta corriendo arranca los pasos para trabajar con esta
 if(cone2!=null)
@@ -172,10 +167,10 @@ if(cone2!=null)
 // Set (Establezco que voy a Editar)
 // Update (Nombre de la Tabla) Set
                
-    String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadroUbicaciones.getText()+"' where ID="+jTextField_ID_Ubicaciones.getText()+"";
+    String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadro.getText()+"' where ID="+jTextField_Cuadro_ID.getText()+"";
 // Ejecuta ahora la Orden de arriba:
         orden.executeUpdate(editar);    
-        JOptionPane.showMessageDialog(this, "¡La Ubicación se ha Modificado con Exito!");
+        JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
         orden.close(); 
         ReAbrirVentanaUbicaciones(); 
 // Actualizar la tabla con el cambio realizado        
@@ -192,9 +187,9 @@ if(cone2!=null)
 }
 private void AgregarRegistro()
 {
-    cone2=conex.CargarDB_Base_datos_Ubicaciones();
+    cone2= conex.CargarDB_Base_datos_Ubicaciones();
 // Cargo la base de datos mas arriba para tenerla disponible en todo.       
-        if(jTextField_txtCuadroUbicaciones.getText().equals("")||jTextField_txtCuadroUbicaciones.getText().equals("(Escribe la Nueva Categoria)"))
+        if(jTextField_txtCuadro.getText().equals("")||jTextField_txtCuadro.getText().equals("(Escribe la Nueva Ubicacion)"))
         {
         JOptionPane.showMessageDialog(this, "Debe escribir la Ubicacion antes de agregar");
         }else 
@@ -205,19 +200,22 @@ private void AgregarRegistro()
       {
           Statement orden = cone2.createStatement();
           String crear = "Insert into Lista_de_Ubicaciones(Lugar,ID) Values("
-                  + "'"+jTextField_txtCuadroUbicaciones.getText()+ "',"
-                   + ""+jTextField_ID_Ubicaciones.getText()+")";                     
-               
+                  + "'"+jTextField_txtCuadro.getText()+ "',"
+                   + ""+jTextField_Cuadro_ID.getText()+")";                     
+                  
+//                  + ""+jTextField_ID_Categoria.getText()+","
+//                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
           
 // Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
            orden.executeUpdate(crear);
+          System.out.println("Registro Agregado OK");
           
        //   IniciarContador(contador_de_filas);
           PropiedadesTabla();
-          JOptionPane.showMessageDialog(this, "Nueva Ubicación Agregada: [ "+jTextField_txtCuadroUbicaciones.getText()+" ]");
-          jTextField_txtCuadroUbicaciones.setText("");
+          JOptionPane.showMessageDialog(this, "Nueva Ubicacion Agregada: [ "+jTextField_txtCuadro.getText()+" ]");
+          jTextField_txtCuadro.setText("");
             //r.close();
-            SeBorroUbicaciones="NO";
+            SeBorroRegistro="NO";
             ReAbrirVentanaUbicaciones();
             orden.close();
             
@@ -252,18 +250,18 @@ public void ReAbrirVentanaUbicaciones()
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField_ID_Ubicaciones = new javax.swing.JTextField();
+        jTextField_Cuadro_ID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton_AgregarUbicaciones = new javax.swing.JButton();
-        jButton_ModificarUbicaciones = new javax.swing.JButton();
-        jButton_EliminarUbicaciones = new javax.swing.JButton();
-        jButton_CerrarUbicaciones = new javax.swing.JButton();
-        jTextField_txtCuadroUbicaciones = new javax.swing.JTextField();
+        jButton_AgregarRegistro = new javax.swing.JButton();
+        jButton_ModificarRegistro = new javax.swing.JButton();
+        jButton_EliminarRegistro = new javax.swing.JButton();
+        jButton_Cerrar = new javax.swing.JButton();
+        jTextField_txtCuadro = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_Listado_de_Ubicaciones = new javax.swing.JTable();
+        jTable_TabladeRegistros = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("RemitoAPP / Categorias");
+        setTitle("RemitoAPP / Ubicaciones");
         setAlwaysOnTop(true);
         setResizable(false);
 
@@ -273,90 +271,90 @@ public void ReAbrirVentanaUbicaciones()
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ubicaciones");
 
-        jTextField_ID_Ubicaciones.setEditable(false);
-        jTextField_ID_Ubicaciones.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_ID_Ubicaciones.setAutoscrolls(false);
-        jTextField_ID_Ubicaciones.setFocusable(false);
+        jTextField_Cuadro_ID.setEditable(false);
+        jTextField_Cuadro_ID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_Cuadro_ID.setAutoscrolls(false);
+        jTextField_Cuadro_ID.setFocusable(false);
 
         jLabel2.setText("ID:");
         jLabel2.setFocusable(false);
 
-        jButton_AgregarUbicaciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_AgregarUbicaciones.setText("+ Agregar");
-        jButton_AgregarUbicaciones.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton_AgregarUbicaciones.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton_AgregarUbicaciones.addActionListener(new java.awt.event.ActionListener()
+        jButton_AgregarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_AgregarRegistro.setText("+ Agregar");
+        jButton_AgregarRegistro.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jButton_AgregarRegistro.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_AgregarRegistro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton_AgregarUbicacionesActionPerformed(evt);
+                jButton_AgregarRegistroActionPerformed(evt);
             }
         });
 
-        jButton_ModificarUbicaciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_ModificarUbicaciones.setText("* Modificar");
-        jButton_ModificarUbicaciones.addActionListener(new java.awt.event.ActionListener()
+        jButton_ModificarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_ModificarRegistro.setText("* Modificar");
+        jButton_ModificarRegistro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton_ModificarUbicacionesActionPerformed(evt);
+                jButton_ModificarRegistroActionPerformed(evt);
             }
         });
 
-        jButton_EliminarUbicaciones.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_EliminarUbicaciones.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton_EliminarUbicaciones.setText("- Eliminar");
-        jButton_EliminarUbicaciones.addActionListener(new java.awt.event.ActionListener()
+        jButton_EliminarRegistro.setBackground(new java.awt.Color(255, 0, 0));
+        jButton_EliminarRegistro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton_EliminarRegistro.setText("- Eliminar");
+        jButton_EliminarRegistro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton_EliminarUbicacionesActionPerformed(evt);
+                jButton_EliminarRegistroActionPerformed(evt);
             }
         });
 
-        jButton_CerrarUbicaciones.setText("Cerrar");
-        jButton_CerrarUbicaciones.addActionListener(new java.awt.event.ActionListener()
+        jButton_Cerrar.setText("Cerrar");
+        jButton_Cerrar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton_CerrarUbicacionesActionPerformed(evt);
+                jButton_CerrarActionPerformed(evt);
             }
         });
 
-        jTextField_txtCuadroUbicaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_txtCuadroUbicaciones.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField_txtCuadroUbicaciones.setFocusCycleRoot(true);
-        jTextField_txtCuadroUbicaciones.addMouseListener(new java.awt.event.MouseAdapter()
+        jTextField_txtCuadro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField_txtCuadro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_txtCuadro.setFocusCycleRoot(true);
+        jTextField_txtCuadro.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jTextField_txtCuadroUbicacionesMouseClicked(evt);
+                jTextField_txtCuadroMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt)
             {
-                jTextField_txtCuadroUbicacionesMouseEntered(evt);
+                jTextField_txtCuadroMouseEntered(evt);
             }
         });
-        jTextField_txtCuadroUbicaciones.addActionListener(new java.awt.event.ActionListener()
+        jTextField_txtCuadro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField_txtCuadroUbicacionesActionPerformed(evt);
+                jTextField_txtCuadroActionPerformed(evt);
             }
         });
-        jTextField_txtCuadroUbicaciones.addKeyListener(new java.awt.event.KeyAdapter()
+        jTextField_txtCuadro.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyPressed(java.awt.event.KeyEvent evt)
             {
-                jTextField_txtCuadroUbicacionesKeyPressed(evt);
+                jTextField_txtCuadroKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt)
             {
-                jTextField_txtCuadroUbicacionesKeyReleased(evt);
+                jTextField_txtCuadroKeyReleased(evt);
             }
         });
 
-        jTable_Listado_de_Ubicaciones.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_TabladeRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
 
@@ -366,19 +364,19 @@ public void ReAbrirVentanaUbicaciones()
 
             }
         ));
-        jTable_Listado_de_Ubicaciones.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTable_Listado_de_Ubicaciones.setAutoscrolls(false);
-        jTable_Listado_de_Ubicaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTable_Listado_de_Ubicaciones.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable_Listado_de_Ubicaciones.getTableHeader().setReorderingAllowed(false);
-        jTable_Listado_de_Ubicaciones.addMouseListener(new java.awt.event.MouseAdapter()
+        jTable_TabladeRegistros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        jTable_TabladeRegistros.setAutoscrolls(false);
+        jTable_TabladeRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable_TabladeRegistros.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable_TabladeRegistros.getTableHeader().setReorderingAllowed(false);
+        jTable_TabladeRegistros.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jTable_Listado_de_UbicacionesMouseClicked(evt);
+                jTable_TabladeRegistrosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable_Listado_de_Ubicaciones);
+        jScrollPane1.setViewportView(jTable_TabladeRegistros);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -394,22 +392,22 @@ public void ReAbrirVentanaUbicaciones()
                         .addGap(264, 264, 264)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_ID_Ubicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField_Cuadro_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_AgregarUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton_EliminarUbicaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                                .addComponent(jButton_ModificarUbicaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                                .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addGap(127, 127, 127)
-                                    .addComponent(jButton_CerrarUbicaciones))))))
+                                    .addComponent(jButton_Cerrar))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(190, Short.MAX_VALUE)
-                    .addComponent(jTextField_txtCuadroUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_txtCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(22, 22, 22)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -421,22 +419,22 @@ public void ReAbrirVentanaUbicaciones()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField_ID_Ubicaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_Cuadro_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                        .addComponent(jButton_AgregarUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_ModificarUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton_EliminarUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton_CerrarUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_Cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(91, 91, 91)
-                    .addComponent(jTextField_txtCuadroUbicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_txtCuadro, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(182, Short.MAX_VALUE)))
         );
 
@@ -454,77 +452,77 @@ public void ReAbrirVentanaUbicaciones()
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_AgregarUbicacionesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_AgregarUbicacionesActionPerformed
-    {//GEN-HEADEREND:event_jButton_AgregarUbicacionesActionPerformed
+    private void jButton_AgregarRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_AgregarRegistroActionPerformed
+    {//GEN-HEADEREND:event_jButton_AgregarRegistroActionPerformed
 AgregarRegistro();
-    }//GEN-LAST:event_jButton_AgregarUbicacionesActionPerformed
+    }//GEN-LAST:event_jButton_AgregarRegistroActionPerformed
 
-    private void jTextField_txtCuadroUbicacionesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_txtCuadroUbicacionesActionPerformed
-    {//GEN-HEADEREND:event_jTextField_txtCuadroUbicacionesActionPerformed
+    private void jTextField_txtCuadroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_txtCuadroActionPerformed
+    {//GEN-HEADEREND:event_jTextField_txtCuadroActionPerformed
 
-    }//GEN-LAST:event_jTextField_txtCuadroUbicacionesActionPerformed
+    }//GEN-LAST:event_jTextField_txtCuadroActionPerformed
 
-    private void jTextField_txtCuadroUbicacionesMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroUbicacionesMouseClicked
-    {//GEN-HEADEREND:event_jTextField_txtCuadroUbicacionesMouseClicked
-        if(jTextField_txtCuadroUbicaciones.getText().equals("(Escribe la Nueva Ubicación)"))
+    private void jTextField_txtCuadroMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroMouseClicked
+    {//GEN-HEADEREND:event_jTextField_txtCuadroMouseClicked
+        if(jTextField_txtCuadro.getText().equals("(Escribe la Nueva Ubicación)"))
         {
-                  jTextField_txtCuadroUbicaciones.setText("");
-                  jButton_AgregarUbicaciones.setVisible(true);
+                  jTextField_txtCuadro.setText("");
+                  jButton_AgregarRegistro.setVisible(true);
         }  
 
-    }//GEN-LAST:event_jTextField_txtCuadroUbicacionesMouseClicked
+    }//GEN-LAST:event_jTextField_txtCuadroMouseClicked
 
-    private void jButton_CerrarUbicacionesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_CerrarUbicacionesActionPerformed
-    {//GEN-HEADEREND:event_jButton_CerrarUbicacionesActionPerformed
+    private void jButton_CerrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_CerrarActionPerformed
+    {//GEN-HEADEREND:event_jButton_CerrarActionPerformed
 //  Java: dispose() es usado para cerrar un jframe
         dispose();
-    }//GEN-LAST:event_jButton_CerrarUbicacionesActionPerformed
+    }//GEN-LAST:event_jButton_CerrarActionPerformed
 
-    private void jButton_ModificarUbicacionesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_ModificarUbicacionesActionPerformed
-    {//GEN-HEADEREND:event_jButton_ModificarUbicacionesActionPerformed
+    private void jButton_ModificarRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_ModificarRegistroActionPerformed
+    {//GEN-HEADEREND:event_jButton_ModificarRegistroActionPerformed
 // Modificar
 EditarRegistro(); 
-    }//GEN-LAST:event_jButton_ModificarUbicacionesActionPerformed
+    }//GEN-LAST:event_jButton_ModificarRegistroActionPerformed
 
-    private void jTable_Listado_de_UbicacionesMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTable_Listado_de_UbicacionesMouseClicked
-    {//GEN-HEADEREND:event_jTable_Listado_de_UbicacionesMouseClicked
+    private void jTable_TabladeRegistrosMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTable_TabladeRegistrosMouseClicked
+    {//GEN-HEADEREND:event_jTable_TabladeRegistrosMouseClicked
         Bandera_Modificando="Si";
         
         
-        jButton_AgregarUbicaciones.setVisible(false);
-        jButton_ModificarUbicaciones.setVisible(true);
-        jButton_EliminarUbicaciones.setVisible(true);
+        jButton_AgregarRegistro.setVisible(false);
+        jButton_ModificarRegistro.setVisible(true);
+        jButton_EliminarRegistro.setVisible(true);
         
         // evento Mouse Clicked en la Tabla:
-             jTextField_ID_Ubicaciones.setText("");
-             jTextField_txtCuadroUbicaciones.setText("");
+             jTextField_Cuadro_ID.setText("");
+             jTextField_txtCuadro.setText("");
              
-             int seleccion=jTable_Listado_de_Ubicaciones.rowAtPoint(evt.getPoint());
+             int seleccion=jTable_TabladeRegistros.rowAtPoint(evt.getPoint());
             
             
-             jTextField_txtCuadroUbicaciones.setText(String.valueOf(jTable_Listado_de_Ubicaciones.getValueAt(seleccion,0)));             
-            jTextField_ID_Ubicaciones.setText(String.valueOf(jTable_Listado_de_Ubicaciones.getValueAt(seleccion,1)));
-                jTextField_txtCuadroUbicaciones.requestFocus();
+             jTextField_txtCuadro.setText(String.valueOf(jTable_TabladeRegistros.getValueAt(seleccion,0)));             
+            jTextField_Cuadro_ID.setText(String.valueOf(jTable_TabladeRegistros.getValueAt(seleccion,1)));
+                jTextField_txtCuadro.requestFocus();
             
-    }//GEN-LAST:event_jTable_Listado_de_UbicacionesMouseClicked
+    }//GEN-LAST:event_jTable_TabladeRegistrosMouseClicked
 
-    private void jTextField_txtCuadroUbicacionesKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroUbicacionesKeyReleased
-    {//GEN-HEADEREND:event_jTextField_txtCuadroUbicacionesKeyReleased
-        FiltrarUbicaciones(jTextField_txtCuadroUbicaciones.getText().trim());
-    }//GEN-LAST:event_jTextField_txtCuadroUbicacionesKeyReleased
+    private void jTextField_txtCuadroKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroKeyReleased
+    {//GEN-HEADEREND:event_jTextField_txtCuadroKeyReleased
+        FiltrarRegistro(jTextField_txtCuadro.getText().trim());
+    }//GEN-LAST:event_jTextField_txtCuadroKeyReleased
 
-    private void jButton_EliminarUbicacionesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_EliminarUbicacionesActionPerformed
-    {//GEN-HEADEREND:event_jButton_EliminarUbicacionesActionPerformed
+    private void jButton_EliminarRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_EliminarRegistroActionPerformed
+    {//GEN-HEADEREND:event_jButton_EliminarRegistroActionPerformed
 // Eliminar
-        if(jTextField_txtCuadroUbicaciones.getText().equals("")||jTextField_txtCuadroUbicaciones.getText().equals("(Escribe la Nueva Ubicacion)"))
+        if(jTextField_txtCuadro.getText().equals("")||jTextField_txtCuadro.getText().equals("(Escribe la Nueva Ubicación)"))
         {
-        JOptionPane.showMessageDialog(this, "Debe Selecionar de la tabla un Lugar y luego pulsar Eliminar");
+        JOptionPane.showMessageDialog(this, "Debe Selecionar de la tabla y luego pulsar Eliminar");
         }else 
         {
 // Se crea un metodo EditarRegistro() para que las instruciones las podamos usar por cualquier otra parte.        
            
-        String opcion[]={"Eliminar Ubicación", "Cancelar"};
-        int eleccion =JOptionPane.showOptionDialog(this, "¿Esta seguro de Eliminar ("+jTextField_txtCuadroUbicaciones.getText()+")", "Eliminar Categoria", 0, 0, null, opcion, NORMAL);
+        String opcion[]={"Eliminar", "Cancelar"};
+        int eleccion =JOptionPane.showOptionDialog(this, "¿Esta seguro de Eliminar ("+jTextField_txtCuadro.getText()+") ?", "Eliminar", 0, 0, null, opcion, NORMAL);
        
         if(eleccion==JOptionPane.YES_OPTION)
         {
@@ -535,23 +533,23 @@ EditarRegistro();
         }
             
         }
-    }//GEN-LAST:event_jButton_EliminarUbicacionesActionPerformed
+    }//GEN-LAST:event_jButton_EliminarRegistroActionPerformed
 
-    private void jTextField_txtCuadroUbicacionesMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroUbicacionesMouseEntered
-    {//GEN-HEADEREND:event_jTextField_txtCuadroUbicacionesMouseEntered
+    private void jTextField_txtCuadroMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroMouseEntered
+    {//GEN-HEADEREND:event_jTextField_txtCuadroMouseEntered
         String Entro = null;
 
 if(Bandera_Modificando=="Si"&& Entro!="Si")
 {
-    String TextoTemporal=jTextField_txtCuadroUbicaciones.getText();   
+    String TextoTemporal=jTextField_txtCuadro.getText();   
     System.out.println("TextoGuardado: "+TextoTemporal);
    Entro="No";  
 }
         
-    }//GEN-LAST:event_jTextField_txtCuadroUbicacionesMouseEntered
+    }//GEN-LAST:event_jTextField_txtCuadroMouseEntered
 
-    private void jTextField_txtCuadroUbicacionesKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroUbicacionesKeyPressed
-    {//GEN-HEADEREND:event_jTextField_txtCuadroUbicacionesKeyPressed
+    private void jTextField_txtCuadroKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_txtCuadroKeyPressed
+    {//GEN-HEADEREND:event_jTextField_txtCuadroKeyPressed
        
         if(evt.getKeyCode()==KeyEvent.VK_ENTER&&Bandera_Modificando=="No")
         {
@@ -560,7 +558,7 @@ if(Bandera_Modificando=="Si"&& Entro!="Si")
         {
             EditarRegistro();
         }   
-    }//GEN-LAST:event_jTextField_txtCuadroUbicacionesKeyPressed
+    }//GEN-LAST:event_jTextField_txtCuadroKeyPressed
 
 /**
  * @param args the command line arguments
@@ -613,53 +611,52 @@ public static void main(String args[])
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_AgregarUbicaciones;
-    private javax.swing.JButton jButton_CerrarUbicaciones;
-    private javax.swing.JButton jButton_EliminarUbicaciones;
-    private javax.swing.JButton jButton_ModificarUbicaciones;
+    private javax.swing.JButton jButton_AgregarRegistro;
+    private javax.swing.JButton jButton_Cerrar;
+    private javax.swing.JButton jButton_EliminarRegistro;
+    private javax.swing.JButton jButton_ModificarRegistro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable_Listado_de_Ubicaciones;
-    private javax.swing.JTextField jTextField_ID_Ubicaciones;
-    private javax.swing.JTextField jTextField_txtCuadroUbicaciones;
+    private javax.swing.JTable jTable_TabladeRegistros;
+    private javax.swing.JTextField jTextField_Cuadro_ID;
+    private javax.swing.JTextField jTextField_txtCuadro;
     // End of variables declaration//GEN-END:variables
 
     private void EliminarRegistro()
     {
-    cone2=conex.CargarDB_Base_datos_Ubicaciones();
+        cone2= conex.CargarDB_Base_datos_Ubicaciones();
 
         if(cone2!=null)
         {
             try
             {
                 Statement orden = cone2.createStatement();
-                int Comienza_desde_Aqui=Integer.parseInt(jTextField_ID_Ubicaciones.getText());
+                int Comienza_desde_Aqui=Integer.parseInt(jTextField_Cuadro_ID.getText());
                 System.out.println("Comienza_desde_Aqui:"+Comienza_desde_Aqui);     
 
-                String Elminar = "DELETE From Lista_de_Ubicaciones Where ID="+jTextField_ID_Ubicaciones.getText();
+                String Elminar = "DELETE From Lista_de_Ubicaciones Where ID="+jTextField_Cuadro_ID.getText();
 
                 orden.executeUpdate(Elminar);
-               
-            
+                          
              cone2.close();
                 JOptionPane.showMessageDialog(this, "Ubicación Elimina");
-         //       ReAbrirVentanaUbicaciones();
+         //       ReAbrirVentanaCategorias();
          
-                 jTextField_txtCuadroUbicaciones.setText("(Escribe la Nueva Ubicación)");
+                 jTextField_txtCuadro.setText("(Escribe la Nueva Ubicación)");
 
-                  jButton_EliminarUbicaciones.setVisible(false);
-                  jButton_AgregarUbicaciones.setVisible(true);
-                  jButton_ModificarUbicaciones.setVisible(false);
+                  jButton_EliminarRegistro.setVisible(false);
+                  jButton_AgregarRegistro.setVisible(true);
+                  jButton_ModificarRegistro.setVisible(false);
                  
                  PropiedadesTabla();
                  
-                id_borrado_Ubicaciones=Comienza_desde_Aqui;
-                SeBorroUbicaciones="SI";
+                id_borrado_categoria=Comienza_desde_Aqui;
+                SeBorroRegistro="SI";
 
               
-              jTextField_ID_Ubicaciones.setText(String.valueOf(Comienza_desde_Aqui));
+              jTextField_Cuadro_ID.setText(String.valueOf(Comienza_desde_Aqui));
                             
              orden.close();
             }
@@ -674,7 +671,7 @@ public int id_incrementable()
 {
     int id=1;
     PreparedStatement ps =null;
-    cone2 = conex.CargarDB_Base_datos_Ubicaciones();
+    cone2= conex.CargarDB_Base_datos_Ubicaciones();
     try
     {
       Statement orden = cone2.createStatement();
@@ -705,9 +702,9 @@ public int id_incrementable()
     
     }
     
-        if(SeBorroUbicaciones=="SI")
+        if(SeBorroRegistro=="SI")
     {
-                        System.out.println("Se Borro un registro recien:"+SeBorroUbicaciones+"La Id era:"+id_borrado_categoria );
+                        System.out.println("Se Borro un registro recien:"+SeBorroRegistro+"La Id era:"+id_borrado_categoria );
      id=Comienza_desde_Aqui;   
     }
     
