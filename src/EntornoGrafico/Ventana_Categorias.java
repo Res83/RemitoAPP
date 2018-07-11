@@ -36,6 +36,42 @@ public class Ventana_Categorias extends javax.swing.JFrame
 /**
  * Creates new form Ventana_Categorias
  */
+public Ventana_Categorias()
+{
+    initComponents();
+    
+       
+    //Crea y carga al momento de cargar la ventana en pantalla.
+    conex.CrearDB_Lista_de_Categorias();
+    cone2= conex.CargarDB_Lista_de_Categorias();
+    int id_borrado=0;
+    
+    
+    jButton_EliminarCategoria.setVisible(false);
+    
+    jButton_ModificarCategoria.setVisible(false);
+    
+    jTextField_txtCuadroCategoria.requestFocus();
+    
+    Bandera_Modificando="No";
+    
+    if(cone2!=null)
+    {
+    PropiedadesTabla();
+    
+  
+
+    
+    
+    
+    //IniciarContador(contador_de_filas);
+  
+    
+    //JOptionPane.showMessageDialog (null,"Mensaje","Titulo",JOptionPane.ERRROR_MESSAGE); 
+    }
+    
+}
+
 private void PropiedadesTabla()
 {
 cone2= conex.CargarDB_Lista_de_Categorias();
@@ -206,41 +242,6 @@ public void ReAbrirVentanaCategorias()
         Ventana_Categorias ventanabierta = new Ventana_Categorias();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true); 
-}
-public Ventana_Categorias()
-{
-    initComponents();
-    
-       
-    //Crea y carga al momento de cargar la ventana en pantalla.
-    conex.CrearDB_Lista_de_Categorias();
-    cone2= conex.CargarDB_Lista_de_Categorias();
-    int id_borrado=0;
-    
-    
-    jButton_EliminarCategoria.setVisible(false);
-    
-    jButton_ModificarCategoria.setVisible(false);
-    
-    jTextField_txtCuadroCategoria.requestFocus();
-    
-    Bandera_Modificando="No";
-    
-    if(cone2!=null)
-    {
-    PropiedadesTabla();
-    
-  
-
-    
-    
-    
-    //IniciarContador(contador_de_filas);
-  
-    
-    //JOptionPane.showMessageDialog (null,"Mensaje","Titulo",JOptionPane.ERRROR_MESSAGE); 
-    }
-    
 }
 
 /**
@@ -508,6 +509,7 @@ EditarRegistro();
             
              jTextField_txtCuadroCategoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,0)));             
             jTextField_ID_Categoria.setText(String.valueOf(jTable_Listado_de_Categorias.getValueAt(seleccion,1)));
+                jTextField_txtCuadroCategoria.requestFocus();
             
     }//GEN-LAST:event_jTable_Listado_de_CategoriasMouseClicked
 
