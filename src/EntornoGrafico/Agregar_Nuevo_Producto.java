@@ -24,7 +24,7 @@ public Agregar_Nuevo_Producto()
 {
     initComponents();
         CBoxCategorias();
-       // CBoxUbicacion();
+        CBoxUbicacion();
                 
 }
 /**
@@ -969,13 +969,13 @@ public Agregar_Nuevo_Producto()
  }  
  private void CBoxUbicacion()
  {
-     conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
-     conexion_BaseDatosUbicaciones.CargarDB_Base_datos_Ubicaciones();
+     conexion_BaseDatosCategorias.CrearDB_Base_datos_Ubicaciones();
+     cone2= conex.CargarDB_Base_datos_Ubicaciones();
    Statement orden;
      try
      {
          orden = cone2.createStatement();
-         ResultSet r=orden.executeQuery("Select* From Base_datos_Ubicaciones");
+         ResultSet r=orden.executeQuery("Select* From Lista_de_Ubicaciones");
          while (r.next())
          {             
              jComboBox_Lista_de_Ubicacion.addItem(r.getString("Lugar"));
