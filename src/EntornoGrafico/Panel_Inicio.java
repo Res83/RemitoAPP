@@ -280,6 +280,8 @@ public Panel_Inicio()
              // Abrir Formulario Provedor_Agregar.java
        // new Provedor_Agregar(this,true).setVisible(true);
      //   this.setVisible(false);
+        conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
+        conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
         Panel_Inicio VB = new Panel_Inicio();
         Agregar_Nuevo_Producto ventanabierta = new Agregar_Nuevo_Producto();
         ventanabierta.setLocationRelativeTo(getParent());
@@ -300,7 +302,7 @@ public Panel_Inicio()
 
     private void jMenuItem_Productos_CategoriasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem_Productos_CategoriasActionPerformed
     {//GEN-HEADEREND:event_jMenuItem_Productos_CategoriasActionPerformed
-        conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
+       conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
         Panel_Inicio VB = new Panel_Inicio();
         Ventana_Categorias ventanabierta = new Ventana_Categorias();
         ventanabierta.setLocationRelativeTo(getParent());

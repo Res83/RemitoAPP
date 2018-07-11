@@ -437,6 +437,20 @@ public Agregar_Nuevo_Producto()
         jLabel2_Codigo_Cliente.setText("Código:");
 
         jComboBox_Lista_de_Ubicacion.setToolTipText("Ubicaciòn");
+        jComboBox_Lista_de_Ubicacion.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_Lista_de_UbicacionMouseClicked(evt);
+            }
+        });
+        jComboBox_Lista_de_Ubicacion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jComboBox_Lista_de_UbicacionActionPerformed(evt);
+            }
+        });
 
         jTextField_Descripcion_Producto.setText("(Descripción)");
         jTextField_Descripcion_Producto.setToolTipText("Campo Mínimo requerido (Requerido)");
@@ -881,6 +895,16 @@ public Agregar_Nuevo_Producto()
     {//GEN-HEADEREND:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox_Lista_de_UbicacionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_UbicacionActionPerformed
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_UbicacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_Lista_de_UbicacionActionPerformed
+
+    private void jComboBox_Lista_de_UbicacionMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_UbicacionMouseClicked
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_UbicacionMouseClicked
+     
+    }//GEN-LAST:event_jComboBox_Lista_de_UbicacionMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
