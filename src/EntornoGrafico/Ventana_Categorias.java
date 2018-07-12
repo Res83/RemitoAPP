@@ -178,7 +178,7 @@ if(cone2!=null)
     String editar ="Update Lista_de_Categorias Set Titulo_Categoria='"+jTextField_txtCuadroCategoria.getText()+"' where ID="+jTextField_ID_Categoria.getText()+"";
 // Ejecuta ahora la Orden de arriba:
         orden.executeUpdate(editar);    
-        JOptionPane.showMessageDialog(this, "¡Categoria ("+TextoTemporal+" >> "+jTextField_txtCuadroCategoria.getText()+" ) Modificada con Exito!");
+        JOptionPane.showMessageDialog(this, "¡Categoria sea Modificada con Exito!");
         orden.close(); 
         ReAbrirVentanaCategorias(); 
 // Actualizar la tabla con el cambio realizado        

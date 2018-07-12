@@ -1,6 +1,19 @@
 ----------------------------------------------------------------
-Wed Jul 11 17:34:58 ART 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0164-8b0d-da85-0000030f6fc0 
+Thu Jul 12 03:41:00 ART 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0164-8d38-b2ec-0000030050b0 
+on database directory C:\RemitoAppGIT\RemitoAPP\BaseDatos\Categorias with class loader sun.misc.Launcher$AppClassLoader@42a57993 
+Loaded from file:/C:/RemitoAppGIT/RemitoAPP/lib/JAVADB_DRIVER_LABEL/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_121-b13
+user.dir=C:\RemitoAppGIT\RemitoAPP
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Jul 12 03:41:01 ART 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance 08264012-0164-8d38-b2ec-0000030050b0 
 on database directory C:\RemitoAppGIT\RemitoAPP\BaseDatos\Ubicacion with class loader sun.misc.Launcher$AppClassLoader@42a57993 
 Loaded from file:/C:/RemitoAppGIT/RemitoAPP/lib/JAVADB_DRIVER_LABEL/derby.jar
 java.vendor=Oracle Corporation
