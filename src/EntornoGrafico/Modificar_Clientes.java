@@ -124,6 +124,7 @@ public Modificar_Clientes()
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2_eleminar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -435,6 +436,8 @@ public Modificar_Clientes()
             }
         });
 
+        jButton2.setText("Agregar Nuevo Cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -454,6 +457,8 @@ public Modificar_Clientes()
                     .addComponent(jButton2_eleminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -472,7 +477,9 @@ public Modificar_Clientes()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2_eleminar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1_CerrarVentanAbierta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1_CerrarVentanAbierta)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -710,6 +717,7 @@ public static void main(String args[])
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton1_CerrarVentanAbierta;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton2_eleminar;
     private javax.swing.JButton jButton_Buscar;
     private javax.swing.JComboBox<String> jComboBox_BuscarporCodCliente;

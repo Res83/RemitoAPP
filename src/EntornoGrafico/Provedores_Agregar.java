@@ -13,11 +13,24 @@ public class Provedores_Agregar extends javax.swing.JFrame
  Conexion conex = new Conexion();
  Connection cone2;
  
+    private String SeBorroRegistro;
+    private String TextoTemporal;
+    private int id_borrado_es;
+    private Integer Comienza_desde_Aqui;
+    private String Bandera_Modificando;
+    private int seleccion;
+    
+    
+ 
 int contador_de_error=0;
 
  
  private void PropiedadesTabla()
  {
+     if(SeBorroRegistro!="SI"){
+int id=id_incrementable();
+jTextField_txtCodigo_Provedor.setText(String.valueOf(id));    
+}
      String Columnas[]=
      {
          "cod",
@@ -78,6 +91,7 @@ public Provedores_Agregar()
 {
     initComponents();
        
+        Bandera_Modificando="No";
         jLabel_Requerido_NombreyApellido.setVisible(false);
         jLabel_Requerido_CalleNumero.setVisible(false);
         jLabel_Requerido_Telefono.setVisible(false);
@@ -114,7 +128,7 @@ public Provedores_Agregar()
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2_Codigo_Provedor = new javax.swing.JLabel();
-        jTextField1_txtCodigo_Provedor = new javax.swing.JTextField();
+        jTextField_txtCodigo_Provedor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField1_txtNombreApellido_Provedor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -162,13 +176,13 @@ public Provedores_Agregar()
 
         jLabel2_Codigo_Provedor.setText("Código:");
 
-        jTextField1_txtCodigo_Provedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1_txtCodigo_Provedor.setText("000");
-        jTextField1_txtCodigo_Provedor.addActionListener(new java.awt.event.ActionListener()
+        jTextField_txtCodigo_Provedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField_txtCodigo_Provedor.setText("000");
+        jTextField_txtCodigo_Provedor.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jTextField1_txtCodigo_ProvedorActionPerformed(evt);
+                jTextField_txtCodigo_ProvedorActionPerformed(evt);
             }
         });
 
@@ -280,7 +294,7 @@ public Provedores_Agregar()
                                 .addGap(0, 590, Short.MAX_VALUE)
                                 .addComponent(jLabel2_Codigo_Provedor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1_txtCodigo_Provedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField_txtCodigo_Provedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(16, 16, 16))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -288,7 +302,7 @@ public Provedores_Agregar()
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2_Codigo_Provedor)
-                    .addComponent(jTextField1_txtCodigo_Provedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_txtCodigo_Provedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -522,7 +536,7 @@ dispose();
                         + "Email_Provedor,"
                         + "Anotacionl_Provedor"
                         + ") Values("
-                        + ""+jTextField1_txtCodigo_Provedor.getText()+","
+                        + ""+jTextField_txtCodigo_Provedor.getText()+","
                         + "'"+jTextField1_txtNombreApellido_Provedor.getText()+"',"
                         + "'"+jTextField1_txtCalle_Provedor.getText()+"',"
                         + ""+jTextField1_txtCalle_Numero_Provedor.getText()+","
@@ -550,7 +564,7 @@ dispose();
                     catch (SQLException ex)
             {
                           System.out.println("Error WILSONG:"+ex);
-                          JOptionPane.showMessageDialog(this, "Error: Numero de Provedor Repetido ("+jTextField1_txtCodigo_Provedor.getText()+") Cambie el numero");
+                          JOptionPane.showMessageDialog(this, "Error: Numero de Provedor Repetido ("+jTextField_txtCodigo_Provedor.getText()+") Cambie el numero");
                                     
                             }}            
             
@@ -615,10 +629,10 @@ public static void main(String args[])
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2_txtTelefonoMovil_ProvedorActionPerformed
 
-    private void jTextField1_txtCodigo_ProvedorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1_txtCodigo_ProvedorActionPerformed
-    {//GEN-HEADEREND:event_jTextField1_txtCodigo_ProvedorActionPerformed
+    private void jTextField_txtCodigo_ProvedorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField_txtCodigo_ProvedorActionPerformed
+    {//GEN-HEADEREND:event_jTextField_txtCodigo_ProvedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1_txtCodigo_ProvedorActionPerformed
+    }//GEN-LAST:event_jTextField_txtCodigo_ProvedorActionPerformed
 
     private void jTextField1_txtCalle_Numero_ProvedorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextField1_txtCalle_Numero_ProvedorActionPerformed
     {//GEN-HEADEREND:event_jTextField1_txtCalle_Numero_ProvedorActionPerformed
@@ -657,7 +671,6 @@ public static void main(String args[])
     private javax.swing.JTextField jTextField1_txtCalle_Numero_Provedor;
     private javax.swing.JTextField jTextField1_txtCalle_Provedor;
     private javax.swing.JTextField jTextField1_txtCiudad_Provedor;
-    private javax.swing.JTextField jTextField1_txtCodigo_Provedor;
     private javax.swing.JTextField jTextField1_txtEmail_Provedor;
     private javax.swing.JTextField jTextField1_txtEntreCalles_Provedor;
     private javax.swing.JTextField jTextField1_txtGoogleMaps_Provedor;
@@ -666,6 +679,7 @@ public static void main(String args[])
     private javax.swing.JTextField jTextField1_txtProvincia_Provedor;
     private javax.swing.JTextField jTextField1_txtTelefonoFijo_Provedor;
     private javax.swing.JTextField jTextField2_txtTelefonoMovil_Provedor;
+    private javax.swing.JTextField jTextField_txtCodigo_Provedor;
     // End of variables declaration//GEN-END:variables
 
  
@@ -725,5 +739,50 @@ public static void main(String args[])
         }
     
               System.out.println("Contador de Error = "+contador_de_error);  
-    }        
+    }
+    
+    public int id_incrementable()
+{
+    int id=1;
+    PreparedStatement ps =null;
+    cone2= conex.CargarDB_Base_datos_Provedores();
+    try
+    {
+      Statement orden = cone2.createStatement();
+      ResultSet r = orden.executeQuery("Select MAX(Codigo_Provedor) From ListadeProvedores");
+        while (r.next())
+        {            
+                    id=r.getInt(1)+1;
+
+        }
+        System.out.println("Id Maximo:"+id);
+        
+            }
+    catch (Exception ex)
+    {
+        System.out.println("Error:"+ex);
+    }
+    finally
+    {
+        try
+        {
+            ps.close();
+            
+            //DesconectarBasededatos Falta
+        }
+        catch (Exception e)
+        {
+        }
+    
+    }
+    
+        if(SeBorroRegistro=="SI")
+    {
+                        System.out.println("Se Borro un registro recien:"+SeBorroRegistro+"La Id era:"+id_borrado_es );
+     id=Comienza_desde_Aqui;   
+    }
+    
+        return id;
+    }
+    
     }

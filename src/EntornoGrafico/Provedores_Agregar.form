@@ -133,7 +133,7 @@
                                       <EmptySpace min="0" pref="590" max="32767" attributes="0"/>
                                       <Component id="jLabel2_Codigo_Provedor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jTextField1_txtCodigo_Provedor" min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="jTextField_txtCodigo_Provedor" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
@@ -147,7 +147,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2_Codigo_Provedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1_txtCodigo_Provedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_txtCodigo_Provedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -183,13 +183,13 @@
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1_txtCodigo_Provedor">
+            <Component class="javax.swing.JTextField" name="jTextField_txtCodigo_Provedor">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="000"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1_txtCodigo_ProvedorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_txtCodigo_ProvedorActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">

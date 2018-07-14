@@ -283,7 +283,7 @@ public Panel_Inicio()
         conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
         conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
         Panel_Inicio VB = new Panel_Inicio();
-        Agregar_Nuevo_Producto ventanabierta = new Agregar_Nuevo_Producto();
+        Ventana_Productos ventanabierta = new Ventana_Productos();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
      //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);       
