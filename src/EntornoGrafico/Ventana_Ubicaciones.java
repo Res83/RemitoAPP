@@ -365,6 +365,7 @@ public void ReAbrirVentanaUbicaciones()
             }
         });
 
+        jTable_TabladeRegistros.setAutoCreateRowSorter(true);
         jTable_TabladeRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -376,7 +377,6 @@ public void ReAbrirVentanaUbicaciones()
             }
         ));
         jTable_TabladeRegistros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        jTable_TabladeRegistros.setAutoscrolls(false);
         jTable_TabladeRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTable_TabladeRegistros.setGridColor(new java.awt.Color(0, 0, 0));
         jTable_TabladeRegistros.getTableHeader().setReorderingAllowed(false);
