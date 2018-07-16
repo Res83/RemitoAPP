@@ -1081,7 +1081,7 @@ public int id_incrementable()
         //Conexion conex = new Conexion();
         //Connection cone2;
 
-        cone2= conex.CargarDB_Base_datos_Provedores();
+        cone2= conex.CargarDB_Base_datos_Proveedores();
         if(cone2!=null)
         {
             try
@@ -1200,8 +1200,8 @@ public int id_incrementable()
  }
   private void CBoxProveedores()
  {
-    cone2= conex.CargarDB_Base_datos_Provedores();
-conex.CrearDB_Base_datos_Provedores();
+    cone2= conex.CargarDB_Base_datos_Proveedores();
+conex.CrearDB_Base_datos_Proveedores();
    Statement orden;
      try
      {

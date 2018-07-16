@@ -37,13 +37,16 @@ public Ventana_Proveedores()
        
         Bandera_Modificando="No";
         
+        
+// Textos de Aviso que debe completar:        
+        jLabel_Requerido_Empresa.setVisible(false);
         jLabel_Requerido_NombreyApellido.setVisible(false);
         jLabel_Requerido_CalleNumero.setVisible(false);
         jLabel_Requerido_Telefono.setVisible(false);
         
 
-    conex.CrearDB_Base_datos_Provedores();
-    cone2= conex.CargarDB_Base_datos_Provedores();
+    conex.CrearDB_Base_datos_Proveedores();
+    cone2= conex.CargarDB_Base_datos_Proveedores();
     if (cone2!=null)
     {
         PropiedadesTabla();
@@ -92,6 +95,7 @@ public Ventana_Proveedores()
         jLabel_Requerido_Telefono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTextField_Empresa = new javax.swing.JTextField();
+        jLabel_Requerido_Empresa = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1_txtPiso_Proveedor = new javax.swing.JTextField();
@@ -210,6 +214,9 @@ public Ventana_Proveedores()
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Empresa:");
 
+        jLabel_Requerido_Empresa.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel_Requerido_Empresa.setText("(Requerido)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -254,6 +261,8 @@ public Ventana_Proveedores()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel_Requerido_Empresa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2_Codigo_Provedor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -271,7 +280,8 @@ public Ventana_Proveedores()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(jTextField_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Requerido_Empresa))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -512,7 +522,7 @@ dispose();
         if(contador_de_error==0)
         {            
       //agregar Proveedores a la tabla
-               cone2= conex.CargarDB_Base_datos_Provedores();
+               cone2= conex.CargarDB_Base_datos_Proveedores();
                 if (cone2!=null)
         
         {
@@ -573,8 +583,8 @@ dispose();
             
 
         }else
-        {
-          JOptionPane.showMessageDialog(this, "Error: Es neceserio completar los campos requeridos para guardar.");
+        {            
+                JOptionPane.showMessageDialog(this, "Es neceserio completar los campos requeridos para guardar.", "Aviso", 0, null);
         }
         }
               
@@ -583,11 +593,6 @@ dispose();
  */
 public static void main(String args[])
 {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
     try
     {
         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
@@ -603,74 +608,7 @@ public static void main(String args[])
     {
         java.util.logging.Logger.getLogger(Ventana_Proveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
-     //</editor-fold>
 
-    //</editor-fold>
-
-    /* Create and display the form */
     java.awt.EventQueue.invokeLater(() ->
     {
         new Ventana_Proveedores().setVisible(true);
@@ -791,6 +729,7 @@ public static void main(String args[])
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Requerido_CalleNumero;
+    private javax.swing.JLabel jLabel_Requerido_Empresa;
     private javax.swing.JLabel jLabel_Requerido_NombreyApellido;
     private javax.swing.JLabel jLabel_Requerido_Telefono;
     private javax.swing.JPanel jPanel1;
@@ -818,7 +757,17 @@ public static void main(String args[])
 
  
     private void Validar() 
-    {      
+    {   
+          if(jTextField_Empresa.getText().equals(""))
+        {
+            jLabel_Requerido_Empresa.setVisible(true);
+            contador_de_error++;
+            System.out.println("+ Empresa");
+        }else
+        {
+            jLabel_Requerido_Empresa.setVisible(false);
+                        System.out.println("- Empresa");
+        }
         if(jTextField1_txtNombreApellido_Proveedor.getText().equals(""))
         {
             jLabel_Requerido_NombreyApellido.setVisible(true);
@@ -850,7 +799,7 @@ public static void main(String args[])
             jLabel_Requerido_CalleNumero.setVisible(false);
                                     System.out.println("- Numero");
         }
-        if(jTextField1_txtTelefonoFijo_Proveedor.getText().equals(""))
+        if(jTextField1_txtTelefonoFijo_Proveedor.getText().equals("")|| (jTextField2_txtTelefonoMovil_Proveedor.getText().equals("")))
         {
             jLabel_Requerido_Telefono.setVisible(true);
             contador_de_error++;
@@ -860,17 +809,16 @@ public static void main(String args[])
             jLabel_Requerido_Telefono.setVisible(false);
             System.out.println("- TelefonoFijoyCelular");
         }
-               if(jTextField2_txtTelefonoMovil_Proveedor.getText().equals(""))
-        {
-            jLabel_Requerido_Telefono.setVisible(true);
-            contador_de_error++;
-                                    System.out.println("+ celular");
-        }else
-        {
-            jLabel_Requerido_Telefono.setVisible(false);
-//            contador_de_error--;
-            System.out.println("- celular");
-        }
+//               if(jTextField2_txtTelefonoMovil_Proveedor.getText().equals(""))
+//        {
+//            jLabel_Requerido_Telefono.setVisible(true);
+//            contador_de_error++;
+//                                    System.out.println("+ celular");
+//        }else
+//        {
+//            jLabel_Requerido_Telefono.setVisible(false);
+//            System.out.println("- celular");
+//        }
     
               System.out.println("Contador de Error = "+contador_de_error);  
     }
@@ -879,7 +827,7 @@ public static void main(String args[])
 {
     int id=1;
     PreparedStatement ps =null;
-    cone2= conex.CargarDB_Base_datos_Provedores();
+    cone2= conex.CargarDB_Base_datos_Proveedores();
     try
     {
       Statement orden = cone2.createStatement();
@@ -924,7 +872,7 @@ public static void main(String args[])
 void EliminarRegistro()
 
 {
-    cone2= conex.CargarDB_Base_datos_Provedores();
+    cone2= conex.CargarDB_Base_datos_Proveedores();
    if(cone2!=null) {
         try
         {
@@ -951,8 +899,8 @@ void EliminarRegistro()
 void Modificar_Proveedor()
 {
     initComponents();
-    conex.CrearDB_Base_datos_Provedores();
-    cone2= conex.CargarDB_Base_datos_Provedores();
+    conex.CrearDB_Base_datos_Proveedores();
+    cone2= conex.CargarDB_Base_datos_Proveedores();
    if(cone2!=null)
    {
       PropiedadesTabla();
@@ -961,7 +909,7 @@ void Modificar_Proveedor()
 
     private void Editar_Registro()
     {
-       cone2= conex.CargarDB_Base_datos_Provedores();
+       cone2= conex.CargarDB_Base_datos_Proveedores();
        
        
        if (cone2!=null)
@@ -999,10 +947,10 @@ void Modificar_Proveedor()
     }
      private void PropiedadesTabla()
  {
+cone2= conex.CargarDB_Base_datos_Proveedores();
      if(SeBorroRegistro!="NO"){
 int id=id_incrementable();
 jTextField_txtCodigo_Proveedor.setText(String.valueOf(id));
-
 jTextField_Empresa.setText("");
 jTextField1_txtNombreApellido_Proveedor.setText("");
 jTextField1_txtCalle_Proveedor.setText("");
