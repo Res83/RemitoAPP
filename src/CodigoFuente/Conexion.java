@@ -20,7 +20,7 @@ String Base_datos_RemitoAPP = System.getProperty("user.dir")+barra+"BaseDatos"+b
 String Base_datos_Clientes = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Clientes";
 
 // Establecer Base de Datos Provedores:
-String Base_datos_Provedores = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Provedores";
+String Base_datos_Proveedores = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Proveedores";
 
 // Establecer Base de Datos Productos:
 String Base_datos_Productos = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Productos";
@@ -32,7 +32,8 @@ String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"Ba
 String Base_datos_Ubicaciones = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Ubicacion";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Primero se crea la tabla y luego se la carga
+////////////////////////////////////////////
 final String drivers ="org.apache.derby.jdbc.EmbeddedDriver"; 
 
 public Connection CrearDB_RemitoAPP_sistema()
@@ -98,6 +99,7 @@ public Connection CargarDB_RemitoAPP_sistema()
         }
         return null;  
     }
+//--------------------------------------------------------------------  
 public Connection CrearDB_Base_datos_Ubicaciones()
     {
       Connection con;
@@ -160,7 +162,7 @@ public Connection CargarDB_Base_datos_Ubicaciones()
         }
         return null;  
     }
-
+//--------------------------------------------------------------------  
 public Connection CrearDB_Base_datos_Clientes()
     {
       Connection con;
@@ -215,12 +217,31 @@ public Connection CrearDB_Base_datos_Clientes()
       }
         return null;
     }
-
-public Connection CrearDB_Base_datos_Provedores()
+public Connection CargarDB_Base_datos_Clientes()
+    {
+      int id=1;
+      Connection con;      
+        try 
+        {
+           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+           String db = "jdbc:derby:"+Base_datos_Clientes;
+           con = DriverManager.getConnection(db);
+            System.out.println("La base de datos de Clientes esta cargada.");
+                        
+           return con;
+               }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println("Error: "+ex);
+        }
+        return null;  
+    }
+//--------------------------------------------------------------------  
+public Connection CrearDB_Base_datos_Proveedores()
     {
       Connection con;
 
-      File url= new File(Base_datos_Provedores);
+      File url= new File(Base_datos_Proveedores);
       
       if(url.exists())
       {
@@ -230,17 +251,18 @@ public Connection CrearDB_Base_datos_Provedores()
           try
           {
              //Carga base de datos 
-             System.out.println("Creando Base de Datos de Provedores...");
+             System.out.println("Creando Base de Datos de Proveedores...");
               Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             // decirle donde va estar la base de datos
-            String db ="jdbc:derby:"+Base_datos_Provedores+";create=true";
+            String db ="jdbc:derby:"+Base_datos_Proveedores+";create=true";
             
             con = DriverManager.getConnection(db);
             
                         // Crear Tabla
             
-            String tabla = "create table ListadeProvedores("
+            String tabla = "create table ListadeProveedores("
                     + "Codigo_Provedor INT PRIMARY KEY,"
+                    + "Empresa Varchar(255),"
                     + "NombreyApellidoProvedor Varchar(255),"
                     + "Calle_Provedor Varchar(255),"
                     + "Calle_Numero_Provedor INT,"
@@ -271,7 +293,27 @@ public Connection CrearDB_Base_datos_Provedores()
       }
         return null;
     }
-   
+public Connection CargarDB_Base_datos_Proveedores()
+    {
+
+      int id=1;
+      Connection con;
+        try 
+        {
+           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+           String db = "jdbc:derby:"+Base_datos_Proveedores;
+           con = DriverManager.getConnection(db);
+            System.out.println("La base de datos esta cargada.");
+                        
+           return con;
+               }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println("Error: "+ex);
+        }
+        return null;  
+    }
+//--------------------------------------------------------------------   
 public Connection CrearDB_Base_datos_Productos()
     {
       Connection con;
@@ -327,47 +369,6 @@ public Connection CrearDB_Base_datos_Productos()
       }
         return null;
     }
-        
-public Connection CargarDB_Base_datos_Provedores()
-    {
-
-      int id=1;
-      Connection con;
-        try 
-        {
-           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-           String db = "jdbc:derby:"+Base_datos_Provedores;
-           con = DriverManager.getConnection(db);
-            System.out.println("La base de datos esta cargada.");
-                        
-           return con;
-               }
-        catch (ClassNotFoundException | SQLException ex)
-        {
-            System.out.println("Error: "+ex);
-        }
-        return null;  
-    }
-public Connection CargarDB_Base_datos_Clientes()
-    {
-      int id=1;
-      Connection con;      
-        try 
-        {
-           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-           String db = "jdbc:derby:"+Base_datos_Clientes;
-           con = DriverManager.getConnection(db);
-            System.out.println("La base de datos de Clientes esta cargada.");
-                        
-           return con;
-               }
-        catch (ClassNotFoundException | SQLException ex)
-        {
-            System.out.println("Error: "+ex);
-        }
-        return null;  
-    }
-        
 public Connection CargarDB_Base_datos_Productos()
     {
       int id=1;
@@ -387,7 +388,7 @@ public Connection CargarDB_Base_datos_Productos()
         }
         return null;  
     }
-
+//--------------------------------------------------------------------    
 public Connection CrearDB_Lista_de_Categorias()
     {
       Connection con;
@@ -430,8 +431,7 @@ public Connection CrearDB_Lista_de_Categorias()
               }
       }
         return null;
-    }
-        
+    }       
 public Connection CargarDB_Lista_de_Categorias()
     {
       Connection con;
@@ -450,4 +450,5 @@ public Connection CargarDB_Lista_de_Categorias()
         }
         return null;  
     }
+//--------------------------------------------------------------------  
 }
