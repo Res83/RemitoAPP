@@ -41,8 +41,9 @@ public Ventana_Proveedores()
         jLabel_Requerido_CalleNumero.setVisible(false);
         jLabel_Requerido_Telefono.setVisible(false);
         
-    conex.CrearDB_Base_datos_Proveedores();
-    cone2=conex.CargarDB_Base_datos_Proveedores();
+
+    conex.CrearDB_Base_datos_Provedores();
+    cone2= conex.CargarDB_Base_datos_Provedores();
     if (cone2!=null)
     {
         PropiedadesTabla();
@@ -511,7 +512,7 @@ dispose();
         if(contador_de_error==0)
         {            
       //agregar Proveedores a la tabla
-               cone2 = conex.CargarDB_Base_datos_Proveedores();
+               cone2= conex.CargarDB_Base_datos_Provedores();
                 if (cone2!=null)
         
         {
@@ -878,7 +879,7 @@ public static void main(String args[])
 {
     int id=1;
     PreparedStatement ps =null;
-    cone2= conex.CargarDB_Base_datos_Proveedores();
+    cone2= conex.CargarDB_Base_datos_Provedores();
     try
     {
       Statement orden = cone2.createStatement();
@@ -923,7 +924,7 @@ public static void main(String args[])
 void EliminarRegistro()
 
 {
-    cone2=conex.CargarDB_Base_datos_Proveedores();
+    cone2= conex.CargarDB_Base_datos_Provedores();
    if(cone2!=null) {
         try
         {
@@ -950,8 +951,8 @@ void EliminarRegistro()
 void Modificar_Proveedor()
 {
     initComponents();
-    conex.CrearDB_Base_datos_Proveedores();
-    cone2=conex.CargarDB_Base_datos_Proveedores();
+    conex.CrearDB_Base_datos_Provedores();
+    cone2= conex.CargarDB_Base_datos_Provedores();
    if(cone2!=null)
    {
       PropiedadesTabla();
@@ -960,7 +961,7 @@ void Modificar_Proveedor()
 
     private void Editar_Registro()
     {
-       cone2=conex.CargarDB_Base_datos_Proveedores();
+       cone2= conex.CargarDB_Base_datos_Provedores();
        
        
        if (cone2!=null)
