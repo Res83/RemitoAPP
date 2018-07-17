@@ -87,7 +87,7 @@ cone2= conex.CargarDB_Base_datos_Ubicaciones();
 //String columnas[] = {"ID", "Lugares"};
 String columnas[] = {"Lugares","ID"};
 
-if(SeBorroRegistro!="SI"){
+if(!"SI".equals(SeBorroRegistro)){
 int id=id_incrementable();
 jTextField_Cuadro_ID.setText(String.valueOf(id));    
 }
@@ -97,25 +97,26 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
 
          try
          {
-             Statement orden = cone2.createStatement();
-
 //Monstrar Algo de una Base de Datos:
-
-            ResultSet r = orden.executeQuery("Select* From Lista_de_Ubicaciones");
+    try (Statement orden = cone2.createStatement())
+    {
+        //Monstrar Algo de una Base de Datos:
+        
+        ResultSet r = orden.executeQuery("Select* From Lista_de_Ubicaciones");
+        
+        while (r.next())
+        {
+            Object Filas[]={r.getString("Lugar"),r.getString("ID")};
+            //  Object Filas[]={r.getString("Titulo_Categoria")};
             
-             while (r.next())
-             { 
-               Object Filas[]={r.getString("Lugar"),r.getString("ID")};
-             //  Object Filas[]={r.getString("Titulo_Categoria")};
-
 // Le digo ahora que tome estas filas dentro de la tabla
 
-            dft.addRow(Filas);
+dft.addRow(Filas);
 
-             }
-             jTable_TabladeRegistros.setModel(dft);
-                          r.close();
-                        orden.close();
+        }
+        jTable_TabladeRegistros.setModel(dft);
+        r.close();
+    }
            
          }
          catch (SQLException ex)
@@ -171,18 +172,22 @@ if(cone2!=null)
 {
     try
     {
-        Statement orden = cone2.createStatement();
-
 // Orden de ejecutar para la base de datos, Codigo de SQL:
 // Update = Editar o Actualizar
 // Set (Establezco que voy a Editar)
 // Update (Nombre de la Tabla) Set
-               
-    String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadro.getText()+"' where ID="+jTextField_Cuadro_ID.getText()+"";
+        try (Statement orden = cone2.createStatement())
+        {
+            // Orden de ejecutar para la base de datos, Codigo de SQL:
+// Update = Editar o Actualizar
+// Set (Establezco que voy a Editar)
+// Update (Nombre de la Tabla) Set
+            
+            String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadro.getText()+"' where ID="+jTextField_Cuadro_ID.getText()+"";
 // Ejecuta ahora la Orden de arriba:
-        orden.executeUpdate(editar);    
-        JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
-        orden.close(); 
+orden.executeUpdate(editar);
+JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
+        } 
         ReAbrirVentanaUbicaciones(); 
 // Actualizar la tabla con el cambio realizado        
     //    PropiedadesTabla();
@@ -209,26 +214,27 @@ private void AgregarRegistro()
   {
       try
       {
-          Statement orden = cone2.createStatement();
-          String crear = "Insert into Lista_de_Ubicaciones(Lugar,ID) Values("
-                  + "'"+jTextField_txtCuadro.getText()+ "',"
-                   + ""+jTextField_Cuadro_ID.getText()+")";                     
-                  
+          try (Statement orden = cone2.createStatement())
+          {
+              String crear = "Insert into Lista_de_Ubicaciones(Lugar,ID) Values("
+                      + "'"+jTextField_txtCuadro.getText()+ "',"
+                      + ""+jTextField_Cuadro_ID.getText()+")";
+              
 //                  + ""+jTextField_ID_Categoria.getText()+","
 //                  + "'"+jTextField_txtCuadroCategoria.getText()+ "')";
           
 // Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
-           orden.executeUpdate(crear);
-          System.out.println("Registro Agregado OK");
-          
-       //   IniciarContador(contador_de_filas);
-          PropiedadesTabla();
-          JOptionPane.showMessageDialog(this, "Nueva Ubicacion Agregada: [ "+jTextField_txtCuadro.getText()+" ]");
-          jTextField_txtCuadro.setText("");
-            //r.close();
-            SeBorroRegistro="NO";
-            ReAbrirVentanaUbicaciones();
-            orden.close();
+orden.executeUpdate(crear);
+System.out.println("Registro Agregado OK");
+
+//   IniciarContador(contador_de_filas);
+PropiedadesTabla();
+JOptionPane.showMessageDialog(this, "Nueva Ubicacion Agregada: [ "+jTextField_txtCuadro.getText()+" ]");
+jTextField_txtCuadro.setText("");
+//r.close();
+SeBorroRegistro="NO";
+ReAbrirVentanaUbicaciones();
+          }
             
       }
       catch (SQLException ex)
@@ -734,5 +740,4 @@ public int id_incrementable()
     }
     
         return id;
-    }
-    }
+    }    }

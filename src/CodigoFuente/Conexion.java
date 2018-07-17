@@ -170,13 +170,13 @@ public Connection CrearDB_Base_datos_Clientes()
       
       if(url.exists())
       {
-          System.out.println("La Base de Datos de Provedores ya existe.");   
+          System.out.println("La Base de Datos de Clientes ya existe.");   
       }else
       {
           try
           {
              //Carga base de datos 
-             System.out.println("Creando Base de Datos de Provedores...");
+             System.out.println("Creando Base de Datos de Clientes...");
               Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             // decirle donde va estar la base de datos
             String db ="jdbc:derby:"+Base_datos_Clientes+";create=true";
@@ -245,7 +245,7 @@ public Connection CrearDB_Base_datos_Proveedores()
       
       if(url.exists())
       {
-          System.out.println("La Base de Datos de Provedores ya existe.");   
+          System.out.println("La Base de Datos de Proveedores ya existe.");   
       }else
       {
           try
@@ -261,21 +261,21 @@ public Connection CrearDB_Base_datos_Proveedores()
                         // Crear Tabla
             
             String tabla = "create table ListadeProveedores("
-                    + "Codigo_Provedor INT PRIMARY KEY,"
+                    + "Codigo_Proveedor INT PRIMARY KEY,"
                     + "Empresa Varchar(255),"
-                    + "NombreyApellidoProvedor Varchar(255),"
-                    + "Calle_Provedor Varchar(255),"
-                    + "Calle_Numero_Provedor INT,"
-                    + "TelefonoFijo_Provedor INT,"
-                    + "TelefonoMovil_Provedor INT,"
-                    + "Piso_Provedor Varchar(5),"
-                    + "EntreCalles_Provedor Varchar(255),"
-                    + "GoogleMaps_Provedor Varchar(255),"
-                    + "CODPOSTAL_Provedor Varchar(10),"
-                    + "Provincia_Provedor Varchar(255),"
-                    + "Ciudad_Provedor Varchar(255),"
-                    + "Email_Provedor Varchar(255),"
-                    + "Anotacionl_Provedor Varchar(255)" 
+                    + "NombreyApellidoProveedor Varchar(255),"
+                    + "Calle_Proveedor Varchar(255),"
+                    + "Calle_Numero_Proveedor INT,"
+                    + "TelefonoFijo_Proveedor INT,"
+                    + "TelefonoMovil_Proveedor INT,"
+                    + "Piso_Proveedor Varchar(5),"
+                    + "EntreCalles_Proveedor Varchar(255),"
+                    + "GoogleMaps_Proveedor Varchar(255),"
+                    + "CODPOSTAL_Proveedor Varchar(10),"
+                    + "Provincia_Proveedor Varchar(255),"
+                    + "Ciudad_Proveedor Varchar(255),"
+                    + "Email_Proveedor Varchar(255),"
+                    + "Anotacionl_Proveedor Varchar(255)" 
                     + ")";              
     try (PreparedStatement ps = con.prepareStatement(tabla))
               {

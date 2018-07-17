@@ -5,7 +5,16 @@
  */
 package EntornoGrafico;
 
+import CodigoFuente.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,8 +22,16 @@ import javax.swing.JOptionPane;
  */
 public class Ventana_Proveedores2 extends javax.swing.JFrame
 {
+    Conexion conex = new Conexion();
+    Connection cone2;
+     Conexion conexion_Base_datos_Provedores = new Conexion();
 
 String Bandera_Modificando="No";
+    private String SeBorroRegistro;
+    private String TextoTemporal;
+    private int id_borrado_categoria;
+    private Integer Comienza_desde_Aqui;
+    private int seleccion;
 
 /**
  * Creates new form Ventan_Proveedores2
@@ -22,7 +39,19 @@ String Bandera_Modificando="No";
 public Ventana_Proveedores2()
 {
     initComponents();
-}
+    
+     jButton_EliminarRegistro.setVisible(false);
+    
+    jButton_ModificarRegistro.setVisible(false);
+    
+    jTextField_Empresa.requestFocus();
+    
+    Bandera_Modificando="No";
+    
+    if(cone2!=null)
+    {
+    PropiedadesTabla();
+}}
 
 /**
  * This method is called from within the constructor to
@@ -374,6 +403,13 @@ public Ventana_Proveedores2()
         jTabbedPane1.addTab("Datos Opcionales", jPanel2);
 
         jButton_AgregarRegistro.setText("Agregar Proveedor");
+        jButton_AgregarRegistro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_AgregarRegistroActionPerformed(evt);
+            }
+        });
 
         jButton_ModificarRegistro.setText("Modificar");
 
@@ -405,7 +441,8 @@ public Ventana_Proveedores2()
                         .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -508,6 +545,11 @@ public Ventana_Proveedores2()
         }
     }//GEN-LAST:event_jButton1_CerrarVentanAbiertaActionPerformed
 
+    private void jButton_AgregarRegistroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_AgregarRegistroActionPerformed
+    {//GEN-HEADEREND:event_jButton_AgregarRegistroActionPerformed
+      AgregarRegistro();
+    }//GEN-LAST:event_jButton_AgregarRegistroActionPerformed
+
 /**
  * @param args the command line arguments
  */
@@ -593,4 +635,177 @@ public static void main(String args[])
     private javax.swing.JTextField jTextField_Empresa;
     private javax.swing.JTextField jTextField_txtCodigo_Proveedor;
     // End of variables declaration//GEN-END:variables
+private void AgregarRegistro()
+{
+cone2= conex.CargarDB_Base_datos_Proveedores();
+// Cargo la base de datos mas arriba para tenerla disponible en todo.       
+        if(jTextField_Empresa.getText().equals("")&& jTextField1_txtNombreApellido_Proveedor.getText().equals(""))
+        {
+        JOptionPane.showMessageDialog(this, "Debe escribir La empresa o Un nombre y apellido antes de agregar");
+        }else 
+        {
+        if(cone2!=null)
+  {
+      try
+      {
+          Statement orden = cone2.createStatement();
+ String crear = "Insert Into ListadeProveedores"
+                        + "("
+                        + "Codigo_Proveedor,"
+                        + "Empresa,"
+                        + "NombreyApellidoProveedor,"
+                        + "Calle_Proveedor,"
+                        + "Calle_Numero_Proveedor,"
+                        + "TelefonoFijo_Proveedor,"
+                        + "TelefonoMovil_Proveedor,"
+                        + "Piso_Proveedor,"
+                        + "EntreCalles_Proveedor,"
+                        + "GoogleMaps_Proveedor,"
+                        + "CODPOSTAL_Proveedor,"
+                        + "Provincia_Proveedor,"
+                        + "Ciudad_Proveedor,"
+                        + "Email_Proveedor,"
+                        + "Anotacionl_Proveedor"
+                        + ") Values("
+                        + ""+jTextField_txtCodigo_Proveedor.getText()+","
+                        + "'"+jTextField_Empresa.getText()+"',"                       
+                        + "'"+jTextField1_txtNombreApellido_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtCalle_Proveedor.getText()+"',"
+                        + ""+jTextField1_txtCalle_Numero_Proveedor.getText()+","
+                        + ""+jTextField1_txtTelefonoFijo_Proveedor.getText()+","
+                        + ""+jTextField2_txtTelefonoMovil_Proveedor.getText()+","
+                        + "'"+jTextField1_txtPiso_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtEntreCalles_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtGoogleMaps_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtCODPOSTAL_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtProvincia_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtCiudad_Proveedor.getText()+"',"
+                        + "'"+jTextField1_txtEmail_Proveedor.getText()+"',"
+                        + "'"+jTextArea1_txtAnotacionl_Proveedor.getText()+"'"
+                        + ")";                
+                  
+          
+// Para ejecutar lo anterior se cree y actualice cada campo en la base de datos.
+           orden.executeUpdate(crear);
+          System.out.println("Registro Agregado OK");
+          
+       //   IniciarContador(contador_de_filas);
+          PropiedadesTabla();
+
+            //r.close();
+            SeBorroRegistro="NO";
+         //   ReAbrirVentana();
+            orden.close();
+            
+      }
+      catch (SQLException ex)
+      {
+          System.out.println("Error:"+ex); 
+    
+      }
+  } }    
+    
+}
+private void PropiedadesTabla()
+{
+cone2= conex.CargarDB_Base_datos_Proveedores();
+
+     String Columnas[]=
+     {
+         "cod",
+         "Empresa",
+         "Nombre y Apellido",
+         "Calle",
+         "Altura",
+         "Teléfono",
+         "Celular",
+         "Piso",
+         "Entre Calles",
+         "GoogleMaps",
+         "CP",
+         "Provincia",
+         "Ciudad",
+         "E-mail",
+         "Nota"
+     };
+
+if(SeBorroRegistro!="SI"){
+int id=id_incrementable();
+jTextField_txtCodigo_Proveedor.setText(String.valueOf(id));    
+}
+// Primero toma las filas pero no las tengo y pongo null
+// Constructor de la Tabla
+DefaultTableModel dft = new DefaultTableModel(null,Columnas);
+
+         try
+         {
+             Statement orden = cone2.createStatement();
+
+//Monstrar Algo de una Base de Datos:
+
+            ResultSet r = orden.executeQuery("Select* From ListadeProveedores");
+            
+             while (r.next())
+             { 
+               Object Filas[]={r.getString("Lugar"),r.getString("ID")};
+             //  Object Filas[]={r.getString("Titulo_Categoria")};
+
+// Le digo ahora que tome estas filas dentro de la tabla
+
+            dft.addRow(Filas);
+
+             }
+             jTable_TablaProveedores.setModel(dft);
+                          r.close();
+                        orden.close();
+           
+         }
+         catch (SQLException ex)
+         {
+             Logger.getLogger(Ventana_Ubicaciones.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}
+public int id_incrementable()
+{
+    int id=1;
+    PreparedStatement ps =null;
+    cone2= conex.CargarDB_Base_datos_Proveedores();
+    try
+    {
+      Statement orden = cone2.createStatement();
+      ResultSet r = orden.executeQuery("Select MAX(ID) From ListadeProveedores");
+        while (r.next())
+        {            
+                    id=r.getInt(1)+1;
+
+        }
+        System.out.println("Id Maximo:"+id);
+        
+            }
+    catch (Exception ex)
+    {
+        System.out.println("Error:"+ex);
+    }
+    finally
+    {
+        try
+        {
+            ps.close();
+            
+            //DesconectarBasededatos Falta
+        }
+        catch (Exception e)
+        {
+        }
+    
+    }
+    
+        if(SeBorroRegistro=="SI")
+    {
+                        System.out.println("Se Borro un registro recien:"+SeBorroRegistro+"La Id era:"+id_borrado_categoria );
+     id=Comienza_desde_Aqui;   
+    }
+    
+        return id;
+    }
 }
