@@ -68,7 +68,7 @@ public Ventana_Proveedores()
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2_Codigo_Provedor = new javax.swing.JLabel();
+        jLabel2_Codigo_Proveedor = new javax.swing.JLabel();
         jTextField_txtCodigo_Proveedor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField1_txtNombreApellido_Proveedor = new javax.swing.JTextField();
@@ -120,7 +120,7 @@ public Ventana_Proveedores()
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Proveedores");
 
-        jLabel2_Codigo_Provedor.setText("Código:");
+        jLabel2_Codigo_Proveedor.setText("Código:");
 
         jTextField_txtCodigo_Proveedor.setEditable(false);
         jTextField_txtCodigo_Proveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -256,7 +256,7 @@ public Ventana_Proveedores()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel_Requerido_Empresa)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2_Codigo_Provedor)
+                                .addComponent(jLabel2_Codigo_Proveedor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField_txtCodigo_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(16, 16, 16))))
@@ -266,7 +266,7 @@ public Ventana_Proveedores()
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2_Codigo_Provedor)
+                        .addComponent(jLabel2_Codigo_Proveedor)
                         .addComponent(jTextField_txtCodigo_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -712,7 +712,7 @@ public static void main(String args[])
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel2_Codigo_Provedor;
+    private javax.swing.JLabel jLabel2_Codigo_Proveedor;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -940,25 +940,11 @@ void Modificar_Proveedor()
      private void PropiedadesTabla()
  {
 cone2= conex.CargarDB_Base_datos_Proveedores();
-     if(SeBorroRegistro!="NO"){
+if(SeBorroRegistro!="SI"){
 int id=id_incrementable();
-jTextField_txtCodigo_Proveedor.setText(String.valueOf(id));
-jTextField_Empresa.setText("");
-jTextField1_txtNombreApellido_Proveedor.setText("");
-jTextField1_txtCalle_Proveedor.setText("");
-jTextField1_txtCalle_Numero_Proveedor.setText("");
-jTextField1_txtTelefonoFijo_Proveedor.setText("");
-jTextField2_txtTelefonoMovil_Proveedor.setText("");
-jTextField1_txtPiso_Proveedor.setText("");
-jTextField1_txtEntreCalles_Proveedor.setText("");
-jTextField1_txtGoogleMaps_Proveedor.setText("");
-jTextField1_txtCODPOSTAL_Proveedor.setText("");
-jTextField1_txtProvincia_Proveedor.setText("");
-jTextField1_txtCiudad_Proveedor.setText("");
-jTextField1_txtEmail_Proveedor.setText("");
-jTextArea1_txtAnotacionl_Proveedor.setText("");
-
+jTextField_txtCodigo_Proveedor.setText(String.valueOf(id));    
 }
+
      String Columnas[]=
      {
          "cod",

@@ -157,7 +157,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel_Requerido_Empresa" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel2_Codigo_Provedor" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2_Codigo_Proveedor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jTextField_txtCodigo_Proveedor" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
@@ -173,7 +173,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2_Codigo_Provedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2_Codigo_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextField_txtCodigo_Proveedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -214,7 +214,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2_Codigo_Provedor">
+            <Component class="javax.swing.JLabel" name="jLabel2_Codigo_Proveedor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
               </Properties>
