@@ -277,7 +277,7 @@ public Panel_Inicio()
        // new Clientes_Agregar(this,true).setVisible(true);
      //   this.setVisible(false);
         Panel_Inicio VB = new Panel_Inicio();
-        Ventana_Proveedores3 ventanabierta = new Ventana_Proveedores3();
+        Ventana_Proveedores ventanabierta = new Ventana_Proveedores();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
    //    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
