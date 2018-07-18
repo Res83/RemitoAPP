@@ -66,6 +66,7 @@ public Ventana_Proveedores()
     if(cone2!=null)
     {
     PropiedadesTabla();
+    PropiedadesTablaProductos();
     
   
 
@@ -151,6 +152,58 @@ dft.addRow(Filas);
 
         }
         jTable_TabladeRegistros.setModel(dft);
+        r.close();
+    }
+           
+         }
+         catch (Exception ex)
+         {
+             Logger.getLogger(Ventana_Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}    
+private void PropiedadesTablaProductos()
+{
+cone2= conex.CargarDB_Base_datos_Productos();
+String columnas[]=
+     {
+         "Codigo_Producto",
+         "Categoria_Producto",
+         "Descripcion_Producto"
+     };
+
+// Primero toma las filas pero no las tengo y pongo null
+// Constructor de la Tabla
+DefaultTableModel dft = new DefaultTableModel(null,columnas);
+
+         try
+         {
+//Monstrar Algo de una Base de Datos:
+    try (Statement orden = cone2.createStatement())
+    {
+        //Monstrar Algo de una Base de Datos:
+        //Codigo_Provedor
+        
+        ResultSet r = orden.executeQuery("Select Codigo_Proveedor  From Listadeproductos");
+        
+        while (r.next())
+        {           
+            Object Filas[] = 
+         {
+             r.getString("Codigo_Producto"),
+             r.getString("Categoria_Producto"),
+             r.getString("Descripcion_Producto")
+         };
+            
+            
+            
+            //  Object Filas[]={r.getString("Titulo_Categoria")};
+            
+// Le digo ahora que tome estas filas dentro de la tabla
+
+dft.addRow(Filas);
+
+        }
+        jTable_Productos.setModel(dft);
         r.close();
     }
            
@@ -253,7 +306,7 @@ if(cone2!=null)
 // Set (Establezco que voy a Editar)
 // Update (Nombre de la Tabla) Set
             
-               String editar="Update From ListadeProveedores set "
+               String editar="Update ListadeProveedores set "
                         + "Empresa='"+jTextField_Empresa.getText()+"',"
                         + "NombreyApellidoProveedor='"+jTextField1_txtNombreApellido_Proveedor.getText()+"',"
                         + "Calle_Proveedor='"+jTextField1_txtCalle_Proveedor.getText()+"',"
@@ -273,9 +326,22 @@ if(cone2!=null)
 orden.executeUpdate(editar);
 JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
         } 
-        ReAbrirVentana(); 
-// Actualizar la tabla con el cambio realizado        
-    //    PropiedadesTabla();
+
+   ReAbrirVentana(); 
+// Actualizar la tabla con el cambio realizado  
+//    int Codigo_Proveedor_borrado=0;
+//    
+//            LimpiarCasilleros();
+//                  jButton_EliminarRegistro.setVisible(false);
+//                  jButton_AgregarRegistro.setVisible(true);
+//                  jButton_ModificarRegistro.setVisible(false);
+//    
+//    jTextField_Empresa.requestFocus();
+//    
+//    Bandera_Modificando="No";
+//    
+//        PropiedadesTabla();
+
 // Es importante cerrar cuando no se usa mas:
 
     }
@@ -290,7 +356,7 @@ private void AgregarRegistro()
 {
     cone2= conex.CargarDB_Base_datos_Proveedores();
 // Cargo la base de datos mas arriba para tenerla disponible en todo.       
-        if(jTextField_Empresa.getText().equals("")&& jTextField1_txtNombreApellido_Proveedor.getText().equals(""))
+        if(jTextField_Empresa.getText().toString().equals(""))
         {
         JOptionPane.showMessageDialog(this, "Debe escribir antes de agregar");
         }else 
@@ -344,11 +410,11 @@ System.out.println("Registro Agregado OK");
 
 //   IniciarContador(contador_de_filas);
 PropiedadesTabla();
-JOptionPane.showMessageDialog(this, "Nueva Ubicacion Agregada: [ "+jTextField_Empresa.getText()+" ]");
-jTextField_Empresa.setText("");
+JOptionPane.showMessageDialog(this, "Nueva Proveedor Agregado: [ "+jTextField_Empresa.getText()+" ]");
 //r.close();
+LimpiarCasilleros();
 SeBorroRegistro="NO";
-//ReAbrirVentana();
+ReAbrirVentana();
           }
             
       }
@@ -405,10 +471,6 @@ public void ReAbrirVentana()
         jLabel_Requerido_Empresa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_TabladeRegistros = new javax.swing.JTable();
-        jButton_Cerrar = new javax.swing.JButton();
-        jButton_EliminarRegistro = new javax.swing.JButton();
-        jButton_ModificarRegistro = new javax.swing.JButton();
-        jButton_AgregarRegistro = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField1_txtPiso_Proveedor = new javax.swing.JTextField();
@@ -427,6 +489,15 @@ public void ReAbrirVentana()
         jLabel16 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1_txtAnotacionl_Proveedor = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField_Buscar = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_Productos = new javax.swing.JTable();
+        jButton_AgregarRegistro = new javax.swing.JButton();
+        jButton_ModificarRegistro = new javax.swing.JButton();
+        jButton_EliminarRegistro = new javax.swing.JButton();
+        jButton_Cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RemitoAPP / Ubicaciones");
@@ -461,10 +532,24 @@ public void ReAbrirVentana()
                 jTextField1_txtNombreApellido_ProveedorActionPerformed(evt);
             }
         });
+        jTextField1_txtNombreApellido_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtNombreApellido_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel4.setText("Calle:");
 
         jTextField1_txtCalle_Proveedor.setToolTipText("Campo Mínimo requerido (Requerido)");
+        jTextField1_txtCalle_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtCalle_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Numero:");
 
@@ -476,10 +561,24 @@ public void ReAbrirVentana()
                 jTextField1_txtCalle_Numero_ProveedorActionPerformed(evt);
             }
         });
+        jTextField1_txtCalle_Numero_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtCalle_Numero_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel5.setText("Teléfono Fijo:");
 
         jTextField1_txtTelefonoFijo_Proveedor.setToolTipText("Campo Mínimo requerido (Requerido)");
+        jTextField1_txtTelefonoFijo_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtTelefonoFijo_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel7.setText("Celular:");
 
@@ -489,6 +588,13 @@ public void ReAbrirVentana()
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 jTextField2_txtTelefonoMovil_ProveedorActionPerformed(evt);
+            }
+        });
+        jTextField2_txtTelefonoMovil_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField2_txtTelefonoMovil_ProveedorKeyPressed(evt);
             }
         });
 
@@ -503,6 +609,14 @@ public void ReAbrirVentana()
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Empresa:");
+
+        jTextField_Empresa.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField_EmpresaKeyPressed(evt);
+            }
+        });
 
         jLabel_Requerido_Empresa.setForeground(new java.awt.Color(255, 51, 51));
         jLabel_Requerido_Empresa.setText("(Requerido)");
@@ -531,51 +645,6 @@ public void ReAbrirVentana()
         });
         jScrollPane1.setViewportView(jTable_TabladeRegistros);
 
-        jButton_Cerrar.setText("Cerrar");
-        jButton_Cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_Cerrar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_CerrarActionPerformed(evt);
-            }
-        });
-
-        jButton_EliminarRegistro.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_EliminarRegistro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton_EliminarRegistro.setText("- Eliminar");
-        jButton_EliminarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_EliminarRegistro.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_EliminarRegistroActionPerformed(evt);
-            }
-        });
-
-        jButton_ModificarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_ModificarRegistro.setText("* Modificar");
-        jButton_ModificarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_ModificarRegistro.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_ModificarRegistroActionPerformed(evt);
-            }
-        });
-
-        jButton_AgregarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton_AgregarRegistro.setText("+ Agregar");
-        jButton_AgregarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton_AgregarRegistro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton_AgregarRegistro.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton_AgregarRegistroActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -593,7 +662,7 @@ public void ReAbrirVentana()
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 125, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -630,16 +699,7 @@ public void ReAbrirVentana()
                                         .addComponent(jTextField_Empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel_Requerido_Empresa)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jButton_Cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(0, 126, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,15 +732,8 @@ public void ReAbrirVentana()
                     .addComponent(jTextField2_txtTelefonoMovil_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Requerido_Telefono))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_Cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
 
         jTabbedPane1.addTab("Datos Basicos", jPanel2);
@@ -694,16 +747,63 @@ public void ReAbrirVentana()
                 jTextField1_txtPiso_ProveedorActionPerformed(evt);
             }
         });
+        jTextField1_txtPiso_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtPiso_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel9.setText("Entre Calles :");
 
+        jTextField1_txtEntreCalles_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtEntreCalles_ProveedorKeyPressed(evt);
+            }
+        });
+
         jLabel10.setText("GoogleMaps :");
 
+        jTextField1_txtGoogleMaps_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtGoogleMaps_ProveedorKeyPressed(evt);
+            }
+        });
+
         jLabel11.setText("Código Postal :");
+
+        jTextField1_txtCODPOSTAL_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtCODPOSTAL_ProveedorKeyPressed(evt);
+            }
+        });
+
+        jTextField1_txtProvincia_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtProvincia_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel12.setText("Provincia :");
 
         jLabel13.setText("Ciudad :");
+
+        jTextField1_txtCiudad_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtCiudad_ProveedorKeyPressed(evt);
+            }
+        });
 
         jLabel14.setText("E-mail:");
 
@@ -712,6 +812,13 @@ public void ReAbrirVentana()
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 jTextField1_txtEmail_ProveedorActionPerformed(evt);
+            }
+        });
+        jTextField1_txtEmail_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                jTextField1_txtEmail_ProveedorKeyPressed(evt);
             }
         });
 
@@ -791,6 +898,49 @@ public void ReAbrirVentana()
 
         jTabbedPane1.addTab("Datos Opcionales", jPanel3);
 
+        jLabel2.setText("Buscar");
+
+        jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+
+            },
+            new String []
+            {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable_Productos);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Productos", jPanel4);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -814,6 +964,51 @@ public void ReAbrirVentana()
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jButton_AgregarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_AgregarRegistro.setText("+ Agregar");
+        jButton_AgregarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_AgregarRegistro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_AgregarRegistro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_AgregarRegistroActionPerformed(evt);
+            }
+        });
+
+        jButton_ModificarRegistro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton_ModificarRegistro.setText("* Modificar");
+        jButton_ModificarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_ModificarRegistro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_ModificarRegistroActionPerformed(evt);
+            }
+        });
+
+        jButton_EliminarRegistro.setBackground(new java.awt.Color(255, 0, 0));
+        jButton_EliminarRegistro.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton_EliminarRegistro.setText("- Eliminar");
+        jButton_EliminarRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_EliminarRegistro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_EliminarRegistroActionPerformed(evt);
+            }
+        });
+
+        jButton_Cerrar.setText("Cerrar");
+        jButton_Cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Cerrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_CerrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -822,12 +1017,32 @@ public void ReAbrirVentana()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_Cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_EliminarRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton_AgregarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_ModificarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton_Cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -954,6 +1169,110 @@ EditarRegistro();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1_txtEmail_ProveedorActionPerformed
 
+    private void jTextField_EmpresaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_EmpresaKeyPressed
+    {//GEN-HEADEREND:event_jTextField_EmpresaKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtNombreApellido_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField_EmpresaKeyPressed
+
+    private void jTextField1_txtNombreApellido_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtNombreApellido_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtNombreApellido_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtCalle_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtNombreApellido_ProveedorKeyPressed
+
+    private void jTextField1_txtCalle_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCalle_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtCalle_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtCalle_Numero_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtCalle_ProveedorKeyPressed
+
+    private void jTextField1_txtCalle_Numero_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCalle_Numero_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtCalle_Numero_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtTelefonoFijo_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtCalle_Numero_ProveedorKeyPressed
+
+    private void jTextField1_txtTelefonoFijo_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtTelefonoFijo_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtTelefonoFijo_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField2_txtTelefonoMovil_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtTelefonoFijo_ProveedorKeyPressed
+
+    private void jTextField2_txtTelefonoMovil_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField2_txtTelefonoMovil_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField2_txtTelefonoMovil_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtPiso_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField2_txtTelefonoMovil_ProveedorKeyPressed
+
+    private void jTextField1_txtPiso_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtPiso_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtPiso_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtEntreCalles_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtPiso_ProveedorKeyPressed
+
+    private void jTextField1_txtEntreCalles_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtEntreCalles_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtEntreCalles_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtGoogleMaps_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtEntreCalles_ProveedorKeyPressed
+
+    private void jTextField1_txtGoogleMaps_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtGoogleMaps_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtGoogleMaps_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtCODPOSTAL_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtGoogleMaps_ProveedorKeyPressed
+
+    private void jTextField1_txtCODPOSTAL_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCODPOSTAL_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtCODPOSTAL_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtProvincia_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtCODPOSTAL_ProveedorKeyPressed
+
+    private void jTextField1_txtProvincia_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtProvincia_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtProvincia_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtCiudad_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtProvincia_ProveedorKeyPressed
+
+    private void jTextField1_txtCiudad_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCiudad_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtCiudad_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextField1_txtEmail_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtCiudad_ProveedorKeyPressed
+
+    private void jTextField1_txtEmail_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtEmail_ProveedorKeyPressed
+    {//GEN-HEADEREND:event_jTextField1_txtEmail_ProveedorKeyPressed
+        if(evt.getKeyCode()==evt.VK_ENTER)
+        {
+        jTextArea1_txtAnotacionl_Proveedor.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField1_txtEmail_ProveedorKeyPressed
+
 /**
  * @param args the command line arguments
  */
@@ -1023,6 +1342,7 @@ public static void main(String args[])
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_Codigo_Proveedor;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1038,9 +1358,12 @@ public static void main(String args[])
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable_Productos;
     private javax.swing.JTable jTable_TabladeRegistros;
     private javax.swing.JTextArea jTextArea1_txtAnotacionl_Proveedor;
     private javax.swing.JTextField jTextField1_txtCODPOSTAL_Proveedor;
@@ -1055,6 +1378,7 @@ public static void main(String args[])
     private javax.swing.JTextField jTextField1_txtProvincia_Proveedor;
     private javax.swing.JTextField jTextField1_txtTelefonoFijo_Proveedor;
     private javax.swing.JTextField jTextField2_txtTelefonoMovil_Proveedor;
+    private javax.swing.JTextField jTextField_Buscar;
     private javax.swing.JTextField jTextField_Empresa;
     private javax.swing.JTextField jTextField_txtCodigo_Proveedor;
     // End of variables declaration//GEN-END:variables
@@ -1093,6 +1417,20 @@ public static void main(String args[])
               jTextField_txtCodigo_Proveedor.setText(String.valueOf(Comienza_desde_Aqui));
                             
              orden.close();
+             
+//                 int Codigo_Proveedor_borrado=0;
+//    
+//            LimpiarCasilleros();
+//                  jButton_EliminarRegistro.setVisible(false);
+//                  jButton_AgregarRegistro.setVisible(true);
+//                  jButton_ModificarRegistro.setVisible(false);
+//    
+//    jTextField_Empresa.requestFocus();
+//    
+//    Bandera_Modificando="No";
+//    
+//        PropiedadesTabla();
+           ReAbrirVentana(); 
             }
             catch (Exception ex)
             {
@@ -1143,4 +1481,24 @@ public int Codigo_Proveedor_incrementable()
     }
     
         return Codigo_Proveedor;
-    }    }
+    }
+
+    private void LimpiarCasilleros()
+    {
+     jTextField_Empresa.setText("");
+     jTextField1_txtNombreApellido_Proveedor.setText("");
+     jTextField1_txtCalle_Proveedor.setText("");
+     jTextField1_txtCalle_Numero_Proveedor.setText("");
+     jTextField1_txtTelefonoFijo_Proveedor.setText("");
+     jTextField2_txtTelefonoMovil_Proveedor.setText("");
+     jTextField1_txtPiso_Proveedor.setText("");
+     jTextField1_txtEntreCalles_Proveedor.setText("");
+     jTextField1_txtGoogleMaps_Proveedor.setText("");
+     jTextField1_txtCODPOSTAL_Proveedor.setText("");
+     jTextField1_txtProvincia_Proveedor.setText("");
+     jTextField1_txtCiudad_Proveedor.setText("");
+     jTextField1_txtEmail_Proveedor.setText("");
+     jTextArea1_txtAnotacionl_Proveedor.setText("");
+     jTextField_txtCodigo_Proveedor.setText("");
+    }
+ }
