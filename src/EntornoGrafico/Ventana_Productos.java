@@ -26,7 +26,7 @@ public class Ventana_Productos extends javax.swing.JFrame
     // int contador_de_filas=1;
     private String SeBorroRegistro;
     private String TextoTemporal;
-    private int id_borrado_categoria;
+    private int Codigo_Producto_borrado_categoria;
     private Integer Comienza_desde_Aqui;
     private String Bandera_Modificando;
     private int seleccion;
@@ -62,7 +62,23 @@ private void PropiedadesTabla()
 {
 cone2= conex.CargarDB_Base_datos_Productos();
 //String columnas[] = {"Codigo_Producto","Categoria_Producto","Descripcion_Producto","Unidades_Producto","Cajas_Producto","UnidadesxCaja_Producto","Atados_Producto","Un_Atado_Tiene_Producto","CostoxUnidad_Producto","CostoxCaja__Producto","CostoxAtado","Ubicacion_Producto","Codigo_Provedor","NombreyApellido__Provedor","Marcas","Anotacionl_Provedor","Foto","QR"};
-String columnas[] = {"Codigo_Producto","Categoria_Producto"};
+String columnas[] = {
+    "Codigo_Producto",
+    "Categoria_Producto",
+    "Descripcion_Producto",    
+    "Cajas_Producto",
+    "UnidadesxCaja_Producto",
+    "Unidades_Producto",
+    "Atados_Producto",
+    "Un_Atado_Tiene_Producto",
+    "CostoxUnidad_Producto",
+    "CostoxCaja__Producto",
+    "CostoxAtado",
+    "Ubicacion_Producto",
+    "Codigo_Provedor",
+    "NombreyApellido__Provedor",
+    "Anotacionl_Provedor"     
+    };
 
 if(SeBorroRegistro!="SI"){
 int id=id_incrementable();
@@ -82,7 +98,23 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
             
              while (r.next())
              { 
-               Object Filas[]={r.getString("Codigo_Producto"),r.getString("Categoria_Producto")};
+               Object Filas[]={
+                   r.getString("Codigo_Producto"),
+                   r.getString("Categoria_Producto"),
+                   r.getString("Descripcion_Producto"),
+                   r.getString("Cajas_Producto"),
+                   r.getString("UnidadesxCaja_Producto"),
+                   r.getString("Unidades_Producto"),
+                   r.getString("Atados_Producto"),
+                   r.getString("Un_Atado_Tiene_Producto"),
+                   r.getString("CostoxUnidad_Producto"),
+                   r.getString("CostoxCaja__Producto"),
+                   r.getString("CostoxAtado"),
+                   r.getString("Ubicacion_Producto"),
+                   r.getString("Codigo_Provedor"),
+                   r.getString("NombreyApellido__Provedor"),
+                   r.getString("Anotacionl_Provedor"),               
+               };
 
 
 // Le digo ahora que tome estas filas dentro de la tabla
@@ -109,13 +141,13 @@ public int id_incrementable()
     try
     {
       Statement orden = cone2.createStatement();
-      ResultSet r = orden.executeQuery("Select MAX(ID) From Listadeproductos");
+      ResultSet r = orden.executeQuery("Select MAX(Codigo_Producto) From Listadeproductos");
         while (r.next())
         {            
                     id=r.getInt(1)+1;
 
         }
-        System.out.println("Id Maximo:"+id);
+        System.out.println("Codigo_Producto Maximo:"+id);
         
             }
     catch (Exception ex)
@@ -138,7 +170,7 @@ public int id_incrementable()
     
         if(SeBorroRegistro=="SI")
     {
-                        System.out.println("Se Borro un registro recien:"+SeBorroRegistro+"La Id era:"+id_borrado_categoria );
+                      
      id=Comienza_desde_Aqui;   
     }
     
@@ -212,7 +244,7 @@ public int id_incrementable()
         jButton_Eliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_Buscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -739,7 +771,7 @@ public int id_incrementable()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -780,7 +812,7 @@ public int id_incrementable()
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -810,8 +842,6 @@ public int id_incrementable()
         jTextArea_txtAnotacion_Producto.setRows(5);
         jScrollPane1.setViewportView(jTextArea_txtAnotacion_Producto);
 
-        jComboBox_Marcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -826,7 +856,7 @@ public int id_incrementable()
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(418, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1091,6 +1121,27 @@ public int id_incrementable()
                 if(r.next())
                 {
                     jTextPane_NombreyApellidoProveedor.setText(r.getString("NombreyApellidoProveedor"));
+                    
+                    
+//                    	jTextField_int_Codigo.setText(r.getString("Codigo_Producto"));
+//	jTextField_Descripcion_Producto.setText(r.getString("Descripcion_Producto"));
+//	jComboBox_Lista_de_Categorias.getSelectedItem()(r.getString("Categoria_Producto"));
+//	jComboBox_Lista_de_Ubicacion.getSelectedItem()(r.getString("Ubicacion_Producto"));
+//    jTextField_int_Cantidad_de_unidades.setText(r.getString("Unidades_Producto"));
+//    jTextField_int_Cantidad_de_cajas.setText(r.getString("Cajas_Producto"));
+//    jTextField_int_caja_se_forma_xunidades.setText(r.getString("UnidadesxCaja_Producto"));
+//    jTextField_int_caja_se_forma_xAtados.setText(r.getString("UnidadesxCaja_Producto"));
+//                            + ""+jTextField_int_Cantidad_de_Atados.getText()+","
+//                            + ""+jTextField_int_UnAtados_se_forma_xunidades.getText()+","
+//                            + ""+jTextField_Costo_Unidad.getText()+","
+//                            + ""+jTextField_Costo_xCaja.getText()+","
+//                            + ""+jTextField_Costo_xAtado.getText()+","
+//                            + ""+jComboBox_CodProveedores.getSelectedItem()+","
+//                            + "'"+jTextPane_NombreyApellidoProveedor.getText()+"',"
+//                            + ""+jComboBox_Marcas.getSelectedItem()+","
+//                            + "'"+jTextArea_txtAnotacion_Producto.getText()+"'"
+                    
+                    
                     r.close();
                     orden.close();
                 }
@@ -1160,7 +1211,7 @@ public int id_incrementable()
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTextArea jTextArea_txtAnotacion_Producto;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField_Buscar;
     private javax.swing.JTextField jTextField_Costo_Unidad;
     private javax.swing.JTextField jTextField_Costo_xAtado;
     private javax.swing.JTextField jTextField_Costo_xCaja;

@@ -173,7 +173,7 @@ String columnas[]=
 
 // Primero toma las filas pero no las tengo y pongo null
 // Constructor de la Tabla
-DefaultTableModel dft = new DefaultTableModel(null,columnas);
+DefaultTableModel dft2 = new DefaultTableModel(null,columnas);
 
          try
          {
@@ -200,10 +200,10 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
             
 // Le digo ahora que tome estas filas dentro de la tabla
 
-dft.addRow(Filas);
+dft2.addRow(Filas);
 
         }
-        jTable_Productos.setModel(dft);
+        jTable_Productos.setModel(dft2);
         r.close();
     }
            
