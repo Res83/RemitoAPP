@@ -1,0 +1,18 @@
+                    + "TipoDocumento Varchar(255),"
+                    + "TipoDocumento Varchar(255),"
+
+
+         "Doc",
+         "Num",
+
+             r.getString("TipoDocumento"),
+             r.getString("Documentoes"),
+
+                        + "TipoDocumento='"+jComboBox_TipoDocumento.getSelectedItem()+"',"
+                        + "Documentoes='"+jTextField_documento.getText()+"',"
+
+
+String value=jComboBox_TipoDocumento.getSelectedItem().toString();
+pst.setString(4,value);
+
+                        + "TipoDocumento='"+jComboBox_TipoDocumento.getSelectedIndex()+"',"
