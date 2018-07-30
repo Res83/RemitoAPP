@@ -21,6 +21,7 @@ public class Ventana_Productos extends javax.swing.JFrame
  Conexion conexion_BaseDatosUbicaciones = new Conexion();
  Conexion conexion_BaseDatosProveedores = new Conexion();
  Conexion conexion_Base_datos_Productos = new Conexion();
+ Conexion Base_datos_BaseDatosMarcas =new Conexion();
  
 
     // int contador_de_filas=1;
@@ -44,6 +45,7 @@ public Ventana_Productos()
         CBoxCategorias();
         CBoxUbicacion();
         CBoxProveedores();
+        CBoxMarcas();
         
         jTextField_Descripcion_Producto.requestFocus();
 // Esconde el Boton de Modificar        
@@ -252,6 +254,7 @@ public int id_incrementable()
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_txtAnotacion_Producto = new javax.swing.JTextArea();
         jComboBox_Marcas = new javax.swing.JComboBox<>();
+        jButton_AgregarMarcas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RemitoAPP > Productos");
@@ -351,6 +354,17 @@ public int id_incrementable()
 
         jLabel4.setText("Cod Provedor:");
 
+        jComboBox_CodProveedores.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_CodProveedoresMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_CodProveedoresMouseEntered(evt);
+            }
+        });
         jComboBox_CodProveedores.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -377,11 +391,11 @@ public int id_incrementable()
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_CodProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox_CodProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton7)))
                 .addContainerGap())
@@ -571,6 +585,10 @@ public int id_incrementable()
             {
                 jComboBox_Lista_de_UbicacionMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_Lista_de_UbicacionMouseEntered(evt);
+            }
         });
         jComboBox_Lista_de_Ubicacion.addActionListener(new java.awt.event.ActionListener()
         {
@@ -659,6 +677,17 @@ public int id_incrementable()
         );
 
         jComboBox_Lista_de_Categorias.setToolTipText("Catagorias");
+        jComboBox_Lista_de_Categorias.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_Lista_de_CategoriasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_Lista_de_CategoriasMouseEntered(evt);
+            }
+        });
         jComboBox_Lista_de_Categorias.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -842,6 +871,23 @@ public int id_incrementable()
         jTextArea_txtAnotacion_Producto.setRows(5);
         jScrollPane1.setViewportView(jTextArea_txtAnotacion_Producto);
 
+        jComboBox_Marcas.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jComboBox_MarcasMouseClicked(evt);
+            }
+        });
+
+        jButton_AgregarMarcas.setText("+");
+        jButton_AgregarMarcas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton_AgregarMarcasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -856,7 +902,9 @@ public int id_incrementable()
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_AgregarMarcas)))
                 .addContainerGap(418, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -865,12 +913,13 @@ public int id_incrementable()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_Marcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_AgregarMarcas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Datos Opcionales", jPanel2);
@@ -937,8 +986,8 @@ public int id_incrementable()
                             + ") Values("
                             + ""+jTextField_int_Codigo.getText()+","
                             + "'"+jTextField_Descripcion_Producto.getText()+"',"
-                            + ""+jComboBox_Lista_de_Categorias.getSelectedItem()+","
-                            + ""+jComboBox_Lista_de_Ubicacion.getSelectedItem()+","
+                            + ""+jComboBox_Lista_de_Categorias.getSelectedItem().toString()+","
+                            + ""+jComboBox_Lista_de_Ubicacion.getSelectedItem().toString()+","
                             + ""+jTextField_int_Cantidad_de_unidades.getText()+","
                             + ""+jTextField_int_Cantidad_de_cajas.getText()+","
                             + ""+jTextField_int_caja_se_forma_xunidades.getText()+","
@@ -948,9 +997,9 @@ public int id_incrementable()
                             + ""+jTextField_Costo_Unidad.getText()+","
                             + ""+jTextField_Costo_xCaja.getText()+","
                             + ""+jTextField_Costo_xAtado.getText()+","
-                            + ""+jComboBox_CodProveedores.getSelectedItem()+","
+                            + ""+jComboBox_CodProveedores.getSelectedItem().toString()+","
                             + "'"+jTextPane_NombreyApellidoProveedor.getText()+"',"
-                            + ""+jComboBox_Marcas.getSelectedItem()+","
+                            + ""+jComboBox_Marcas.getSelectedItem().toString()+","
                             + "'"+jTextArea_txtAnotacion_Producto.getText()+"'"
                             + ")";
 
@@ -1061,11 +1110,12 @@ public int id_incrementable()
         Ventana_Categorias ventanabierta = new Ventana_Categorias();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox_Lista_de_CategoriasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_CategoriasActionPerformed
     {//GEN-HEADEREND:event_jComboBox_Lista_de_CategoriasActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox_Lista_de_CategoriasActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
@@ -1089,7 +1139,7 @@ public int id_incrementable()
 
     private void jComboBox_Lista_de_UbicacionMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_UbicacionMouseClicked
     {//GEN-HEADEREND:event_jComboBox_Lista_de_UbicacionMouseClicked
-     
+ CBoxUbicacion();  
     }//GEN-LAST:event_jComboBox_Lista_de_UbicacionMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton4ActionPerformed
@@ -1159,6 +1209,45 @@ public int id_incrementable()
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_Costo_xAtadoActionPerformed
 
+    private void jComboBox_Lista_de_CategoriasMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_CategoriasMouseClicked
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_CategoriasMouseClicked
+          CBoxCategorias();
+    }//GEN-LAST:event_jComboBox_Lista_de_CategoriasMouseClicked
+
+    private void jComboBox_Lista_de_CategoriasMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_CategoriasMouseEntered
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_CategoriasMouseEntered
+    
+    }//GEN-LAST:event_jComboBox_Lista_de_CategoriasMouseEntered
+
+    private void jComboBox_Lista_de_UbicacionMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_Lista_de_UbicacionMouseEntered
+    {//GEN-HEADEREND:event_jComboBox_Lista_de_UbicacionMouseEntered
+
+    }//GEN-LAST:event_jComboBox_Lista_de_UbicacionMouseEntered
+
+    private void jComboBox_CodProveedoresMouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_CodProveedoresMouseEntered
+    {//GEN-HEADEREND:event_jComboBox_CodProveedoresMouseEntered
+     
+    }//GEN-LAST:event_jComboBox_CodProveedoresMouseEntered
+
+    private void jComboBox_CodProveedoresMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_CodProveedoresMouseClicked
+    {//GEN-HEADEREND:event_jComboBox_CodProveedoresMouseClicked
+   CBoxProveedores();
+    }//GEN-LAST:event_jComboBox_CodProveedoresMouseClicked
+
+    private void jButton_AgregarMarcasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton_AgregarMarcasActionPerformed
+    {//GEN-HEADEREND:event_jButton_AgregarMarcasActionPerformed
+    //Boton + Categoria
+        Ventana_Productos VB = new Ventana_Productos();
+        Ventana_Marcas ventanabierta = new Ventana_Marcas();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+    }//GEN-LAST:event_jButton_AgregarMarcasActionPerformed
+
+    private void jComboBox_MarcasMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jComboBox_MarcasMouseClicked
+    {//GEN-HEADEREND:event_jComboBox_MarcasMouseClicked
+      CBoxMarcas();
+    }//GEN-LAST:event_jComboBox_MarcasMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1167,6 +1256,7 @@ public int id_incrementable()
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton_AgregarMarcas;
     private javax.swing.JButton jButton_CerrarVentanAbierta;
     private javax.swing.JButton jButton_Eliminar;
     private javax.swing.JButton jButton_GuardarNuevoCliente;
@@ -1228,6 +1318,7 @@ public int id_incrementable()
    
  private void CBoxCategorias()
  {
+       jComboBox_Lista_de_Categorias.removeAllItems();
    //  conex.CrearDB_Lista_de_Categorias();
      cone2=conex.CargarDB_Lista_de_Categorias(); 
      conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
@@ -1251,6 +1342,7 @@ public int id_incrementable()
  }
   private void CBoxProveedores()
  {
+          jComboBox_CodProveedores.removeAllItems();
     cone2= conex.CargarDB_Base_datos_Proveedores();
 conex.CrearDB_Base_datos_Proveedores();
    Statement orden;
@@ -1272,6 +1364,7 @@ conex.CrearDB_Base_datos_Proveedores();
  }   
  private void CBoxUbicacion()
  {
+      jComboBox_Lista_de_Ubicacion.removeAllItems();
      conexion_BaseDatosCategorias.CrearDB_Base_datos_Ubicaciones();
      cone2= conex.CargarDB_Base_datos_Ubicaciones();
    Statement orden;
@@ -1291,4 +1384,27 @@ conex.CrearDB_Base_datos_Proveedores();
 
      
  }   
+
+    private void CBoxMarcas()
+    {
+            jComboBox_Marcas.removeAllItems();
+     Base_datos_BaseDatosMarcas.CrearDB_Base_datos_Marcas();
+     cone2= conex.CargarDB_Base_datos_Marcas();
+   Statement orden;
+     try
+     {
+         orden = cone2.createStatement();
+         ResultSet r=orden.executeQuery("Select* From Lista_de_Marcas");
+         while (r.next())
+         {             
+             jComboBox_Marcas.addItem(r.getString("Marcas"));
+         }
+     }
+     catch (SQLException ex)
+     {
+         Logger.getLogger(Ventana_Productos.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
+      
+    }
     }

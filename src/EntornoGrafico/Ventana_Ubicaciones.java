@@ -188,7 +188,7 @@ if(cone2!=null)
 orden.executeUpdate(editar);
 JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
         } 
-        ReAbrirVentanaUbicaciones(); 
+        ReAbrirVentana(); 
 // Actualizar la tabla con el cambio realizado        
     //    PropiedadesTabla();
 // Es importante cerrar cuando no se usa mas:
@@ -233,7 +233,7 @@ JOptionPane.showMessageDialog(this, "Nueva Ubicacion Agregada: [ "+jTextField_tx
 jTextField_txtCuadro.setText("");
 //r.close();
 SeBorroRegistro="NO";
-ReAbrirVentanaUbicaciones();
+ReAbrirVentana();
           }
             
       }
@@ -245,7 +245,7 @@ ReAbrirVentanaUbicaciones();
   } }    
     
 }
-public void ReAbrirVentanaUbicaciones()
+public void ReAbrirVentana()
 {
         dispose();
         Panel_Inicio VB = new Panel_Inicio();

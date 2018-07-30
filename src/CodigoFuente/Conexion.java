@@ -31,6 +31,10 @@ String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"Ba
 // Establecer Base de Datos Lista de Categorias:
 String Base_datos_Ubicaciones = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Ubicacion";
 
+       
+        // Establecer Base de Datos Lista de Categorias:
+String Base_datos_BaseDatosMarcas = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Marcas";
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Primero se crea la tabla y luego se la carga
 ////////////////////////////////////////////
@@ -441,6 +445,71 @@ public Connection CargarDB_Lista_de_Categorias()
            String db = "jdbc:derby:"+Base_datos_Lista_de_Categorias;
            con = DriverManager.getConnection(db);
             System.out.println("La base de datos Categoria ya esta cargada.");
+                        
+           return con;
+               }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            System.out.println("Error: "+ex);
+        }
+        return null;  
+    }
+//--------------------------------------------------------------------  
+
+public Connection CrearDB_Base_datos_Marcas()
+    {
+      Connection con;
+      File url= new File(Base_datos_BaseDatosMarcas);
+      
+      if(url.exists())
+      {
+          System.out.println("La Base de Datos de Base_datos_Marcas ya existe.");   
+      }else
+      {
+          try
+          {
+             //Carga base de datos 
+             System.out.println("Creando Base de Datos de Base_datos_Ubicaciones...");
+              Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            // decirle donde va estar la base de datos
+            String db ="jdbc:derby:"+Base_datos_BaseDatosMarcas+";create=true";
+            
+            con = DriverManager.getConnection(db);
+            
+                        // Crear Tabla Control_RemitoAPP
+            
+            String tabla = "create table Lista_de_Marcas("
+                    + "ID INT PRIMARY KEY,"
+                    + "Marcas Varchar(255)"
+                    + ")";
+              try (PreparedStatement ps = con.prepareStatement(tabla))
+              {
+                  ps.execute();
+              }
+                    
+              System.out.println("Base de Datos de Marcas se ha Creado con Exito.");
+
+             return con;
+
+          }catch (ClassNotFoundException | SQLException ex)
+              {
+                             System.out.println("Error:"+ex);   
+              }
+      }
+        return null;
+    }
+//--------------------------------------------------------------------  
+public Connection CargarDB_Base_datos_Marcas()
+    {
+
+      int id=1;
+      Connection con;
+        try 
+        {
+           Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+           String db = "jdbc:derby:"+Base_datos_BaseDatosMarcas;
+           con = DriverManager.getConnection(db);
+            System.out.println("La base de datos esta cargada.");
                         
            return con;
                }
