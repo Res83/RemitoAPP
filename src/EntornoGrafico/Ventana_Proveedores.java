@@ -357,11 +357,6 @@ private void AgregarRegistro()
 {
     cone2= conex.CargarDB_Base_datos_Proveedores();
 // Cargo la base de datos mas arriba para tenerla disponible en todo.       
-        if(jTextField_Empresa.getText().toString().equals(""))
-        {
-        JOptionPane.showMessageDialog(this, "Debe escribir antes de agregar");
-        }else 
-        {
         if(cone2!=null)
   {
       try
@@ -422,10 +417,13 @@ ReAbrirVentana();
       catch (Exception ex)
       {
           System.out.println("Error:"+ex); 
-                  JOptionPane.showMessageDialog(this, "Debe escribir antes de agregar");
+                  JOptionPane.showMessageDialog(this, "EX Debe escribir antes de agregar");
     
       }
-  } }    
+  }else
+        {
+       JOptionPane.showMessageDialog(this, "Debe escribir antes de agregar"); 
+        }    
     
 }
 public void ReAbrirVentana()
@@ -732,7 +730,7 @@ public void ReAbrirVentana()
                     .addComponent(jTextField2_txtTelefonoMovil_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Requerido_Telefono))
                 .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -1437,7 +1435,7 @@ public static void main(String args[])
 
 public int Codigo_Proveedor_incrementable()
 {
-    int Codigo_Proveedor=1;
+    int Codigo_Proveedor=0;
     PreparedStatement ps =null;
     cone2= conex.CargarDB_Base_datos_Proveedores();
     try

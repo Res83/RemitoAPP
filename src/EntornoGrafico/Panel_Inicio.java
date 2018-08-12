@@ -19,6 +19,7 @@ public class Panel_Inicio extends javax.swing.JFrame
     Conexion conexion_BaseDatosCategorias = new Conexion();
     Conexion conexion_BaseDatosUbicaciones = new Conexion();
     Conexion conexion_BaseDatosProductos = new Conexion();
+    Conexion conexion_BaseDatosMarcas = new Conexion();
     
 
 // Conexion conexion_BaseDatosClientes = new Conexion();
@@ -54,6 +55,7 @@ public Panel_Inicio()
         jMenuItem_Productos_Agregar_Nuevo = new javax.swing.JMenuItem();
         jMenuItem_Productos_Categorias = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -129,6 +131,16 @@ public Panel_Inicio()
             }
         });
         jMenu3.add(jMenuItem1);
+
+        jMenuItem4.setText("Marcas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
 
         jMenuBar1.add(jMenu3);
 
@@ -283,6 +295,16 @@ public Panel_Inicio()
    //    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenu2MouseClicked
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem4ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem4ActionPerformed
+        conexion_BaseDatosMarcas.CrearDB_Base_datos_Marcas();
+        Panel_Inicio VB = new Panel_Inicio();
+        Ventana_Marcas ventanabierta = new Ventana_Marcas();
+        ventanabierta.setLocationRelativeTo(getParent());
+        ventanabierta.setVisible(true);
+        // this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
 /**
  * @param args the command line arguments
  */
@@ -336,6 +358,7 @@ public static void main(String args[])
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem_Productos_Agregar_Nuevo;
     private javax.swing.JMenuItem jMenuItem_Productos_Categorias;
     // End of variables declaration//GEN-END:variables

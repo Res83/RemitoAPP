@@ -3,10 +3,6 @@ package CodigoFuente;
 import java.io.File;
 import java.sql.*;
 
-/**
- *
- * @author Res
- */
 public class Conexion
 {
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +28,7 @@ String Base_datos_Lista_de_Categorias = System.getProperty("user.dir")+barra+"Ba
 String Base_datos_Ubicaciones = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Ubicacion";
 
        
-        // Establecer Base de Datos Lista de Categorias:
+// Establecer Base de Datos Lista de Categorias:
 String Base_datos_BaseDatosMarcas = System.getProperty("user.dir")+barra+"BaseDatos"+barra+"Marcas";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
