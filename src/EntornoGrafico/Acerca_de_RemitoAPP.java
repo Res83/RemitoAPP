@@ -5,6 +5,8 @@
  */
 package EntornoGrafico;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Res
@@ -18,6 +20,7 @@ public class Acerca_de_RemitoAPP extends javax.swing.JFrame
 public Acerca_de_RemitoAPP()
 {
     initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
 }
 
 /**

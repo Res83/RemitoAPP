@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,6 +47,8 @@ public class Ventana_Marcas extends javax.swing.JFrame
 public Ventana_Marcas()
 {
     initComponents();
+    
+        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
     
 //Crea y carga Base de Datos /////////////////////////////////////////////////////////////
 

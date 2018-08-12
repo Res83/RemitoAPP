@@ -23,7 +23,9 @@ public static void main(String[] args)
     
 // Al Usar esto VB.setLocationRelativeTo(null) establezco
 //    la ventana en el centro de la pantalla.
- VB.setVisible(true);  
+ VB.setVisible(true);
+
+ 
 }
 
 }

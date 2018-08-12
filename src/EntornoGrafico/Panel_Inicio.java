@@ -6,6 +6,7 @@
 package EntornoGrafico;
 
 import CodigoFuente.Conexion;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,6 +30,7 @@ public Panel_Inicio()
 {
     initComponents();
 
+    setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
 
 }
 

@@ -4,6 +4,7 @@ import CodigoFuente.Conexion;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -77,7 +78,7 @@ public class Clientes_Agregar extends javax.swing.JFrame
 public Clientes_Agregar()
 {
     initComponents();
-           
+        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());       
     conex.CrearDB_Base_datos_Clientes();
     cone2=conex.CargarDB_Base_datos_Clientes();
     if (cone2!=null)

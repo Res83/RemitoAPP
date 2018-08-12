@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +42,7 @@ public Ventana_Categorias()
 {
     initComponents();
     
+        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
        
     //Crea y carga al momento de cargar la ventana en pantalla.
     conex.CrearDB_Lista_de_Categorias();

@@ -9,6 +9,7 @@ import CodigoFuente.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -62,6 +63,9 @@ private void EliminarRegistro()
 public Modificar_Clientes()
 {
     initComponents();
+    
+        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
+        
     conex.CrearDB_Base_datos_Clientes();
     cone2=conex.CargarDB_Base_datos_Clientes();
    if(cone2!=null)
