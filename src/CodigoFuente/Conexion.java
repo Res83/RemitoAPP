@@ -350,7 +350,7 @@ public Connection CrearDB_Base_datos_Productos()
                     + "CostoxAtado INT,"
                     + "Ubicacion_Producto Varchar(255),"
                     + "Codigo_Provedor INT,"
-                    + "NombreyApellido__Provedor Varchar(255),"
+                    + "Marca Varchar(255),"
                     + "Anotacionl_Provedor Varchar(255)" 
                     + ")";
               try (PreparedStatement ps = con.prepareStatement(tabla))

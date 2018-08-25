@@ -147,7 +147,7 @@ DefaultTableModel dft = new DefaultTableModel(null,columnas);
 
 public int Codigo_Producto_incrementable()
 {
-    int Codigo_Producto=1;
+    int Codigo_Producto=0;
     PreparedStatement ps =null;
     cone2= conex.CargarDB_Base_datos_Productos();
     try
@@ -1038,30 +1038,34 @@ public int Codigo_Producto_incrementable()
                 {
                     Statement orden = cone2.createStatement();
                     String crear;
+                    
+                    int Categoria=jComboBox_Lista_de_Categorias.getSelectedIndex();                   
+                    int Ubicacion=jComboBox_Lista_de_Ubicacion.getSelectedIndex();
+                    int Marca=jComboBox_Marcas.getSelectedIndex();
+                    int Proveedor=jComboBox_CodProveedores.getSelectedIndex();
+                    
                     crear = "Insert Into ListadeProductos"
                             + "("
-                            + "int_Codigo_Producto,"
+                           + "Codigo_Producto,"
+                            + "Categoria_Producto,"
                             + "Descripcion_Producto,"
-                            + "jCBox_Lista_de_Categorias,"
-                            + "jCBox_Lista_de_Ubicacion,"
-                            + "int_Cantidad_de_unidades,"
-                            + "int_Cantidad_de_cajas,"
-                            + "int_caja_se_forma_xunidades,"
-                            + "int_caja_se_forma_xAtados,"
-                            + "int_Cantidad_de_Atados,"
-                            + "int_UnAtados_se_forma_xunidades,"
-                            + "Costo_Unidad,"
-                            + "Costo_xCaja,"
-                            + "Costo_xAtado,"
-                            + "cod_Provedor,"
-                            + "NombreyApellidoProvedor,"
-                            + "jCBOX_Marcas,"
-                            + "txtAnotacion_Producto"
+                            + "Cajas_Producto,"
+                            + "UnidadesxCaja_Producto,"
+                            + "Unidades_Producto,"
+                            + "Atados_Producto,"
+                            + "Un_Atado_Tiene_Producto,"
+                            + "CostoxUnidad_Producto,"
+                            + "CostoxCaja__Producto,"
+                            + "CostoxAtado,"
+                            + "Ubicacion_Producto,"
+                            + "Codigo_Provedor,"
+                            + "Marca,"
+                            + "Anotacionl_Provedor" 
                             + ") Values("
                             + ""+jTextField_int_Codigo.getText()+","
+                            + ""+Categoria+","
                             + "'"+jTextField_Descripcion_Producto.getText()+"',"
-                            + ""+jComboBox_Lista_de_Categorias.getSelectedItem().toString()+","
-                            + ""+jComboBox_Lista_de_Ubicacion.getSelectedItem().toString()+","
+                            + ""+Ubicacion+","
                             + ""+jTextField_int_Cantidad_de_unidades.getText()+","
                             + ""+jTextField_int_Cantidad_de_cajas.getText()+","
                             + ""+jTextField_int_caja_se_forma_xunidades.getText()+","
@@ -1071,12 +1075,11 @@ public int Codigo_Producto_incrementable()
                             + ""+jTextField_Costo_Unidad.getText()+","
                             + ""+jTextField_Costo_xCaja.getText()+","
                             + ""+jTextField_Costo_xAtado.getText()+","
-                            + ""+jComboBox_CodProveedores.getSelectedItem().toString()+","
-                            + "'"+jTextPane_NombreyApellidoProveedor.getText()+"',"
-                            + ""+jComboBox_Marcas.getSelectedItem().toString()+","
+                            + ""+Proveedor+","
+                            + ""+Marca+","
                             + "'"+jTextArea_txtAnotacion_Producto.getText()+"'"
                             + ")";
-
+                    System.out.println("Categoria nº:"+Categoria);
                     orden.executeUpdate(crear);
                     System.out.println("Registro creado");
 

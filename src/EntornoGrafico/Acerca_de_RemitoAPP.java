@@ -20,7 +20,11 @@ public class Acerca_de_RemitoAPP extends javax.swing.JFrame
 public Acerca_de_RemitoAPP()
 {
     initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getImage());
+    
+// Ubica la Ventana en el Centro de la Pantalla    
+this.setLocationRelativeTo(null);
+///////////////////////////////////////////////////////////////
+
 }
 
 /**
@@ -44,6 +48,7 @@ public Acerca_de_RemitoAPP()
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
