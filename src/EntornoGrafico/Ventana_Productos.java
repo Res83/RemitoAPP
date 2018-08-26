@@ -540,7 +540,7 @@ public int Codigo_Producto_incrementable()
         });
 
         jTextField_Descripcion_Producto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField_Descripcion_Producto.setToolTipText("Campo Mínimo requerido (Requerido)");
+        jTextField_Descripcion_Producto.setToolTipText("Nombre del Producto");
         jTextField_Descripcion_Producto.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -618,7 +618,8 @@ public int Codigo_Producto_incrementable()
                 .addGap(12, 12, 12))
         );
 
-        jComboBox_Lista_de_Categorias.setToolTipText("Catagorias");
+        jComboBox_Lista_de_Categorias.setToolTipText("Lista de Catagorias");
+        jComboBox_Lista_de_Categorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox_Lista_de_Categorias.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -640,6 +641,15 @@ public int Codigo_Producto_incrementable()
 
         jButton1.setText("+");
         jButton1.setToolTipText("Abrir Categorias");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                jButton1MouseEntered(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -677,6 +687,8 @@ public int Codigo_Producto_incrementable()
 
         jButton_Actualizar_Categorias.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_Actualizar_Categorias.setText("Actualizar");
+        jButton_Actualizar_Categorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Actualizar_Categorias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Actualizar_Categorias.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -709,7 +721,8 @@ public int Codigo_Producto_incrementable()
             }
         });
 
-        jComboBox_Marcas.setToolTipText("Marcas");
+        jComboBox_Marcas.setToolTipText("Lista de Marcas");
+        jComboBox_Marcas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox_Marcas.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -720,6 +733,9 @@ public int Codigo_Producto_incrementable()
 
         jButton_Actualizar_Categorias4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_Actualizar_Categorias4.setText("Actualizar");
+        jButton_Actualizar_Categorias4.setToolTipText("Actulizar Lista de Marcas");
+        jButton_Actualizar_Categorias4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Actualizar_Categorias4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Actualizar_Categorias4.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -737,6 +753,8 @@ public int Codigo_Producto_incrementable()
 
         jButton_AgregarMarcas1.setText("+");
         jButton_AgregarMarcas1.setToolTipText("Abrir Marcas");
+        jButton_AgregarMarcas1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_AgregarMarcas1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_AgregarMarcas1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -746,6 +764,7 @@ public int Codigo_Producto_incrementable()
         });
 
         jComboBox_CodProveedores.setToolTipText("Código de  Provedores");
+        jComboBox_CodProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBox_CodProveedores.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -767,6 +786,9 @@ public int Codigo_Producto_incrementable()
 
         jButton_Actualizar_Categorias2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton_Actualizar_Categorias2.setText("Actualizar");
+        jButton_Actualizar_Categorias2.setToolTipText("Actualizar Lista de Proveedores");
+        jButton_Actualizar_Categorias2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton_Actualizar_Categorias2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_Actualizar_Categorias2.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -784,6 +806,8 @@ public int Codigo_Producto_incrementable()
 
         jButton7.setText("+");
         jButton7.setToolTipText("Abrir Proveedores");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -971,11 +995,17 @@ public int Codigo_Producto_incrementable()
             }
         });
 
-        jButton_Modificar.setText("Modificar");
+        jButton_Modificar.setForeground(new java.awt.Color(0, 153, 0));
+        jButton_Modificar.setText("Guardar Modificación");
+        jButton_Modificar.setToolTipText("Guardar Modificación");
 
+        jButton_Eliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton_Eliminar.setForeground(new java.awt.Color(255, 51, 102));
         jButton_Eliminar.setText("Eliminar");
+        jButton_Eliminar.setToolTipText("Eliminar");
 
         jButton_CerrarVentanAbierta.setText("Cerrar");
+        jButton_CerrarVentanAbierta.setToolTipText("Cerrar Ventana");
         jButton_CerrarVentanAbierta.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -988,22 +1018,21 @@ public int Codigo_Producto_incrementable()
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_GuardarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(631, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_GuardarNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_CerrarVentanAbierta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1013,12 +1042,13 @@ public int Codigo_Producto_incrementable()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_GuardarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton_GuardarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_CerrarVentanAbierta, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -1376,6 +1406,11 @@ public int Codigo_Producto_incrementable()
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
     }//GEN-LAST:event_jButton_AgregarMarcas1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton1MouseEntered
+    {//GEN-HEADEREND:event_jButton1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseEntered
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

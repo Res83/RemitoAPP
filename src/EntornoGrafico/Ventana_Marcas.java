@@ -353,6 +353,10 @@ public void ReAbrirVentana()
             {
                 jTextField_txtCuadroMouseEntered(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                jTextField_txtCuadroMousePressed(evt);
+            }
         });
         jTextField_txtCuadro.addActionListener(new java.awt.event.ActionListener()
         {
@@ -592,6 +596,15 @@ if(Bandera_Modificando=="Si"&& Entro!="Si")
             EditarRegistro();
         }   
     }//GEN-LAST:event_jTextField_txtCuadroKeyPressed
+
+    private void jTextField_txtCuadroMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextField_txtCuadroMousePressed
+    {//GEN-HEADEREND:event_jTextField_txtCuadroMousePressed
+             if(jTextField_txtCuadro.getText().equals("(Escribe la Nueva Ubicación)"))
+        {
+                  jTextField_txtCuadro.setText("");
+                  jButton_AgregarRegistro.setVisible(true);
+        }  
+    }//GEN-LAST:event_jTextField_txtCuadroMousePressed
 
 /**
  * @param args the command line arguments
