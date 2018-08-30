@@ -293,6 +293,8 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField1_txtTelefonoFijo_Proveedor">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value="Campo M&#xed;nimo requerido (Requerido)"/>
                   </Properties>
                   <Events>
@@ -306,6 +308,8 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField2_txtTelefonoMovil_Proveedor">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value="Campo M&#xed;nimo requerido (Requerido)"/>
                   </Properties>
                   <Events>

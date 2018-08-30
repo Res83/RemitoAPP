@@ -60,6 +60,7 @@ public Connection CrearDB_RemitoAPP_sistema()
             
             String tabla = "create table Control_RemitoAPP("
                     + "ID INT PRIMARY KEY,"
+                    + "ProgramaAbierto BOOLEAN,"                    
                     + "Acceso_Categorias BOOLEAN,"
                     + "Texto_antes_cambiar Varchar(255)"
                     + ")";
@@ -336,22 +337,21 @@ public Connection CrearDB_Base_datos_Productos()
             
                         // Crear Tabla
             
-            String tabla = "create table Listadeproductos("
+            String tabla = "Insert Into Listadeproductos("
                     + "Codigo_Producto INT PRIMARY KEY,"
+                    + "Nombre_Producto Varchar(255),"
                     + "Categoria_Producto  Varchar(255),"
-                    + "Descripcion_Producto Varchar(255),"
+                    + "Ubicacion_Producto Varchar(255),"
+                    + "Marca Varchar(255),"
+                    + "Unidades_Producto INT,"                                    
                     + "Cajas_Producto INT,"
-                    + "UnidadesxCaja_Producto  INT,"
-                    + "Unidades_Producto INT,"
+                    + "Una_Caja_Tiene_Producto  INT,"
                     + "Atados_Producto INT,"
                     + "Un_Atado_Tiene_Producto INT,"
                     + "CostoxUnidad_Producto INT,"
                     + "CostoxCaja__Producto INT,"
                     + "CostoxAtado INT,"
-                    + "Ubicacion_Producto Varchar(255),"
-                    + "Codigo_Provedor INT,"
-                    + "Marca Varchar(255),"
-                    + "Anotacionl_Provedor Varchar(255)" 
+                    + "Codigo_Provedor INT"
                     + ")";
               try (PreparedStatement ps = con.prepareStatement(tabla))
               {

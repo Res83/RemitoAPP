@@ -6,7 +6,10 @@
 package EntornoGrafico;
 
 import CodigoFuente.Conexion;
+import java.io.IOException;
+import java.net.ServerSocket;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +25,7 @@ public class Panel_Inicio extends javax.swing.JFrame
     Conexion conexion_BaseDatosProductos = new Conexion();
     Conexion conexion_BaseDatosMarcas = new Conexion();
     Conexion conexion_BaseDatosClientes = new Conexion();
+    Conexion conexion_Base_datos_RemitoAPP = new Conexion();
     
 
 // Conexion conexion_BaseDatosClientes = new Conexion();
@@ -32,6 +36,7 @@ public Panel_Inicio()
     initComponents();
 // Ubica la Ventana en el Centro de la Pantalla    
 this.setLocationRelativeTo(null);
+
 ///////////////////////////////////////////////////////////////
 
 // Agrega un Icono a la ventana de Java
@@ -58,6 +63,7 @@ setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getIm
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem_Productos_Agregar_Nuevo = new javax.swing.JMenuItem();
@@ -93,6 +99,16 @@ setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getIm
 
         jMenuItem13.setText("Listado de Remitos");
         jMenu4.add(jMenuItem13);
+
+        jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
 
         jMenuBar1.add(jMenu4);
 
@@ -205,7 +221,6 @@ setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getIm
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem14ActionPerformed
     {//GEN-HEADEREND:event_jMenuItem14ActionPerformed
 // Abrir Acerca_de_RemitoAPP.java
-
         Panel_Inicio VB = new Panel_Inicio();
         Acerca_de_RemitoAPP ventanabierta = new Acerca_de_RemitoAPP();
         ventanabierta.setLocationRelativeTo(getParent());
@@ -235,17 +250,16 @@ setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getIm
 
     private void jMenuItem_Productos_Agregar_NuevoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
     {//GEN-HEADEREND:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
-        // Modificar Provedor
-        // Abrir Formulario Provedor_Agregar.java
-        // new Provedor_Agregar(this,true).setVisible(true);
-        //   this.setVisible(false);
+        // Provedor
         conexion_BaseDatosUbicaciones.CrearDB_Base_datos_Ubicaciones();
         conexion_BaseDatosCategorias.CrearDB_Lista_de_Categorias();
+        
         Panel_Inicio VB = new Panel_Inicio();
         Ventana_Productos ventanabierta = new Ventana_Productos();
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
-        //  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+   //    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
     }//GEN-LAST:event_jMenuItem_Productos_Agregar_NuevoActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenu2MouseClicked
@@ -278,6 +292,11 @@ setIconImage(new ImageIcon(getClass().getResource("../Imagenes/Logo.png")).getIm
         ventanabierta.setLocationRelativeTo(getParent());
         ventanabierta.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem2ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem2ActionPerformed
+     System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 /**
  * @param args the command line arguments
@@ -330,6 +349,7 @@ public static void main(String args[])
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem_Productos_Agregar_Nuevo;
     private javax.swing.JMenuItem jMenuItem_Productos_Categorias;

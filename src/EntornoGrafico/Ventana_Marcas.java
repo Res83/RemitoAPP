@@ -692,19 +692,27 @@ public static void main(String args[])
                 JOptionPane.showMessageDialog(this, "Marca Elimina");
          //       ReAbrirVentanaCategorias();
          
-                 jTextField_txtCuadro.setText("(Escribe la Nueva Marca)");
+                 jTextField_txtCuadro.setText("");
+                  jTextField_txtCuadro.requestFocus();
+                 
 
                   jButton_EliminarRegistro.setVisible(false);
                   jButton_AgregarRegistro.setVisible(true);
                   jButton_ModificarRegistro.setVisible(false);
-                 
-                 PropiedadesTabla();
-                 
-                id_borrado_categoria=Comienza_desde_Aqui;
+                
+                  id_borrado_categoria=Comienza_desde_Aqui;
                 SeBorroRegistro="SI";
+                jTextField_Cuadro_ID.setText(String.valueOf(Comienza_desde_Aqui));
+               jTextField_txtCuadro.requestFocus();
+               
+               ReAbrirVentana();
+                
+                 //PropiedadesTabla();
+                 
+   
 
               
-              jTextField_Cuadro_ID.setText(String.valueOf(Comienza_desde_Aqui));
+
                             
              orden.close();
             }

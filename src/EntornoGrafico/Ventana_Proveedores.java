@@ -13,7 +13,7 @@ package EntornoGrafico;
 
 // Importo la relación con la base de datos
 import CodigoFuente.Conexion;
- import java.sql.*;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -574,6 +574,8 @@ public void ReAbrirVentana()
 
         jLabel5.setText("Teléfono Fijo:");
 
+        jTextField1_txtTelefonoFijo_Proveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1_txtTelefonoFijo_Proveedor.setText("0");
         jTextField1_txtTelefonoFijo_Proveedor.setToolTipText("Campo Mínimo requerido (Requerido)");
         jTextField1_txtTelefonoFijo_Proveedor.addKeyListener(new java.awt.event.KeyAdapter()
         {
@@ -585,6 +587,8 @@ public void ReAbrirVentana()
 
         jLabel7.setText("Celular:");
 
+        jTextField2_txtTelefonoMovil_Proveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2_txtTelefonoMovil_Proveedor.setText("0");
         jTextField2_txtTelefonoMovil_Proveedor.setToolTipText("Campo Mínimo requerido (Requerido)");
         jTextField2_txtTelefonoMovil_Proveedor.addActionListener(new java.awt.event.ActionListener()
         {
@@ -1169,7 +1173,7 @@ EditarRegistro();
 
     private void jTextField_EmpresaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField_EmpresaKeyPressed
     {//GEN-HEADEREND:event_jTextField_EmpresaKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtNombreApellido_Proveedor.requestFocus();
         }
@@ -1177,7 +1181,7 @@ EditarRegistro();
 
     private void jTextField1_txtNombreApellido_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtNombreApellido_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtNombreApellido_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtCalle_Proveedor.requestFocus();
         }
@@ -1185,7 +1189,7 @@ EditarRegistro();
 
     private void jTextField1_txtCalle_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCalle_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtCalle_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtCalle_Numero_Proveedor.requestFocus();
         }
@@ -1193,7 +1197,7 @@ EditarRegistro();
 
     private void jTextField1_txtCalle_Numero_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCalle_Numero_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtCalle_Numero_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtTelefonoFijo_Proveedor.requestFocus();
         }
@@ -1201,7 +1205,7 @@ EditarRegistro();
 
     private void jTextField1_txtTelefonoFijo_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtTelefonoFijo_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtTelefonoFijo_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField2_txtTelefonoMovil_Proveedor.requestFocus();
         }
@@ -1209,7 +1213,7 @@ EditarRegistro();
 
     private void jTextField2_txtTelefonoMovil_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField2_txtTelefonoMovil_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField2_txtTelefonoMovil_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtPiso_Proveedor.requestFocus();
         }
@@ -1217,7 +1221,7 @@ EditarRegistro();
 
     private void jTextField1_txtPiso_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtPiso_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtPiso_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtEntreCalles_Proveedor.requestFocus();
         }
@@ -1225,7 +1229,7 @@ EditarRegistro();
 
     private void jTextField1_txtEntreCalles_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtEntreCalles_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtEntreCalles_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtGoogleMaps_Proveedor.requestFocus();
         }
@@ -1233,7 +1237,7 @@ EditarRegistro();
 
     private void jTextField1_txtGoogleMaps_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtGoogleMaps_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtGoogleMaps_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtCODPOSTAL_Proveedor.requestFocus();
         }
@@ -1241,7 +1245,7 @@ EditarRegistro();
 
     private void jTextField1_txtCODPOSTAL_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCODPOSTAL_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtCODPOSTAL_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtProvincia_Proveedor.requestFocus();
         }
@@ -1249,7 +1253,7 @@ EditarRegistro();
 
     private void jTextField1_txtProvincia_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtProvincia_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtProvincia_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtCiudad_Proveedor.requestFocus();
         }
@@ -1257,7 +1261,7 @@ EditarRegistro();
 
     private void jTextField1_txtCiudad_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtCiudad_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtCiudad_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextField1_txtEmail_Proveedor.requestFocus();
         }
@@ -1265,7 +1269,7 @@ EditarRegistro();
 
     private void jTextField1_txtEmail_ProveedorKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextField1_txtEmail_ProveedorKeyPressed
     {//GEN-HEADEREND:event_jTextField1_txtEmail_ProveedorKeyPressed
-        if(evt.getKeyCode()==evt.VK_ENTER)
+        if(evt.getKeyCode()==evt.VK_ENTER|| evt.getKeyCode()==evt.VK_TAB)
         {
         jTextArea1_txtAnotacionl_Proveedor.requestFocus();
         }

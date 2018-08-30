@@ -675,19 +675,21 @@ public static void main(String args[])
                 JOptionPane.showMessageDialog(this, "Categoria Elimina");
          //       ReAbrirVentanaCategorias();
          
-                 jTextField_txtCuadroCategoria.setText("(Escribe la Nueva Categoria)");
+                 jTextField_txtCuadroCategoria.setText("");
 
                   jButton_EliminarCategoria.setVisible(false);
                   jButton_AgregarCategoria.setVisible(true);
-                  jButton_ModificarCategoria.setVisible(false);
-                 
-                 PropiedadesTabla();
-                 
+                  jButton_ModificarCategoria.setVisible(false);                
+                
                 id_borrado_categoria=Comienza_desde_Aqui;
                 SeBorroCategoria="SI";
-
-              
               jTextField_ID_Categoria.setText(String.valueOf(Comienza_desde_Aqui));
+              jTextField_txtCuadroCategoria.requestFocus();
+              
+              //PropiedadesTabla();
+              ReAbrirVentanaCategorias();
+              
+
                             
              orden.close();
             }

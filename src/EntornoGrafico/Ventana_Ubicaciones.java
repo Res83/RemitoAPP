@@ -186,7 +186,7 @@ if(cone2!=null)
 // Set (Establezco que voy a Editar)
 // Update (Nombre de la Tabla) Set
             
-            String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadro.getText()+"' where ID="+jTextField_Cuadro_ID.getText()+"";
+    String editar ="Update Lista_de_Ubicaciones Set Lugar='"+jTextField_txtCuadro.getText()+"' where ID="+jTextField_Cuadro_ID.getText()+"";
 // Ejecuta ahora la Orden de arriba:
 orden.executeUpdate(editar);
 JOptionPane.showMessageDialog(this, "¡Modificada con Exito!");
@@ -678,19 +678,23 @@ public static void main(String args[])
                 JOptionPane.showMessageDialog(this, "Ubicación Elimina");
          //       ReAbrirVentanaCategorias();
          
-                 jTextField_txtCuadro.setText("(Escribe la Nueva Ubicación)");
+                 jTextField_txtCuadro.setText("");
 
                   jButton_EliminarRegistro.setVisible(false);
                   jButton_AgregarRegistro.setVisible(true);
                   jButton_ModificarRegistro.setVisible(false);
-                 
-                 PropiedadesTabla();
-                 
-                id_borrado_categoria=Comienza_desde_Aqui;
+                
+                  id_borrado_categoria=Comienza_desde_Aqui;
                 SeBorroRegistro="SI";
+                jTextField_Cuadro_ID.setText(String.valueOf(Comienza_desde_Aqui));
+                 jTextField_txtCuadro.requestFocus();
+            //    PropiedadesTabla();
+                ReAbrirVentana();
+                 
+
 
               
-              jTextField_Cuadro_ID.setText(String.valueOf(Comienza_desde_Aqui));
+
                             
              orden.close();
             }
