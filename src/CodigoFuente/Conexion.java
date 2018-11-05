@@ -345,7 +345,7 @@ public Connection CrearDB_Base_datos_Productos()
                     + "Marca Varchar(255),"
                     + "Unidades_Producto INT,"                                    
                     + "Cajas_Producto INT,"
-                    + "Una_Caja_Tiene_Producto  INT,"
+                    + "Una_Caja_Tiene_Producto INT,"
                     + "Atados_Producto INT,"
                     + "Un_Atado_Tiene_Producto INT,"
                     + "CostoxUnidad_Producto INT,"
@@ -371,7 +371,7 @@ public Connection CrearDB_Base_datos_Productos()
     }
 public Connection CargarDB_Base_datos_Productos()
     {
-      int id=1;
+    //  int id=1;
       Connection con;     
         try 
         {
