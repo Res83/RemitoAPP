@@ -9,6 +9,6 @@ package Clases;
  *
  * @author Raúl Eduardo Scalia
  */
-public class Producto {
+public class Empresa {
     
 }

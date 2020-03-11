@@ -7,12 +7,12 @@ package Clases;
 
 /**
  *
- * @author eduar
+ * @author Raúl Eduardo Scalia
  */
 class Persona 
 {
 
-    public Persona(int codigo_id, String Nombre_Apellido, String Calle, int numero_de_calle, int numero_telefono_fijo, int numero_celular, String piso_depto, String piso_letra, String entre_calles, String enlace_google_maps, String codigo_postal, String Provincia, String Ciudad, String email, String nota_personal) {
+    public Persona(int codigo_id, String Nombre_Apellido, String Calle, int numero_de_calle, int numero_telefono_fijo, int numero_celular, String piso_depto, String piso_letra, String entre_calles, String enlace_google_maps, String codigo_postal, String Provincia, String Ciudad, String email, String nota_personal, String rol) {
         this.codigo_id = codigo_id;
         this.Nombre_Apellido = Nombre_Apellido;
         this.Calle = Calle;
@@ -28,6 +28,21 @@ class Persona
         this.Ciudad = Ciudad;
         this.email = email;
         this.nota_personal = nota_personal;
+        this.rol=rol;
+    }
+    
+    public String getRol(){
+        return rol;
+    }
+    
+    public void setRol(String rol){
+        
+        if(rol.equals("Cliente"))
+        {
+          this.rol="Cliente";  
+        }
+        else if (rol.equals("Proveedor"))
+       this.rol="Proveedor";
     }
 
     public int getCodigo_id() {
@@ -164,6 +179,7 @@ class Persona
     private String Ciudad;
     private String email;
     private String nota_personal;
+    private String rol;
  
 
     

@@ -6,7 +6,7 @@
 package EntornoGrafico;
 
 // Importo la relación con la base de datos
-import CodigoFuente.Conexion;
+import Base_de_datos.Conexion;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
