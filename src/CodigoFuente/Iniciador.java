@@ -2,7 +2,6 @@
  * RemitoAPP     / Version 1.0
  */
 package CodigoFuente;
-
 /**
  *
  * @author Res
@@ -17,6 +16,7 @@ public static void main(String[] args)
 {
 //Carga la Ventana de Bienvenida y la hace visible
         EntornoGrafico.Panel_Inicio VB=new EntornoGrafico.Panel_Inicio();
+        
         
 //EntornoGrafico.LoginxPantalla VB=new EntornoGrafico.LoginxPantalla();
     VB.setLocationRelativeTo(null);
