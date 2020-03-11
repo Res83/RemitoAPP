@@ -3,9 +3,8 @@
  */
 package Clases;
 
-import EntornoGrafico.MenuPrimario;
+import EntornoGrafico.Ventana_inicio_configuración;
 //import EntornoGrafico.Panel_Inicio;
-
 /**
  *
  * @author Raúl Eduardo Scalia
@@ -19,7 +18,7 @@ public class Inicio
 public static void main(String[] args)
 {
 //Carga la Ventana de Bienvenida y la hace visible
-        EntornoGrafico.MenuPrimario VB=new EntornoGrafico.MenuPrimario();
+        EntornoGrafico.Ventana_inicio_configuración VB=new EntornoGrafico.Ventana_inicio_configuración();
         
         
 //EntornoGrafico.LoginxPantalla VB=new EntornoGrafico.LoginxPantalla();
